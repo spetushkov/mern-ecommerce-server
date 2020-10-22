@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug",
+      "skipFiles": ["<node_internals>/**"],
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "envFile": "${workspaceFolder}/config/.env",
+      "runtimeArgs": ["-r", "ts-node/register", "--preserve-symlinks", "--preserve-symlinks-main"],
+      "program": "${workspaceFolder}/src/index.ts"
+    }
+  ]
+}

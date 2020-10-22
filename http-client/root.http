@@ -1,0 +1,12 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 3000
+@contentTypeJson = application/json
+
+### root
+GET {{host}}:{{port}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+### undefined
+POST {{host}}:{{port}}/null {{protocol}}
+Content-Type: {{contentTypeJson}}

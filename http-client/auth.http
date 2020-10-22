@@ -1,0 +1,29 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 3000
+@baseUrl = /v1/api/auth
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+
+### signUp
+POST {{url}}/signUp {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+{
+"name": "jdoe",
+"email": "jdoe3@comapny.com",
+"password": "password"
+}
+
+### signIn
+POST {{url}}/signIn {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+{
+"email": "jdoe3@comapny.com",
+"password": "password"
+}
+
+### signOut
+POST {{url}}/signOut {{protocol}}
+Content-Type: {{contentTypeJson}}
