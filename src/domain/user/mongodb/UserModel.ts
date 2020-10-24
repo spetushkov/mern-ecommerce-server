@@ -1,4 +1,17 @@
-import { model } from 'mongoose';
-import { User } from './User';
+import { model, Schema } from 'mongoose';
 
-export const UserModel = model('User', User);
+export const UserSchema = new Schema(
+  {
+    name: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true, minlength: 6 },
+    isAdmin: { type: Boolean, default: false },
+  },
+  { timestamps: true },
+);
+
+UserSchema.statics.getExternalKeys = function () {
+  return [];
+};
+
+export const UserModel = model('User', UserSchema);

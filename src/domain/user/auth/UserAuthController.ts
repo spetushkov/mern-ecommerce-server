@@ -80,7 +80,7 @@ export class UserAuthController extends BaseController<User> implements AuthCont
     return `${Cookie.AUTHORIZATION}=; Max-Age=0`;
   }
 
-  protected fromPlain(entity: Object | null): User {
+  protected normalize(entity: Object | null): User {
     return ClassTransformer.fromPlain(User, entity);
   }
 }

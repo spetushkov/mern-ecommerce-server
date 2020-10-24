@@ -63,14 +63,6 @@ export class UserAuthService extends BaseCrudService<User> implements AuthServic
     }
   }
 
-  protected getCreatedBy(entity: User): string | undefined {
-    return undefined;
-  }
-
-  protected getUpdatedBy(entity: User): string | undefined {
-    return undefined;
-  }
-
   getSecret(): string {
     return process.env.JWT_SECRET || 'secret';
   }

@@ -10,11 +10,6 @@ import {
   UndefinedRoute,
 } from '@spetushkou/api-expressjs';
 import { Application } from 'express';
-import { TaskMongoDbRepository } from '../../domain/task/mongodb/TaskMongoDbRepository';
-import { Task } from '../../domain/task/Task';
-import { TaskCrudController } from '../../domain/task/TaskCrudController';
-import { TaskCrudRoute } from '../../domain/task/TaskCrudRoute';
-import { TaskCrudService } from '../../domain/task/TaskCrudService';
 import { UserAuthController } from '../../domain/user/auth/UserAuthController';
 import { UserAuthRoute } from '../../domain/user/auth/UserAuthRoute';
 import { UserAuthService } from '../../domain/user/auth/UserAuthService';
@@ -30,11 +25,6 @@ export class RoutesManager {
   private apiVersion: string;
   private baseUrl: string;
   private routes: Route[] = [];
-
-  private taskRepository: Repository<Task>;
-  private taskService: BaseCrudService<Task>;
-  private taskController: BaseCrudController<Task>;
-  private taskRoute: TaskCrudRoute;
 
   private userRepository: Repository<User>;
   private userService: BaseCrudService<User>;
@@ -61,12 +51,6 @@ export class RoutesManager {
     this.authController = new UserAuthController(this.authService);
     this.authRoute = new UserAuthRoute(this.authController);
     this.register(this.authRoute);
-
-    this.taskRepository = new TaskMongoDbRepository();
-    this.taskService = new TaskCrudService(this.taskRepository);
-    this.taskController = new TaskCrudController(this.taskService);
-    this.taskRoute = new TaskCrudRoute(this.taskController, this.authService);
-    this.register(this.taskRoute);
   }
 
   private register(route: Route) {

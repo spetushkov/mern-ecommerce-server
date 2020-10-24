@@ -25,7 +25,7 @@
     "mockdata": "ts-node src/__mock__/MockData.ts",
     "mockdata:create": "yarn mockdata --create",
     "mockdata:delete": "yarn mockdata --delete",
-    "port": "lsof -w -n -i tcp:3000",
+    "port": "lsof -w -n -i tcp:8080",
     "setup": "yarn clean && yarn && yarn build:link",
     "start": "yarn start:dev",
     "start:dev": "cross-env NODE_ENV=development yarn start:watch",
