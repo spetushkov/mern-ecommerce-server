@@ -60,7 +60,6 @@ export class Product extends BaseDomainEntity {
   numReviews = 0;
 
   @Expose()
-  @Type(() => User)
   @IsMongoId()
   @IsNotEmpty()
   user: User | string = ''; // reference: Product MANY_TO_ONE User

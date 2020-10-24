@@ -9,6 +9,6 @@ export class UserMongoDbRepository extends BaseMongoDbRepository<User> {
   }
 
   protected normalize(dbResult: MongoDbResult | null): User | User[] {
-    return ClassTransformer.trimExcluded(ClassTransformer.fromPlain(User, dbResult));
+    return ClassTransformer.fromPlain(User, dbResult);
   }
 }

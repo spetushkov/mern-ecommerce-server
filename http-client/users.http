@@ -4,7 +4,7 @@
 @baseUrl = /v1/api/users
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5f7f41f90572ab64d2c4ec94
+@entityId = 5f9454940a1c224ee1780bc3
 
 ### findAll
 GET {{url}} {{protocol}}
@@ -19,49 +19,18 @@ POST {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
-"name": "jdoe",
+"name": "jdoe1",
 "email": "jdoe1@company.com",
 "password": "12345678",
-"roles": ["role1", "role2"]
+"isAdmin": false
 }
-
-# {
-# "name": "jdoe",
-# "email": "jdoe1@company.com",
-# "password": "12345678",
-# "roles": ["role1", "role2"],
-# "description": "description",
-# "notes": "notes",
-# "isActive": false,
-# "age": 28,
-# "imageUri": "http://www.company.com/someImage.png",
-# "address": {
-# "country": "country2",
-# "city": "city",
-# "street": "street",
-# "building": null,
-# "apartment": 345,
-# "isEU": true,
-# "labels": ["label1", "label2"]
-# },
-# "registrationDate": "2020-10-08T20:08:19.197Z",
-# "enrollmentDate": "2020-09-08T20:08:19.197Z",
-# "isRegistered": "false",
-# "registrationCount": "2",
-# "registrationFirstName": "John",
-# "registrationLastName": "Doe",
-# "profile": {
-# "firstName": "firstName",
-# "lastName": "lastName"
-# }
-# }
 
 ### updateById
 PATCH {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
-"name": "jsmith",
+"name": "jsmith"
 }
 
 ### deleteById

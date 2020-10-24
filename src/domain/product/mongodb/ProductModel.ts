@@ -19,7 +19,7 @@ export const ProductSchema = new Schema(
 );
 
 ProductSchema.statics.getExternalKeys = function () {
-  return [];
+  return ['user'];
 };
 
 export const ProductModel = model('Product', ProductSchema);

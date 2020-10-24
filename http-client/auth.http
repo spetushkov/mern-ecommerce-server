@@ -11,8 +11,9 @@ Content-Type: {{contentTypeJson}}
 
 {
 "name": "jdoe",
-"email": "jdoe3@comapny.com",
-"password": "password"
+"email": "jdoe1@company.com",
+"password": "123456",
+"isAdmin": false
 }
 
 ### signIn
@@ -20,8 +21,8 @@ POST {{url}}/signIn {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
-"email": "jdoe3@comapny.com",
-"password": "password"
+"email": "jdoe1@company.com",
+"password": "123456"
 }
 
 ### signOut

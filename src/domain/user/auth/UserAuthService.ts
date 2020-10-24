@@ -69,8 +69,12 @@ export class UserAuthService extends BaseCrudService<User> implements AuthServic
 
   private getAuthData(userEntity: User): AuthData {
     return {
-      user: ClassTransformer.trimExcluded(userEntity),
+      user: this.normalize(userEntity) as User,
       authToken: AuthTokenService.create(userEntity, this.getSecret()),
     };
+  }
+
+  protected normalize(entity: User | User[]): User | User[] {
+    return ClassTransformer.trimExcluded(entity);
   }
 }

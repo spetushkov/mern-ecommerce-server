@@ -9,7 +9,7 @@
       "env": {
         "NODE_ENV": "development"
       },
-      "envFile": "${workspaceFolder}/config/.env",
+      "envFile": "${workspaceFolder}/config/.env.development",
       "runtimeArgs": ["-r", "ts-node/register", "--preserve-symlinks", "--preserve-symlinks-main"],
       "program": "${workspaceFolder}/src/index.ts"
     }

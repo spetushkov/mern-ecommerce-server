@@ -35,7 +35,6 @@ class OrderItem {
   price = 0.0;
 
   @Expose()
-  @Type(() => Product)
   @IsMongoId()
   @IsNotEmpty()
   product: Product | string = ''; // reference: OrderItem MANY_TO_ONE Order
@@ -87,7 +86,6 @@ class PaymentResult {
 
 export class Order extends BaseDomainEntity {
   @Expose()
-  @Type(() => User)
   @IsMongoId()
   @IsNotEmpty()
   user: User | string = ''; // reference: Order MANY_TO_ONE User

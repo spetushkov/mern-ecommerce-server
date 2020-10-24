@@ -7,6 +7,7 @@ export class AppContext {
   constructor() {
     const env = dotenvFlow.config({
       path: './config/',
+      silent: true,
     });
 
     const envParsed = dotenvExpand(env);

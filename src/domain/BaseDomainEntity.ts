@@ -6,19 +6,13 @@ export abstract class BaseDomainEntity extends BaseEntity {
   id = '';
 
   @Expose()
-  createdAtIso?: string;
-
-  @Expose()
-  createdAt?: Date;
+  createdAt?: string;
 
   @Expose()
   createdBy?: string;
 
   @Expose()
-  updateAtIso?: string;
-
-  @Expose()
-  updateAt?: Date;
+  updatedAt?: string;
 
   @Expose()
   updatedBy?: string;

@@ -2,9 +2,9 @@ import { model, Schema } from 'mongoose';
 
 const Document = new Schema(
   {
-    createdAtIso: String,
+    createdAt: String,
     createdBy: String,
-    updateAtIso: String,
+    updatedAt: String,
     updatedBy: String,
   },
   {
