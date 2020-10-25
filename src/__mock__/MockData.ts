@@ -1,59 +1,75 @@
 import { Logger } from '@spetushkou/api-expressjs';
 import { AppContext } from '../app/AppContext';
+import { OrderModel } from '../domain/order/mongodb/OrderModel';
+import { ProductModel } from '../domain/product/mongodb/ProductModel';
 import { UserModel } from '../domain/user/mongodb/UserModel';
 import { MongoDbStorage } from '../repository/mongodb/MongoDbStorage';
 import { MongoDbStorageConnection } from '../repository/mongodb/MongoDbStorageConnection';
+import { products } from './json/products';
 import { users } from './json/users';
 
 class MockData {
-  static async create(): Promise<void> {
+  private mongoDbStorage: MongoDbStorage;
+
+  constructor() {
     new AppContext();
 
-    const mongoDbStorage = new MongoDbStorage(new MongoDbStorageConnection());
-    mongoDbStorage.connect();
+    this.mongoDbStorage = new MongoDbStorage(new MongoDbStorageConnection());
+    this.mongoDbStorage.connect();
+  }
 
+  exit(code?: number) {
+    this.mongoDbStorage.disconnect();
+    process.exit(code);
+  }
+
+  async create(): Promise<void> {
     try {
+      await OrderModel.deleteMany({});
+      await ProductModel.deleteMany({});
       await UserModel.deleteMany({});
-      await UserModel.insertMany(users);
+
+      const usersCreated = await UserModel.insertMany(users);
+      const productsUpdated = products.map((product) => {
+        return { ...product, user: usersCreated[0]._id };
+      });
+      await ProductModel.insertMany(productsUpdated);
 
       Logger.log('Mock data created');
-      mongoDbStorage.disconnect();
-      process.exit();
     } catch (error) {
-      mongoDbStorage.disconnect();
       Logger.error(error);
-      process.exit(1);
+      this.exit(1);
     }
   }
 
-  static async delete(): Promise<void> {
-    new AppContext();
-
-    const mongoDbStorage = new MongoDbStorage(new MongoDbStorageConnection());
-    mongoDbStorage.connect();
-
+  async delete(): Promise<void> {
     try {
+      await OrderModel.deleteMany({});
+      await ProductModel.deleteMany({});
       await UserModel.deleteMany({});
 
       Logger.log('Mock data deleted');
-      mongoDbStorage.disconnect();
-      process.exit();
     } catch (error) {
-      mongoDbStorage.disconnect();
       Logger.error(error);
-      process.exit(1);
+      this.exit(1);
     }
   }
 }
 
-switch (process.argv[2]) {
-  case '--create':
-    MockData.create();
-    break;
-  case '--delete':
-    MockData.delete();
-    break;
-  default:
-    Logger.log('No mock data updated');
-    break;
-}
+const run = async () => {
+  const mockData = new MockData();
+  switch (process.argv[2]) {
+    case '--create':
+      await mockData.create();
+      break;
+    case '--delete':
+      await mockData.delete();
+      break;
+    default:
+      Logger.log('No mock data updated');
+      break;
+  }
+  mockData.exit();
+};
+
+run();
