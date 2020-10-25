@@ -3,15 +3,17 @@ import {
   AuthResult,
   AuthService,
   AuthTokenService,
-  BaseCrudService,
   PasswordService,
   Repository,
   ServerException,
 } from '@spetushkou/api-expressjs';
 import { ClassTransformer } from '../../../class/ClassTransformer';
+import { BaseDomainCrudService } from '../../../service/BaseDomainCrudService';
 import { User } from '../User';
 
-export class UserAuthService extends BaseCrudService<User> implements AuthService<User, AuthData> {
+export class UserAuthService
+  extends BaseDomainCrudService<User>
+  implements AuthService<User, AuthData> {
   constructor(repository: Repository<User>) {
     super(repository);
   }
@@ -72,9 +74,5 @@ export class UserAuthService extends BaseCrudService<User> implements AuthServic
       user: this.normalize(userEntity) as User,
       authToken: AuthTokenService.create(userEntity, this.getSecret()),
     };
-  }
-
-  protected normalize(entity: User | User[]): User | User[] {
-    return ClassTransformer.trimExcluded(entity);
   }
 }

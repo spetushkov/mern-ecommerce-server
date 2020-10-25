@@ -1,13 +1,9 @@
-import { BaseCrudController, CrudService } from '@spetushkou/api-expressjs';
-import { ClassTransformer } from '../../class/ClassTransformer';
+import { CrudService } from '@spetushkou/api-expressjs';
+import { BaseDomainCrudController } from '../../server/express/controller/BaseDomainCrudController';
 import { Product } from './Product';
 
-export class ProductCrudController extends BaseCrudController<Product> {
+export class ProductCrudController extends BaseDomainCrudController<Product> {
   constructor(service: CrudService<Product>) {
-    super(service);
-  }
-
-  protected normalize(entity: Object | null): Product {
-    return ClassTransformer.fromPlain(Product, entity);
+    super(service, Product);
   }
 }

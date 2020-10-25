@@ -1,13 +1,9 @@
-import { BaseCrudService, Repository } from '@spetushkou/api-expressjs';
-import { ClassTransformer } from '../../class/ClassTransformer';
+import { Repository } from '@spetushkou/api-expressjs';
+import { BaseDomainCrudService } from '../../service/BaseDomainCrudService';
 import { User } from './User';
 
-export class UserCrudService extends BaseCrudService<User> {
+export class UserCrudService extends BaseDomainCrudService<User> {
   constructor(repository: Repository<User>) {
     super(repository);
-  }
-
-  protected normalize(entity: User | User[]): User | User[] {
-    return ClassTransformer.trimExcluded(entity);
   }
 }

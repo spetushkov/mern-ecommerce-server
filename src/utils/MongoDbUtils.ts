@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 
-export class MongoDb {
+export class MongoDbUtils {
   static async exposeExternalRefs(doc: Document): Promise<Document> {
     try {
       const keys = doc.schema.statics.getExternalKeys();

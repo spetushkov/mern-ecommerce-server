@@ -1,6 +1,8 @@
 import { classToClass, classToPlain, plainToClass, plainToClassFromExist } from 'class-transformer';
 import { ClassType } from 'class-transformer/ClassTransformer';
 
+export type Clazz<T> = ClassType<T>;
+
 export class ClassTransformer {
   static fromPlain<T>(
     entityClass: ClassType<T>,

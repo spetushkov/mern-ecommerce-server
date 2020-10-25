@@ -1,25 +1,19 @@
-import { BaseMongoDbRepository, MongoDbResult } from '@spetushkou/api-expressjs';
 import { Document } from 'mongoose';
-import { ClassTransformer } from '../../../class/ClassTransformer';
-import { MongoDb } from '../../../utils/MongoDb';
+import { BaseDomainMongoDbRepository } from '../../../repository/mongodb/BaseDomainMongoDbRepository';
+import { MongoDbUtils } from '../../../utils/MongoDbUtils';
 import { Product } from '../Product';
 import { ProductModel } from './ProductModel';
 
-export class ProductMongoDbRepository extends BaseMongoDbRepository<Product> {
+export class ProductMongoDbRepository extends BaseDomainMongoDbRepository<Product> {
   constructor() {
-    super(ProductModel);
+    super(ProductModel, Product);
   }
 
   protected async postSave(doc: Document): Promise<Document> {
     try {
-      return await MongoDb.exposeExternalRefs(doc);
+      return await MongoDbUtils.exposeExternalRefs(doc);
     } catch (error) {
       return Promise.reject(error);
     }
-  }
-
-  protected normalize(dbResult: MongoDbResult | null): Product | Product[] {
-    const resultNotExcluded = ClassTransformer.fromPlain(Product, dbResult, false);
-    return ClassTransformer.fromPlain(Product, resultNotExcluded, true);
   }
 }
