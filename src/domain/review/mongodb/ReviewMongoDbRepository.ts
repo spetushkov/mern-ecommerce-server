@@ -9,6 +9,7 @@ export class ReviewMongoDbRepository extends BaseMongoDbRepository<Review> {
   }
 
   protected normalize(dbResult: MongoDbResult | null): Review | Review[] {
-    return ClassTransformer.fromPlain(Review, dbResult);
+    const resultNotExcluded = ClassTransformer.fromPlain(Review, dbResult, false);
+    return ClassTransformer.fromPlain(Review, resultNotExcluded, true);
   }
 }

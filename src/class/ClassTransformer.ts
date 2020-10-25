@@ -2,9 +2,13 @@ import { classToClass, classToPlain, plainToClass, plainToClassFromExist } from 
 import { ClassType } from 'class-transformer/ClassTransformer';
 
 export class ClassTransformer {
-  static fromPlain<T>(entityClass: ClassType<T>, entity: Object | null): T {
+  static fromPlain<T>(
+    entityClass: ClassType<T>,
+    entity: Object | null,
+    excludeExtraneousValues = true,
+  ): T {
     return plainToClass(entityClass, entity, {
-      excludeExtraneousValues: true,
+      excludeExtraneousValues,
     });
   }
 

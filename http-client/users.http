@@ -4,7 +4,7 @@
 @baseUrl = /v1/api/users
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5f9454940a1c224ee1780bc3
+@entityId = 5f947b274a4fa25ff7d432bd
 
 ### findAll
 GET {{url}} {{protocol}}
@@ -19,8 +19,8 @@ POST {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
-"name": "jdoe1",
-"email": "jdoe1@company.com",
+"name": "jdoe3",
+"email": "jdoe3@company.com",
 "password": "12345678",
 "isAdmin": false
 }

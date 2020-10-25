@@ -5,7 +5,7 @@
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
 @entityId = 5f9454940a1c224ee1780bc3
-@authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjgwMjcyYWRhYjU2YzdhOTExMDY0YzAiLCJpYXQiOjE2MDIyMzkxNTgsImV4cCI6MTYwMjI2Nzk1OH0.pKJyR-RoURTQ2D1T7NfdWpfiAcbPFRbqf8RpY6dA9KA
+@authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Zjk0N2IyNzRhNGZhMjVmZjdkNDMyYmQiLCJpYXQiOjE2MDM1Njg0NjYsImV4cCI6MTYwMzU5NzI2Nn0.eP44vBe3g6q2WzaA_cs-84iczOCiP68cfZOqhfiq6g8
 
 ### findAll
 GET {{url}} {{protocol}}
@@ -21,7 +21,7 @@ Content-Type: {{contentTypeJson}}
 Cookie: {{authCookie}}
 
 {
-    "name": "Airpods Wireless Bluetooth Headphones",
+    "name": "Airpods2 Wireless Bluetooth Headphones",
     "image": "/images/airpods.jpg",
     "description":
       "Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working",
@@ -31,7 +31,7 @@ Cookie: {{authCookie}}
     "countInStock": 10,
     "rating": 4.5,
     "numReviews": 12,
-    "user": "5f945f70afd720514fdf0bfc"
+    "user": "5f947b274a4fa25ff7d432bd"
   }
 
 ### updateById

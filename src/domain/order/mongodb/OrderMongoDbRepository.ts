@@ -9,6 +9,7 @@ export class OrderMongoDbRepository extends BaseMongoDbRepository<Order> {
   }
 
   protected normalize(dbResult: MongoDbResult | null): Order | Order[] {
-    return ClassTransformer.fromPlain(Order, dbResult);
+    const resultNotExcluded = ClassTransformer.fromPlain(Order, dbResult, false);
+    return ClassTransformer.fromPlain(Order, resultNotExcluded, true);
   }
 }

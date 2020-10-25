@@ -1,8 +1,9 @@
 import { BaseMongoDbRepository, MongoDbResult } from '@spetushkou/api-expressjs';
 import { Document } from 'mongoose';
 import { ClassTransformer } from '../../../class/ClassTransformer';
+import { MongoDb } from '../../../utils/MongoDb';
 import { Product } from '../Product';
-import { ProductModel, ProductSchema } from './ProductModel';
+import { ProductModel } from './ProductModel';
 
 export class ProductMongoDbRepository extends BaseMongoDbRepository<Product> {
   constructor() {
@@ -11,17 +12,14 @@ export class ProductMongoDbRepository extends BaseMongoDbRepository<Product> {
 
   protected async postSave(doc: Document): Promise<Document> {
     try {
-      const keys = ProductSchema.statics.getExternalKeys();
-      for (const key of keys) {
-        await doc.populate(key).execPopulate();
-      }
-      return doc;
+      return await MongoDb.exposeExternalRefs(doc);
     } catch (error) {
       return Promise.reject(error);
     }
   }
 
   protected normalize(dbResult: MongoDbResult | null): Product | Product[] {
-    return ClassTransformer.fromPlain(Product, dbResult);
+    const resultNotExcluded = ClassTransformer.fromPlain(Product, dbResult, false);
+    return ClassTransformer.fromPlain(Product, resultNotExcluded, true);
   }
 }

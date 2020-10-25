@@ -9,6 +9,7 @@ export class UserMongoDbRepository extends BaseMongoDbRepository<User> {
   }
 
   protected normalize(dbResult: MongoDbResult | null): User | User[] {
-    return ClassTransformer.fromPlain(User, dbResult);
+    const resultNotExcluded = ClassTransformer.fromPlain(User, dbResult, false);
+    return ClassTransformer.fromPlain(User, resultNotExcluded, true);
   }
 }
