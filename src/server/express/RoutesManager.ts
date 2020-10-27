@@ -11,18 +11,18 @@ import {
 } from '@spetushkou/api-expressjs';
 import { Application } from 'express';
 import { ProductMongoDbRepository } from '../../domain/product/mongodb/ProductMongoDbRepository';
-import { Product } from '../../domain/product/Product';
 import { ProductCrudController } from '../../domain/product/ProductCrudController';
 import { ProductCrudRoute } from '../../domain/product/ProductCrudRoute';
 import { ProductCrudService } from '../../domain/product/ProductCrudService';
+import { ProductEntity } from '../../domain/product/ProductEntity';
 import { UserAuthController } from '../../domain/user/auth/UserAuthController';
 import { UserAuthRoute } from '../../domain/user/auth/UserAuthRoute';
 import { UserAuthService } from '../../domain/user/auth/UserAuthService';
 import { UserMongoDbRepository } from '../../domain/user/mongodb/UserMongoDbRepository';
-import { User } from '../../domain/user/User';
 import { UserCrudController } from '../../domain/user/UserCrudController';
 import { UserCrudRoute } from '../../domain/user/UserCrudRoute';
 import { UserCrudService } from '../../domain/user/UserCrudService';
+import { UserEntity } from '../../domain/user/UserEntity';
 
 export class RoutesManager {
   private app: Application;
@@ -31,18 +31,18 @@ export class RoutesManager {
   private baseUrl: string;
   private routes: Route[] = [];
 
-  private userRepository: Repository<User>;
-  private userService: BaseCrudService<User>;
-  private userController: BaseCrudController<User>;
+  private userRepository: Repository<UserEntity>;
+  private userService: BaseCrudService<UserEntity>;
+  private userController: BaseCrudController<UserEntity>;
   private userRoute: UserCrudRoute;
 
-  private authService: AuthService<User, AuthData>;
+  private authService: AuthService<UserEntity, AuthData>;
   private authController: AuthController;
   private authRoute: UserAuthRoute;
 
-  private productRepository: Repository<Product>;
-  private productService: BaseCrudService<Product>;
-  private productController: BaseCrudController<Product>;
+  private productRepository: Repository<ProductEntity>;
+  private productService: BaseCrudService<ProductEntity>;
+  private productController: BaseCrudController<ProductEntity>;
   private productRoute: ProductCrudRoute;
 
   constructor(app: Application) {

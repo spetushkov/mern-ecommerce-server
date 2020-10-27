@@ -9,9 +9,10 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
+import { Order } from '../../shared/Order';
 import { BaseDomainEntity } from '../BaseDomainEntity';
-import { Product } from '../product/Product';
-import { User } from '../user/User';
+import { ProductEntity } from '../product/ProductEntity';
+import { UserEntity } from '../user/UserEntity';
 
 class OrderItem {
   @Expose()
@@ -37,7 +38,7 @@ class OrderItem {
   @Expose()
   @IsMongoId()
   @IsNotEmpty()
-  product: Product | string = ''; // reference: OrderItem MANY_TO_ONE Order
+  product: ProductEntity | string = ''; // reference: OrderItem MANY_TO_ONE Order
 }
 
 class ShippingAddress {
@@ -84,11 +85,11 @@ class PaymentResult {
   email_address?: string;
 }
 
-export class Order extends BaseDomainEntity {
+export class OrderEntity extends BaseDomainEntity implements Order {
   @Expose()
   @IsMongoId()
   @IsNotEmpty()
-  user: User | string = ''; // reference: Order MANY_TO_ONE User
+  user: UserEntity | string = ''; // reference: Order MANY_TO_ONE User
 
   @Expose()
   @Type(() => OrderItem)

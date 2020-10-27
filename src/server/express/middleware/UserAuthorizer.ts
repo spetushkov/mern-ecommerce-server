@@ -7,13 +7,11 @@ import {
   ServerException,
 } from '@spetushkou/api-expressjs';
 import { NextFunction, RequestHandler, Response } from 'express';
-import { User } from '../../../domain/user/User';
+import { UserEntity } from '../../../domain/user/UserEntity';
 
-export const UserAuthorizer = (authService: AuthService<User, AuthData>): RequestHandler => async (
-  req: BaseRequest,
-  res: Response,
-  next: NextFunction,
-) => {
+export const UserAuthorizer = (
+  authService: AuthService<UserEntity, AuthData>,
+): RequestHandler => async (req: BaseRequest, res: Response, next: NextFunction) => {
   try {
     const token = AuthTokenResolver.resolveFromRequestCookies(req);
     const payload = AuthTokenService.verify(token, authService.getSecret());

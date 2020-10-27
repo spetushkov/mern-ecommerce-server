@@ -1,8 +1,9 @@
 import { Exclude, Expose } from 'class-transformer';
 import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
+import { User } from '../../shared/User';
 import { BaseDomainEntity } from '../BaseDomainEntity';
 
-export class User extends BaseDomainEntity {
+export class UserEntity extends BaseDomainEntity implements User {
   @Expose()
   @IsString()
   @IsNotEmpty()

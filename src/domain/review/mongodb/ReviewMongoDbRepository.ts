@@ -1,9 +1,9 @@
 import { BaseDomainMongoDbRepository } from '../../../repository/mongodb/BaseDomainMongoDbRepository';
-import { Review } from '../Review';
+import { ReviewEntity } from '../ReviewEntity';
 import { ReviewModel } from './ReviewModel';
 
-export class ReviewMongoDbRepository extends BaseDomainMongoDbRepository<Review> {
+export class ReviewMongoDbRepository extends BaseDomainMongoDbRepository<ReviewEntity> {
   constructor() {
-    super(ReviewModel, Review);
+    super(ReviewModel, ReviewEntity);
   }
 }

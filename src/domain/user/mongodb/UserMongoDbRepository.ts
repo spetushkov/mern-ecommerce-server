@@ -1,9 +1,9 @@
 import { BaseDomainMongoDbRepository } from '../../../repository/mongodb/BaseDomainMongoDbRepository';
-import { User } from '../User';
+import { UserEntity } from '../UserEntity';
 import { UserModel } from './UserModel';
 
-export class UserMongoDbRepository extends BaseDomainMongoDbRepository<User> {
+export class UserMongoDbRepository extends BaseDomainMongoDbRepository<UserEntity> {
   constructor() {
-    super(UserModel, User);
+    super(UserModel, UserEntity);
   }
 }

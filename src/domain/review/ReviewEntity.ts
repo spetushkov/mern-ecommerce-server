@@ -1,8 +1,9 @@
 import { Expose } from 'class-transformer';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Review } from '../../shared/Review';
 import { BaseDomainEntity } from '../BaseDomainEntity';
 
-export class Review extends BaseDomainEntity {
+export class ReviewEntity extends BaseDomainEntity implements Review {
   @Expose()
   @IsString()
   @IsNotEmpty()

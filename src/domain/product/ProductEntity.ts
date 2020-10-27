@@ -9,11 +9,12 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
+import { Product } from '../../shared/Product';
 import { BaseDomainEntity } from '../BaseDomainEntity';
-import { Review } from '../review/Review';
-import { User } from '../user/User';
+import { ReviewEntity } from '../review/ReviewEntity';
+import { UserEntity } from '../user/UserEntity';
 
-export class Product extends BaseDomainEntity {
+export class ProductEntity extends BaseDomainEntity implements Product {
   @Expose()
   @IsString()
   @IsNotEmpty()
@@ -60,18 +61,18 @@ export class Product extends BaseDomainEntity {
   numReviews = 0;
 
   @Expose()
-  @Type(() => User)
+  @Type(() => UserEntity)
   @IsMongoId()
   @IsNotEmpty()
-  user: User | string = ''; // reference: Product MANY_TO_ONE User
+  user: UserEntity | string = ''; // reference: Product MANY_TO_ONE User
 
   @Expose()
-  @Type(() => Review)
+  @Type(() => ReviewEntity)
   @IsOptional()
   @IsArray()
   @ArrayNotEmpty()
   @ValidateNested()
-  reviews?: Review[] | string[]; // reference (embedded doc): Product ONE_TO_ONE Review
+  reviews?: ReviewEntity[] | string[]; // reference (embedded doc): Product ONE_TO_ONE Review
 
   constructor() {
     super();

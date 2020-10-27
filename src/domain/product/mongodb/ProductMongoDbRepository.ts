@@ -1,12 +1,12 @@
 import { Document } from 'mongoose';
 import { BaseDomainMongoDbRepository } from '../../../repository/mongodb/BaseDomainMongoDbRepository';
 import { MongoDbUtils } from '../../../utils/MongoDbUtils';
-import { Product } from '../Product';
+import { ProductEntity } from '../ProductEntity';
 import { ProductModel } from './ProductModel';
 
-export class ProductMongoDbRepository extends BaseDomainMongoDbRepository<Product> {
+export class ProductMongoDbRepository extends BaseDomainMongoDbRepository<ProductEntity> {
   constructor() {
-    super(ProductModel, Product);
+    super(ProductModel, ProductEntity);
   }
 
   protected async postSave(doc: Document): Promise<Document> {

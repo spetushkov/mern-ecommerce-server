@@ -1,9 +1,9 @@
 import { Repository } from '@spetushkou/api-expressjs';
 import { BaseDomainCrudService } from '../../service/BaseDomainCrudService';
-import { User } from './User';
+import { UserEntity } from './UserEntity';
 
-export class UserCrudService extends BaseDomainCrudService<User> {
-  constructor(repository: Repository<User>) {
+export class UserCrudService extends BaseDomainCrudService<UserEntity> {
+  constructor(repository: Repository<UserEntity>) {
     super(repository);
   }
 }

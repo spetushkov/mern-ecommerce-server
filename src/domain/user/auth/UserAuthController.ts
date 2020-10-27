@@ -10,19 +10,19 @@ import {
 } from '@spetushkou/api-expressjs';
 import { Request, Response } from 'express';
 import { ClassTransformer } from '../../../class/ClassTransformer';
-import { User } from '../User';
+import { UserEntity } from '../UserEntity';
 
-export class UserAuthController extends BaseController<User> implements AuthController {
-  private service: AuthService<User, AuthData>;
+export class UserAuthController extends BaseController<UserEntity> implements AuthController {
+  private service: AuthService<UserEntity, AuthData>;
 
-  constructor(service: AuthService<User, AuthData>) {
+  constructor(service: AuthService<UserEntity, AuthData>) {
     super();
     this.service = service;
   }
 
   async signUp(req: Request, res: Response): Promise<void> {
     try {
-      const entity = (await this.normalizeRequestBody(req.body, false)) as User;
+      const entity = (await this.normalizeRequestBody(req.body, false)) as UserEntity;
 
       const response = await this.service.signUp(entity);
       const { error, data } = response;
@@ -42,7 +42,7 @@ export class UserAuthController extends BaseController<User> implements AuthCont
 
   async signIn(req: Request, res: Response): Promise<void> {
     try {
-      const entity = (await this.normalizeRequestBody(req.body, true)) as User;
+      const entity = (await this.normalizeRequestBody(req.body, true)) as UserEntity;
 
       const response = await this.service.signIn(entity);
       const { error, data } = response;
@@ -80,7 +80,7 @@ export class UserAuthController extends BaseController<User> implements AuthCont
     return `${Cookie.AUTHORIZATION}=; Max-Age=0`;
   }
 
-  protected normalize(entity: Object | null): User {
-    return ClassTransformer.fromPlain(User, entity);
+  protected normalize(entity: Object | null): UserEntity {
+    return ClassTransformer.fromPlain(UserEntity, entity);
   }
 }

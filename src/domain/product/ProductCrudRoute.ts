@@ -6,13 +6,16 @@ import {
 } from '@spetushkou/api-expressjs';
 import { RequestHandler } from 'express';
 import { UserAuthorizer } from '../../server/express/middleware/UserAuthorizer';
-import { User } from '../user/User';
-import { Product } from './Product';
+import { UserEntity } from '../user/UserEntity';
+import { ProductEntity } from './ProductEntity';
 
-export class ProductCrudRoute extends BaseCrudRoute<Product> {
-  private authService: AuthService<User, AuthData>;
+export class ProductCrudRoute extends BaseCrudRoute<ProductEntity> {
+  private authService: AuthService<UserEntity, AuthData>;
 
-  constructor(constroller: BaseCrudController<Product>, authService: AuthService<User, AuthData>) {
+  constructor(
+    constroller: BaseCrudController<ProductEntity>,
+    authService: AuthService<UserEntity, AuthData>,
+  ) {
     super(constroller);
     this.authService = authService;
   }

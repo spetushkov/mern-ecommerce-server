@@ -1,9 +1,9 @@
 import { BaseDomainMongoDbRepository } from '../../../repository/mongodb/BaseDomainMongoDbRepository';
-import { Order } from '../Order';
+import { OrderEntity } from '../OrderEntity';
 import { OrderModel } from './OrderModel';
 
-export class OrderMongoDbRepository extends BaseDomainMongoDbRepository<Order> {
+export class OrderMongoDbRepository extends BaseDomainMongoDbRepository<OrderEntity> {
   constructor() {
-    super(OrderModel, Order);
+    super(OrderModel, OrderEntity);
   }
 }

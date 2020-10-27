@@ -1,8 +1,8 @@
 import { BaseCrudController, BaseCrudRoute } from '@spetushkou/api-expressjs';
-import { User } from './User';
+import { UserEntity } from './UserEntity';
 
-export class UserCrudRoute extends BaseCrudRoute<User> {
-  constructor(constroller: BaseCrudController<User>) {
+export class UserCrudRoute extends BaseCrudRoute<UserEntity> {
+  constructor(constroller: BaseCrudController<UserEntity>) {
     super(constroller);
   }
 

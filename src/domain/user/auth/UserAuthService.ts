@@ -9,16 +9,16 @@ import {
 } from '@spetushkou/api-expressjs';
 import { ClassTransformer } from '../../../class/ClassTransformer';
 import { BaseDomainCrudService } from '../../../service/BaseDomainCrudService';
-import { User } from '../User';
+import { UserEntity } from '../UserEntity';
 
 export class UserAuthService
-  extends BaseDomainCrudService<User>
-  implements AuthService<User, AuthData> {
-  constructor(repository: Repository<User>) {
+  extends BaseDomainCrudService<UserEntity>
+  implements AuthService<UserEntity, AuthData> {
+  constructor(repository: Repository<UserEntity>) {
     super(repository);
   }
 
-  async signUp(user: User): Promise<AuthResult<AuthData>> {
+  async signUp(user: UserEntity): Promise<AuthResult<AuthData>> {
     try {
       const userUpdated = ClassTransformer.clone(user);
       userUpdated.password = await PasswordService.hash(user.password);
@@ -31,7 +31,7 @@ export class UserAuthService
     }
   }
 
-  async signIn(user: User): Promise<AuthResult<AuthData>> {
+  async signIn(user: UserEntity): Promise<AuthResult<AuthData>> {
     try {
       const { email } = user;
       const userEntity = await this.repository.findOne({ email });
@@ -57,7 +57,7 @@ export class UserAuthService
     }
   }
 
-  async findById(userId: string): Promise<User> {
+  async findById(userId: string): Promise<UserEntity> {
     try {
       return await this.repository.findById(userId);
     } catch (error) {
@@ -69,9 +69,9 @@ export class UserAuthService
     return process.env.JWT_SECRET || 'secret';
   }
 
-  private getAuthData(userEntity: User): AuthData {
+  private getAuthData(userEntity: UserEntity): AuthData {
     return {
-      user: this.normalize(userEntity) as User,
+      user: this.normalize(userEntity) as UserEntity,
       authToken: AuthTokenService.create(userEntity, this.getSecret()),
     };
   }

@@ -1,9 +1,9 @@
 import { CrudService } from '@spetushkou/api-expressjs';
 import { BaseDomainCrudController } from '../../server/express/controller/BaseDomainCrudController';
-import { User } from './User';
+import { UserEntity } from './UserEntity';
 
-export class UserCrudController extends BaseDomainCrudController<User> {
-  constructor(service: CrudService<User>) {
-    super(service, User);
+export class UserCrudController extends BaseDomainCrudController<UserEntity> {
+  constructor(service: CrudService<UserEntity>) {
+    super(service, UserEntity);
   }
 }
