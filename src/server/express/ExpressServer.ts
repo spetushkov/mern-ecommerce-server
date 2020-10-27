@@ -29,7 +29,7 @@ export class ExpressServer implements Server {
   constructor() {
     this.app = express();
     this.name = 'Express server';
-    this.port = Number(process.env.SERVER_PORT) || 3000;
+    this.port = Number(process.env.PORT) || 3000;
 
     this.storageConnection = new MongoDbStorageConnection();
     this.storagesManager = new StoragesManager(this.storageConnection);

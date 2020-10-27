@@ -1,6 +1,6 @@
 @protocol = HTTP/1.1
 @host = http://localhost
-@port = 3000
+@port = 8080
 @baseUrl = /v1/api/users
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json

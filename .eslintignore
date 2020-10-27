@@ -150,16 +150,19 @@ dist
 
 # CUSTOM
 
-.env*.local
-yarn.lock
 *.snap
 *.png
-.gitignore
-.prettierignore
-.eslintignore
-.npmignore
-LICENSE
-TODO
 *.http
 *.ico
 *.txt
+.env*.local
+.gitignore
+.prettierignore
+.eslintignore
+.stylelintignore
+.npmignore
+yarn.lock
+package-lock.json
+LICENSE
+TODO
+public/
