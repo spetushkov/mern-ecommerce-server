@@ -1,22 +1,22 @@
-import bcrypt from 'bcrypt';
+import { PasswordService } from '@spetushkou/api-expressjs';
 
 export const users = [
   {
     name: 'Admin User',
     email: 'admin@company.com',
-    password: bcrypt.hashSync('123456', 10),
+    password: PasswordService.hashSync('123456'),
     isAdmin: true,
   },
   {
     name: 'John Doe',
     email: 'jdoe@company.com',
-    password: bcrypt.hashSync('123456', 10),
+    password: PasswordService.hashSync('123456'),
     isAdmin: false,
   },
   {
     name: 'Adam Smith',
     email: 'asmith@company.com',
-    password: bcrypt.hashSync('123456', 10),
+    password: PasswordService.hashSync('123456'),
     isAdmin: false,
   },
 ];

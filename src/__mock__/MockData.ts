@@ -5,8 +5,8 @@ import { ProductModel } from '../domain/product/mongodb/ProductModel';
 import { UserModel } from '../domain/user/mongodb/UserModel';
 import { MongoDbStorage } from '../repository/mongodb/MongoDbStorage';
 import { MongoDbStorageConnection } from '../repository/mongodb/MongoDbStorageConnection';
-import { products } from './json/products';
-import { users } from './json/users';
+import { products } from './products';
+import { users } from './users';
 
 class MockData {
   private mongoDbStorage: MongoDbStorage;

@@ -4,7 +4,7 @@
 @baseUrl = /v1/api/products
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5f9454940a1c224ee1780bc3
+@entityId = 5f968f5375086cce470d3a35
 @authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Zjk1YzE2OGM1ZDRjMDkyYjNhZmVlZTYiLCJpYXQiOjE2MDM2NDk4OTgsImV4cCI6MTYwMzY3ODY5OH0.bHREuS-H71gXUkFSwXei-VXGgMdWg4S7LXjYSl0Ruqc; HttpOnly; Max-Age=28800
 
 ### findAll
