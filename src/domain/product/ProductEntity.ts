@@ -9,10 +9,10 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { Product } from '../../shared/Product';
 import { BaseDomainEntity } from '../BaseDomainEntity';
 import { ReviewEntity } from '../review/ReviewEntity';
 import { UserEntity } from '../user/UserEntity';
+import { Product } from './Product';
 
 export class ProductEntity extends BaseDomainEntity implements Product {
   @Expose()

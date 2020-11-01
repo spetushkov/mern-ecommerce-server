@@ -9,10 +9,10 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
-import { Order } from '../../shared/Order';
 import { BaseDomainEntity } from '../BaseDomainEntity';
 import { ProductEntity } from '../product/ProductEntity';
 import { UserEntity } from '../user/UserEntity';
+import { Order } from './Order';
 
 class OrderItem {
   @Expose()
@@ -34,6 +34,11 @@ class OrderItem {
   @IsNumber()
   @IsNotEmpty()
   price = 0.0;
+
+  @Expose()
+  @IsNumber()
+  @IsNotEmpty()
+  countInStock = 0;
 
   @Expose()
   @IsMongoId()

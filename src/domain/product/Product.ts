@@ -1,6 +1,6 @@
-import { BaseDomain } from './BaseDomain';
-import { Review } from './Review';
-import { User } from './User';
+import { BaseDomain } from '../BaseDomain';
+import { Review } from '../review/Review';
+import { User } from '../user/User';
 
 export interface Product extends BaseDomain {
   name: string;
