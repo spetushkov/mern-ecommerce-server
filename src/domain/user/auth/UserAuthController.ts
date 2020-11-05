@@ -6,7 +6,9 @@ import {
   BaseController,
   Cookie,
   Header,
+  ServerException,
   StatusCode,
+  StatusCodeReason,
 } from '@spetushkou/api-expressjs';
 import { Request, Response } from 'express';
 import { ClassTransformer } from '../../../class/ClassTransformer';
@@ -63,10 +65,19 @@ export class UserAuthController extends BaseController<UserEntity> implements Au
   async signOut(req: Request, res: Response): Promise<void> {
     try {
       const response = await this.service.signOut();
+      if (!response) {
+        const error = ServerException.create(
+          StatusCode.INTERNAL_SERVER_ERROR,
+          StatusCodeReason.INTERNAL_SERVER_ERROR,
+        );
+        res.status(error.status).json(response);
+        return;
+      }
+
       if (response) {
         res.setHeader(Header.SET_COOKIE, [this.removeAuthCookie()]);
       }
-      res.status(StatusCode.NO_CONTENT).send();
+      res.status(StatusCode.OK).json(response);
     } catch (error) {
       return Promise.reject(error);
     }

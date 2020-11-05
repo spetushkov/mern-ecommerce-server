@@ -49,9 +49,9 @@ export class UserAuthService
     }
   }
 
-  async signOut(): Promise<boolean> {
+  async signOut(): Promise<AuthResult<boolean>> {
     try {
-      return Promise.resolve(true);
+      return Promise.resolve(new AuthResult(true));
     } catch (error) {
       return Promise.reject(error);
     }

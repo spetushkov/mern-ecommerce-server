@@ -26,5 +26,5 @@ Content-Type: {{contentTypeJson}}
 }
 
 ### signOut
-POST {{url}}/signOut {{protocol}}
+GET {{url}}/signOut {{protocol}}
 Content-Type: {{contentTypeJson}}

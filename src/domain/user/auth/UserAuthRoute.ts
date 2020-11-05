@@ -17,7 +17,7 @@ export class UserAuthRoute implements AuthRoute, Route {
   getRoute(): Router {
     this.router.post(`${this.getBaseUrl()}/signUp`, this.signUp);
     this.router.post(`${this.getBaseUrl()}/signIn`, this.signIn);
-    this.router.post(`${this.getBaseUrl()}/signOut`, this.signOut);
+    this.router.get(`${this.getBaseUrl()}/signOut`, this.signOut);
     return this.router;
   }
 
