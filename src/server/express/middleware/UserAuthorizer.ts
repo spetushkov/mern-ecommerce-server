@@ -13,7 +13,7 @@ export const UserAuthorizer = (
   authService: AuthService<UserEntity, AuthData>,
 ): RequestHandler => async (req: BaseRequest, res: Response, next: NextFunction) => {
   try {
-    const token = AuthTokenResolver.resolveFromRequestCookies(req);
+    const token = AuthTokenResolver.resolveFromRequest(req);
     const payload = AuthTokenService.verify(token, authService.getSecret());
     const userEntity = await authService.findById(payload.userId);
     if (!userEntity) {

@@ -24,8 +24,15 @@ export class ProductCrudRoute extends BaseCrudRoute<ProductEntity> {
     return '/products';
   }
 
-  protected allMutateHandlers = (): RequestHandler[] => [
+  protected saveHandlers = (): RequestHandler[] => [UserAuthorizer(this.authService), this.save];
+
+  protected updateByIdHandlers = (): RequestHandler[] => [
     UserAuthorizer(this.authService),
-    this.allMutate,
+    this.updateById,
+  ];
+
+  protected deleteByIdHandlers = (): RequestHandler[] => [
+    UserAuthorizer(this.authService),
+    this.deleteById,
   ];
 }

@@ -30,6 +30,7 @@ export class AppContext {
       API_VERSION: str(),
       ACCESS_CONTROL_ALLOW_ORIGIN: str(),
       ACCESS_CONTROL_ALLOW_HEADERS: str(),
+      ACCESS_CONTROL_ALLOW_METHODS: str(),
     });
   }
 }
