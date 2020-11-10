@@ -1,6 +1,6 @@
 import { Document } from 'mongoose';
 import { BaseDomainMongoDbRepository } from '../../../repository/mongodb/BaseDomainMongoDbRepository';
-import { MongoDbUtils } from '../../../utils/MongoDbUtils';
+import { MongoDbUtils } from '../../../repository/mongodb/MongoDbUtils';
 import { ProductEntity } from '../ProductEntity';
 import { ProductModel } from './ProductModel';
 
