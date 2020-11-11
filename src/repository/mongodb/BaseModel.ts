@@ -7,9 +7,7 @@ const Document = new Schema(
     updatedAt: String,
     updatedBy: String,
   },
-  {
-    timestamps: true,
-  },
+  { timestamps: true },
 );
 
 export const BaseModel = model('Document', Document);
