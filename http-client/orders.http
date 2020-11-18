@@ -1,0 +1,100 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 8080
+@baseUrl = /v1/api/orders
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+@entityId = 5fb27c3370564a5e49d41f50
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmE4ZjViZThhZTM0YzIzZmFkYTI2YWMiLCJpYXQiOjE2MDU2MjA5MTksImV4cCI6MTYwNTY0OTcxOX0.qYW1V07qakhcnB9-GT_3qkBDv8zTDNKYBed5ZgEXs_Y
+
+### head
+HEAD {{url}} {{protocol}}
+
+### head
+HEAD {{url}}/{{entityId}} {{protocol}}
+
+### options
+OPTIONS {{url}} {{protocol}}
+
+### options
+OPTIONS {{url}}/{{entityId}} {{protocol}}
+
+### findAll
+GET {{url}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+### findById
+GET {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+### save
+POST {{url}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+{
+    "user": "5fa8fc458ae34c23fada2732",
+    "orderItems": [
+      {
+        "name": "name1",
+        "quantity": 0,
+        "image": "image1",
+        "price": 0.0,
+        "countInStock": 0,
+        "product": "5f9a9744e07c97391c49c659"
+      }
+    ],
+    "shippingAddress": {
+      "address": "address1",
+      "city": "city1",
+      "postalCode": "postalCode1",
+      "country": "country1"
+    },
+    "paymentMethod": "PayPal",
+    "orderItemsPrice": 0.0,
+    "shippingPrice": 0.0,
+    "taxPrice": 0.0,
+    "totalPrice": 0.0,
+    "paymentResult": {
+      "id": "id1",
+      "status": "status1",
+      "update_time": "update_time1",
+      "email_address": "email_address1"
+    },
+    "isPaid": false,
+    "paidAt": "2020-11-15T12:16:05.706Z",
+    "isDelivered": false,
+    "deliveredAt": "2020-11-15T12:16:05.706Z"
+}
+
+### updateById
+PATCH {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+{
+  "taxPrice": 16
+}
+
+### payById
+PATCH {{url}}/{{entityId}}?payOrder=true {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+{
+  "paymentResult": {
+      "id": "id1",
+      "status": "status1",
+      "update_time": "update_time1",
+      "payer": {
+        "email_address": "email_address1"
+      }
+    }
+}
+
+### deleteById
+DELETE {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}

@@ -1,19 +1,22 @@
 import { BaseDomain } from '../BaseDomain';
 import { User } from '../user/User';
 import { OrderItem } from './OrderItem';
-import { PaymentResult } from './PaymentResult';
+import { PaymentMethod } from './PaymentMethod';
+import { PayPalPaymentResult } from './payPal/PayPalPaymentResult';
 import { ShippingAddress } from './ShippingAddress';
 
 export interface Order extends BaseDomain {
-  user: User | string; // reference: Order MANY_TO_ONE User
-  orderItems?: OrderItem[]; // reference (embedded doc): Order ONE_TO_ONE OrderItem
-  shippingAddress?: ShippingAddress;
-  paymentMethod: string;
-  paymentResult?: PaymentResult;
-  taxPrice: number;
+  user?: User | string; // reference: Order MANY_TO_ONE User
+  orderItems: OrderItem[]; // reference (embedded doc): Order ONE_TO_ONE OrderItem
+  shippingAddress: ShippingAddress | null;
+  paymentMethod: PaymentMethod | null;
+  orderItemsPrice: number;
   shippingPrice: number;
-  isPaid: boolean;
+  taxPrice: number;
+  totalPrice: number;
+  paymentResult?: PayPalPaymentResult;
+  isPaid?: boolean;
   paidAt?: Date;
-  isDelivered: boolean;
+  isDelivered?: boolean;
   deliveredAt?: Date;
 }

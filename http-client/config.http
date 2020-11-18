@@ -1,0 +1,10 @@
+@protocol = HTTP/1.1
+@host = http://localhost
+@port = 8080
+@baseUrl = /v1/api/configs
+@url = {{host}}:{{port}}{{baseUrl}}
+@contentTypeJson = application/json
+
+### findById: payPalClientId
+GET {{url}}/payPalClientId {{protocol}}
+Content-Type: {{contentTypeJson}}

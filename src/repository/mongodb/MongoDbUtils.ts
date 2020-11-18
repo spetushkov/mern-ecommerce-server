@@ -12,4 +12,10 @@ export class MongoDbUtils {
       return Promise.reject(error);
     }
   }
+
+  static toObjectId(objectIdholder: string): any {
+    return (value: any, obj: any) => {
+      return value ? value.toString() : obj[objectIdholder];
+    };
+  }
 }

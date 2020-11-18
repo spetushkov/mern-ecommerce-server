@@ -4,7 +4,7 @@
 @baseUrl = /v1/api/users
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5f947b274a4fa25ff7d432bd
+@entityId = 5f9a9744e07c97391c49c656
 
 ### findAll
 GET {{url}} {{protocol}}

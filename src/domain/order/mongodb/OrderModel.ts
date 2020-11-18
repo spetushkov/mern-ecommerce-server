@@ -5,6 +5,7 @@ const OrderItemSchema = new Schema({
   quantity: { type: Number, required: true },
   image: { type: String, required: true },
   price: { type: Number, required: true },
+  countInStock: { type: Number, required: true },
   product: { type: Schema.Types.ObjectId, required: true, ref: 'Product' },
 });
 
@@ -15,32 +16,41 @@ const ShippingAddressSchema = new Schema({
   country: { type: String, required: true },
 });
 
-const PaymentResultSchema = new Schema({
+const PayPalPaymentResultSchema = new Schema({
   id: { type: String },
   status: { type: String },
   update_time: { type: String },
-  email_address: { type: String },
+  payer: {
+    email_address: { type: String },
+  },
 });
 
 export const OrderSchema = new Schema(
   {
-    user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    orderItems: [OrderItemSchema],
-    shippingAddress: ShippingAddressSchema,
-    paymentMethod: { type: String, required: true },
-    paymentResult: PaymentResultSchema,
-    taxPrice: { type: Number, required: true, default: 0.0 },
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    orderItems: { type: [OrderItemSchema], required: true, default: [] },
+    shippingAddress: { type: ShippingAddressSchema, required: true, default: null },
+    paymentMethod: {
+      type: String,
+      enum: ['PayPal', 'Stripe'],
+      required: true,
+      default: null,
+    },
+    orderItemsPrice: { type: Number, required: true, default: 0.0 },
     shippingPrice: { type: Number, required: true, default: 0.0 },
-    isPaid: { type: Boolean, required: true, default: false },
+    taxPrice: { type: Number, required: true, default: 0.0 },
+    totalPrice: { type: Number, required: true, default: 0.0 },
+    paymentResult: PayPalPaymentResultSchema,
+    isPaid: { type: Boolean, default: false },
     paidAt: { type: Date },
-    isDelivered: { type: Boolean, required: true, default: false },
+    isDelivered: { type: Boolean, default: false },
     deliveredAt: { type: Date },
   },
   { timestamps: true },
 );
 
 OrderSchema.statics.getExternalKeys = function () {
-  return [];
+  return ['user'];
 };
 
 export const OrderModel = model('Order', OrderSchema);

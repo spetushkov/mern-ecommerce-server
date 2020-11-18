@@ -1,7 +1,10 @@
-import { Expose, Type } from 'class-transformer';
+import { Expose, Transform, Type } from 'class-transformer';
 import {
+  ArrayNotEmpty,
+  IsArray,
   IsBoolean,
   IsDate,
+  IsEnum,
   IsMongoId,
   IsNotEmpty,
   IsNumber,
@@ -9,10 +12,14 @@ import {
   IsString,
   ValidateNested,
 } from 'class-validator';
+import { ObjectId } from 'mongodb';
+import { MongoDbUtils } from '../../repository/mongodb/MongoDbUtils';
 import { BaseDomainEntity } from '../BaseDomainEntity';
 import { ProductEntity } from '../product/ProductEntity';
 import { UserEntity } from '../user/UserEntity';
 import { Order } from './Order';
+import { PaymentMethod } from './PaymentMethod';
+import { PayPalPaymentResult } from './payPal/PayPalPaymentResult';
 
 class OrderItem {
   @Expose()
@@ -41,6 +48,8 @@ class OrderItem {
   countInStock = 0;
 
   @Expose()
+  @Type(() => ObjectId)
+  @Transform(MongoDbUtils.toObjectId('product'), { toClassOnly: true })
   @IsMongoId()
   @IsNotEmpty()
   product: ProductEntity | string = ''; // reference: OrderItem MANY_TO_ONE Order
@@ -68,56 +77,40 @@ class ShippingAddress {
   country = '';
 }
 
-class PaymentResult {
-  @Expose()
-  @IsOptional()
-  @IsString()
-  id?: string;
-
-  @Expose()
-  @IsOptional()
-  @IsString()
-  status?: string;
-
-  @Expose()
-  @IsOptional()
-  @IsString()
-  update_time?: string;
-
-  @Expose()
-  @IsOptional()
-  @IsString()
-  email_address?: string;
-}
-
 export class OrderEntity extends BaseDomainEntity implements Order {
   @Expose()
+  @Type(() => UserEntity)
+  @IsOptional()
   @IsMongoId()
   @IsNotEmpty()
-  user: UserEntity | string = ''; // reference: Order MANY_TO_ONE User
+  user?: UserEntity | string; // reference: Order MANY_TO_ONE User
 
   @Expose()
   @Type(() => OrderItem)
-  @IsOptional()
+  @IsArray()
+  @ArrayNotEmpty()
   @ValidateNested()
-  orderItems?: OrderItem[]; // reference (embedded doc): Order ONE_TO_ONE OrderItem
+  orderItems: OrderItem[] = []; // reference (embedded doc): Order ONE_TO_ONE OrderItem
 
   @Expose()
   @Type(() => ShippingAddress)
-  @IsOptional()
   @ValidateNested()
-  shippingAddress?: ShippingAddress;
+  shippingAddress = null;
 
   @Expose()
-  @IsString()
+  @IsEnum(PaymentMethod)
   @IsNotEmpty()
-  paymentMethod = '';
+  paymentMethod = null;
 
   @Expose()
-  @Type(() => PaymentResult)
-  @IsOptional()
-  @ValidateNested()
-  paymentResult?: PaymentResult;
+  @IsNumber()
+  @IsNotEmpty()
+  orderItemsPrice = 0.0;
+
+  @Expose()
+  @IsNumber()
+  @IsNotEmpty()
+  shippingPrice = 0.0;
 
   @Expose()
   @IsNumber()
@@ -127,12 +120,19 @@ export class OrderEntity extends BaseDomainEntity implements Order {
   @Expose()
   @IsNumber()
   @IsNotEmpty()
-  shippingPrice = 0.0;
+  totalPrice = 0.0;
 
   @Expose()
+  @Type(() => PayPalPaymentResult)
+  @IsOptional()
+  @ValidateNested()
+  paymentResult?: PayPalPaymentResult;
+
+  @Expose()
+  @IsOptional()
   @IsBoolean()
   @IsNotEmpty()
-  isPaid = false;
+  isPaid? = false;
 
   @Expose()
   @Type(() => Date)
@@ -142,6 +142,7 @@ export class OrderEntity extends BaseDomainEntity implements Order {
   paidAt?: Date;
 
   @Expose()
+  @IsOptional()
   @IsBoolean()
   @IsNotEmpty()
   isDelivered = false;

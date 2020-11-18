@@ -10,6 +10,16 @@ import {
   UndefinedRoute,
 } from '@spetushkou/api-expressjs';
 import { Application } from 'express';
+import { ConfigCrudController } from '../../domain/config/ConfigCrudController';
+import { ConfigCrudRoute } from '../../domain/config/ConfigCrudRoute';
+import { ConfigCrudService } from '../../domain/config/ConfigCrudService';
+import { ConfigEntity } from '../../domain/config/ConfigEntity';
+import { ConfigEnvRepository } from '../../domain/config/ConfigEnvRepository';
+import { OrderMongoDbRepository } from '../../domain/order/mongodb/OrderMongoDbRepository';
+import { OrderCrudController } from '../../domain/order/OrderCrudController';
+import { OrderCrudRoute } from '../../domain/order/OrderCrudRoute';
+import { OrderCrudService } from '../../domain/order/OrderCrudService';
+import { OrderEntity } from '../../domain/order/OrderEntity';
 import { ProductMongoDbRepository } from '../../domain/product/mongodb/ProductMongoDbRepository';
 import { ProductCrudController } from '../../domain/product/ProductCrudController';
 import { ProductCrudRoute } from '../../domain/product/ProductCrudRoute';
@@ -45,6 +55,16 @@ export class RoutesManager {
   private productController: BaseCrudController<ProductEntity>;
   private productRoute: ProductCrudRoute;
 
+  private orderRepository: Repository<OrderEntity>;
+  private orderService: BaseCrudService<OrderEntity>;
+  private orderController: BaseCrudController<OrderEntity>;
+  private orderRoute: OrderCrudRoute;
+
+  private configRepository: Repository<ConfigEntity>;
+  private configService: BaseCrudService<ConfigEntity>;
+  private configController: BaseCrudController<ConfigEntity>;
+  private configRoute: ConfigCrudRoute;
+
   constructor(app: Application) {
     this.app = app;
 
@@ -67,6 +87,18 @@ export class RoutesManager {
     this.productController = new ProductCrudController(this.productService);
     this.productRoute = new ProductCrudRoute(this.productController, this.authService);
     this.register(this.productRoute);
+
+    this.orderRepository = new OrderMongoDbRepository();
+    this.orderService = new OrderCrudService(this.orderRepository);
+    this.orderController = new OrderCrudController(this.orderService);
+    this.orderRoute = new OrderCrudRoute(this.orderController, this.authService);
+    this.register(this.orderRoute);
+
+    this.configRepository = new ConfigEnvRepository();
+    this.configService = new ConfigCrudService(this.configRepository);
+    this.configController = new ConfigCrudController(this.configService);
+    this.configRoute = new ConfigCrudRoute(this.configController);
+    this.register(this.configRoute);
   }
 
   private register(route: Route) {
