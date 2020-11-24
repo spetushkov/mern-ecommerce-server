@@ -5,18 +5,22 @@
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
 @entityId = 5f9a9744e07c97391c49c656
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDYyMTE5ODksImV4cCI6MTYwNjI0MDc4OX0.6A_dQAAPz9NCJ-3en05ShCwc0tdQ65awWSqxkwcubV4
 
 ### findAll
 GET {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
 
 ### findById
 GET {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
 
 ### save
 POST {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
 
 {
 "name": "jdoe3",
@@ -28,6 +32,7 @@ Content-Type: {{contentTypeJson}}
 ### updateById
 PATCH {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
 
 {
 "name": "jsmith"
@@ -36,3 +41,4 @@ Content-Type: {{contentTypeJson}}
 ### deleteById
 DELETE {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}

@@ -21,7 +21,7 @@ POST {{url}}/signIn {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
-"email": "name1@company.com",
+"email": "admin@company.com",
 "password": "123456"
 }
 

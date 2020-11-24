@@ -72,15 +72,16 @@ export class RoutesManager {
     this.baseUrl = `/${this.apiVersion}/api`;
 
     this.userRepository = new UserMongoDbRepository();
-    this.userService = new UserCrudService(this.userRepository);
-    this.userController = new UserCrudController(this.userService);
-    this.userRoute = new UserCrudRoute(this.userController);
-    this.register(this.userRoute);
 
     this.authService = new UserAuthService(this.userRepository);
     this.authController = new UserAuthController(this.authService);
     this.authRoute = new UserAuthRoute(this.authController);
     this.register(this.authRoute);
+
+    this.userService = new UserCrudService(this.userRepository);
+    this.userController = new UserCrudController(this.userService);
+    this.userRoute = new UserCrudRoute(this.userController, this.authService);
+    this.register(this.userRoute);
 
     this.productRepository = new ProductMongoDbRepository();
     this.productService = new ProductCrudService(this.productRepository);
