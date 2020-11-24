@@ -1,4 +1,5 @@
-import { BaseRequest, CrudService } from '@spetushkou/api-expressjs';
+import { BaseRequest, CrudService, ServerException } from '@spetushkou/api-expressjs';
+import { Response } from 'express';
 import { ClassTransformer } from '../../class/ClassTransformer';
 import { BaseDomainCrudController } from '../../server/express/controller/BaseDomainCrudController';
 import { OrderEntity } from './OrderEntity';
@@ -24,7 +25,7 @@ export class OrderCrudController extends BaseDomainCrudController<OrderEntity> {
   protected preUpdate(req: BaseRequest, entity: OrderEntity): OrderEntity {
     this.insertUserIdToRequestQuery(req);
 
-    // pay order handler
+    // pay order with PayPal handler
     const query = ClassTransformer.fromPlain(OrderQueryEntity, req.query);
     if (
       query.payOrder &&
@@ -66,6 +67,10 @@ export class OrderCrudController extends BaseDomainCrudController<OrderEntity> {
 
   private getUserId(req: BaseRequest): string | null {
     return req.user ? req.user.id : null;
+  }
+
+  deleteById(req: BaseRequest, res: Response): Promise<void> {
+    throw ServerException.MethodNotAllowedException();
   }
 
   protected normalizeRequestQueryParams(query: Object | null): Partial<OrderEntity> {

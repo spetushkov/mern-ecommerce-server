@@ -4,8 +4,8 @@
 @baseUrl = /v1/api/orders
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5fb27c3370564a5e49d41f50
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmE4ZjViZThhZTM0YzIzZmFkYTI2YWMiLCJpYXQiOjE2MDU2MjA5MTksImV4cCI6MTYwNTY0OTcxOX0.qYW1V07qakhcnB9-GT_3qkBDv8zTDNKYBed5ZgEXs_Y
+@entityId = 5fb240409ea5d058f1cc262b
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmE4ZjViZThhZTM0YzIzZmFkYTI2YWMiLCJpYXQiOjE2MDU2OTAyOTQsImV4cCI6MTYwNTcxOTA5NH0.oScDCIiZ3MYtv5uwv9p-REojOycw1NboHcNmB5yll_4
 
 ### head
 HEAD {{url}} {{protocol}}
@@ -86,10 +86,10 @@ Authorization: {{authHeader}}
 {
   "paymentResult": {
       "id": "id1",
-      "status": "status1",
+      "status": "COMPLETED",
       "update_time": "update_time1",
       "payer": {
-        "email_address": "email_address1"
+        "email_address": "email_address1@company.com"
       }
     }
 }

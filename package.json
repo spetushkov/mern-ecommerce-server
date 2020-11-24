@@ -23,6 +23,7 @@
     "mockdata": "ts-node src/__mock__/MockData.ts",
     "mockdata:create": "yarn mockdata --create",
     "mockdata:delete": "yarn mockdata --delete",
+    "mongodb": "mongod --dbpath=/Users/spetushkou/Library/MongoDB/data",
     "port": "lsof -w -n -i tcp:8080",
     "setup": "yarn clean && yarn && yarn setup:link",
     "setup:git": "sudo rm -rf .git && git init && git remote add origin git@github.com:spetushkov/mern-ecommerce-server.git",
