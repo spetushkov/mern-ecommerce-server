@@ -5,8 +5,8 @@ import {
   BaseCrudRoute,
 } from '@spetushkou/api-expressjs';
 import { RequestHandler } from 'express';
-import { AdminAuthenticator } from '../../server/express/middleware/auth/AdminAuthenticator';
-import { UserAuthenticator } from '../../server/express/middleware/auth/UserAuthenticator';
+import { UserAdminValidator } from '../../server/express/middleware/UserAdminValidator';
+import { UserAuthenticator } from '../../server/express/middleware/UserAuthenticator';
 import { UserEntity } from './UserEntity';
 
 export class UserCrudRoute extends BaseCrudRoute<UserEntity> {
@@ -26,24 +26,31 @@ export class UserCrudRoute extends BaseCrudRoute<UserEntity> {
 
   protected findAllHandlers = (): RequestHandler[] => [
     UserAuthenticator(this.authService),
-    AdminAuthenticator(),
+    UserAdminValidator(),
     this.findAll,
   ];
 
   protected findByIdHandlers = (): RequestHandler[] => [
     UserAuthenticator(this.authService),
+    UserAdminValidator(),
     this.findById,
   ];
 
-  protected saveHandlers = (): RequestHandler[] => [UserAuthenticator(this.authService), this.save];
+  protected saveHandlers = (): RequestHandler[] => [
+    UserAuthenticator(this.authService),
+    UserAdminValidator(),
+    this.save,
+  ];
 
   protected updateByIdHandlers = (): RequestHandler[] => [
     UserAuthenticator(this.authService),
+    UserAdminValidator(),
     this.updateById,
   ];
 
   protected deleteByIdHandlers = (): RequestHandler[] => [
     UserAuthenticator(this.authService),
+    UserAdminValidator(),
     this.deleteById,
   ];
 }

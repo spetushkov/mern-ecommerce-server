@@ -16,7 +16,16 @@ Content-Type: {{contentTypeJson}}
 "isAdmin": false
 }
 
-### signIn
+### signIn as a regular user
+POST {{url}}/signIn {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+{
+"email": "name1@company.com",
+"password": "123456"
+}
+
+### signIn as admin user
 POST {{url}}/signIn {{protocol}}
 Content-Type: {{contentTypeJson}}
 

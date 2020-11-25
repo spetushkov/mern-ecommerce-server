@@ -5,7 +5,7 @@ import {
   BaseCrudRoute,
 } from '@spetushkou/api-expressjs';
 import { RequestHandler } from 'express';
-import { UserAuthenticator } from '../../server/express/middleware/auth/UserAuthenticator';
+import { UserAuthenticator } from '../../server/express/middleware/UserAuthenticator';
 import { UserEntity } from '../user/UserEntity';
 import { ProductEntity } from './ProductEntity';
 

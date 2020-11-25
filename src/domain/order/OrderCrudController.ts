@@ -1,7 +1,9 @@
 import { BaseRequest, CrudService, ServerException } from '@spetushkou/api-expressjs';
 import { Response } from 'express';
+import { AuthAccessService } from '../../auth/AuthAccessService';
 import { ClassTransformer } from '../../class/ClassTransformer';
 import { BaseDomainCrudController } from '../../server/express/controller/BaseDomainCrudController';
+import { BaseQueryEntity } from '../../server/express/controller/BaseQueryEntity';
 import { OrderEntity } from './OrderEntity';
 import { OrderQueryEntity } from './OrderQueryEntity';
 
@@ -11,11 +13,29 @@ export class OrderCrudController extends BaseDomainCrudController<OrderEntity> {
   }
 
   protected preFindAll(req: BaseRequest): void {
-    this.insertUserIdToRequestQuery(req);
+    const query = ClassTransformer.fromPlain(BaseQueryEntity, req.query);
+    if (query.byUserId) {
+      // filter by user id
+      this.insertUserIdToRequestQuery(req);
+    } else {
+      // do not filter by user id, return all entries (admin only)
+      if (!AuthAccessService.isAdmin(req.user)) {
+        throw ServerException.InvalidAccessException();
+      }
+    }
   }
 
   protected preFindById(req: BaseRequest): void {
-    this.insertUserIdToRequestQuery(req);
+    const query = ClassTransformer.fromPlain(BaseQueryEntity, req.query);
+    if (query.byUserId) {
+      // filter by user id
+      this.insertUserIdToRequestQuery(req);
+    } else {
+      // do not filter by user id, return all entries (admin only)
+      if (!AuthAccessService.isAdmin(req.user)) {
+        throw ServerException.InvalidAccessException();
+      }
+    }
   }
 
   protected preSave(req: BaseRequest, entity: OrderEntity): OrderEntity {

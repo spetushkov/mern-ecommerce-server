@@ -5,7 +5,7 @@
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
 @entityId = 5fb240409ea5d058f1cc262b
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmE4ZjViZThhZTM0YzIzZmFkYTI2YWMiLCJpYXQiOjE2MDU2OTAyOTQsImV4cCI6MTYwNTcxOTA5NH0.oScDCIiZ3MYtv5uwv9p-REojOycw1NboHcNmB5yll_4
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDYyNDA2MTQsImV4cCI6MTYwNjI2OTQxNH0.wWKccEHSnCBdibV8TsJwh2j5QW9ezfpfmw48vFgyjP8
 
 ### head
 HEAD {{url}} {{protocol}}
@@ -19,13 +19,18 @@ OPTIONS {{url}} {{protocol}}
 ### options
 OPTIONS {{url}}/{{entityId}} {{protocol}}
 
-### findAll
+### findAll and filter by user id
+GET {{url}}?byUserId=true {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+### findAll and do NOT filter by user id (admin only)
 GET {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
 Authorization: {{authHeader}}
 
-### findById
-GET {{url}}/{{entityId}} {{protocol}}
+### findById and filter by user id
+GET {{url}}/{{entityId}}?byUserId=true {{protocol}}
 Content-Type: {{contentTypeJson}}
 Authorization: {{authHeader}}
 

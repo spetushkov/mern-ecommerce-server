@@ -5,7 +5,7 @@
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
 @entityId = 5f9a9744e07c97391c49c656
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDYyMTE5ODksImV4cCI6MTYwNjI0MDc4OX0.6A_dQAAPz9NCJ-3en05ShCwc0tdQ65awWSqxkwcubV4
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDYyNDAzOTQsImV4cCI6MTYwNjI2OTE5NH0.As9BYbF0gcTaBuXWULn4DzcgR3STMj0ZEluKgOVXUMk
 
 ### findAll
 GET {{url}} {{protocol}}
