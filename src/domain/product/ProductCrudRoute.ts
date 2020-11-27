@@ -5,6 +5,7 @@ import {
   BaseCrudRoute,
 } from '@spetushkou/api-expressjs';
 import { RequestHandler } from 'express';
+import { UserAdminValidator } from '../../server/express/middleware/UserAdminValidator';
 import { UserAuthenticator } from '../../server/express/middleware/UserAuthenticator';
 import { UserEntity } from '../user/UserEntity';
 import { ProductEntity } from './ProductEntity';
@@ -24,15 +25,21 @@ export class ProductCrudRoute extends BaseCrudRoute<ProductEntity> {
     return '/products';
   }
 
-  protected saveHandlers = (): RequestHandler[] => [UserAuthenticator(this.authService), this.save];
+  protected saveHandlers = (): RequestHandler[] => [
+    UserAuthenticator(this.authService),
+    UserAdminValidator(),
+    this.save,
+  ];
 
   protected updateByIdHandlers = (): RequestHandler[] => [
     UserAuthenticator(this.authService),
+    UserAdminValidator(),
     this.updateById,
   ];
 
   protected deleteByIdHandlers = (): RequestHandler[] => [
     UserAuthenticator(this.authService),
+    UserAdminValidator(),
     this.deleteById,
   ];
 }

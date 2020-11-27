@@ -24,7 +24,7 @@ GET {{url}}?byUserId=true {{protocol}}
 Content-Type: {{contentTypeJson}}
 Authorization: {{authHeader}}
 
-### findAll and do NOT filter by user id (admin only)
+### do not filter by user id, return all entries (admin only)
 GET {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
 Authorization: {{authHeader}}

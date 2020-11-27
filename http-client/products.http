@@ -4,9 +4,9 @@
 @baseUrl = /v1/api/products
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5f9a9744e07c97391c49c659
+@entityId = 5fc0d3445e53d7734973b1bc
 @authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Zjk1YzE2OGM1ZDRjMDkyYjNhZmVlZTYiLCJpYXQiOjE2MDM2NDk4OTgsImV4cCI6MTYwMzY3ODY5OH0.bHREuS-H71gXUkFSwXei-VXGgMdWg4S7LXjYSl0Ruqc; HttpOnly; Max-Age=28800
-
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDY0NzUzOTUsImV4cCI6MTYwNjUwNDE5NX0.5RMrxM3CK4o-Db0uRs7tXpEm_8J3E2bw3YNlNhqyoh4
 ### head
 HEAD {{url}} {{protocol}}
 
@@ -30,26 +30,27 @@ Content-Type: {{contentTypeJson}}
 ### save
 POST {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
-Cookie: {{authCookie}}
+# Cookie: {{authCookie}}
+Authorization: {{authHeader}}
 
 {
-    "name": "Airpods Wireless Bluetooth Headphones",
-    "image": "/images/airpods.jpg",
-    "description":
-      "Bluetooth technology lets you connect it with compatible devices wirelessly High-quality AAC audio offers immersive listening experience Built-in microphone allows you to take calls while working",
+    "name": "Test Product",
+    "image": "/assets/images/airpods.jpg",
+    "description": "test description...",
     "brand": "Apple",
     "category": "Electronics",
-    "price": 89.99,
-    "countInStock": 10,
-    "rating": 4.5,
-    "numReviews": 12,
-    "user": "5f947b274a4fa25ff7d432bd"
-  }
+    "price": 109.99,
+    "countInStock": 12,
+    "rating": 4.8,
+    "numReviews": 17,
+    "user": "5f9a9744e07c97391c49c656"
+}
 
 ### updateById
 PATCH {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
-Cookie: {{authCookie}}
+# Cookie: {{authCookie}}
+Authorization: {{authHeader}}
 
 {
 "name": "name updated"
@@ -58,4 +59,5 @@ Cookie: {{authCookie}}
 ### deleteById
 DELETE {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
-Cookie: {{authCookie}}
+# Cookie: {{authCookie}}
+Authorization: {{authHeader}}

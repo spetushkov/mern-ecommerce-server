@@ -10,8 +10,8 @@ POST {{url}}/signUp {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
-"name": "jdoe",
-"email": "jdoe1@company.com",
+"name": "name1",
+"email": "name1@company.com",
 "password": "123456",
 "isAdmin": false
 }
