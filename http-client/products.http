@@ -4,9 +4,9 @@
 @baseUrl = /v1/api/products
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5fc0d3445e53d7734973b1bc
+@entityId = 5fc0ee2f49e7327629b12215
 @authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Zjk1YzE2OGM1ZDRjMDkyYjNhZmVlZTYiLCJpYXQiOjE2MDM2NDk4OTgsImV4cCI6MTYwMzY3ODY5OH0.bHREuS-H71gXUkFSwXei-VXGgMdWg4S7LXjYSl0Ruqc; HttpOnly; Max-Age=28800
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDY0NzUzOTUsImV4cCI6MTYwNjUwNDE5NX0.5RMrxM3CK4o-Db0uRs7tXpEm_8J3E2bw3YNlNhqyoh4
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDY2NTM0NzksImV4cCI6MTYwNjY4MjI3OX0.GckcrrGoPn5GFswgIc03cZB_D9mczWnV_OhKl2N6Dv0
 ### head
 HEAD {{url}} {{protocol}}
 

@@ -15,6 +15,7 @@ import {
 import express, { Application } from 'express';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { ResponseHeaders } from './middleware/ResponseHeaders';
+import { StaticFolderRegister } from './middleware/StaticFolderRegister';
 import { RoutesManager } from './RoutesManager';
 import { StoragesManager } from './StoragesManager';
 
@@ -25,11 +26,13 @@ export class ExpressServer implements Server {
   private storageConnection: DbStorageConnection;
   private storagesManager: StoragesManager;
   private routesManager: RoutesManager;
+  private fileUploadsPath: string;
 
   constructor() {
     this.app = express();
     this.name = 'Express server';
     this.port = Number(process.env.PORT) || 3000;
+    this.fileUploadsPath = process.env.FILE_UPLOADS_PATH || '/';
 
     this.storageConnection = new MongoDbStorageConnection();
     this.storagesManager = new StoragesManager(this.storageConnection);
@@ -42,6 +45,7 @@ export class ExpressServer implements Server {
       this.app.use(CookieParser());
       this.app.use(Cors());
       this.app.use(HttpLogger());
+      this.app.use(this.fileUploadsPath, StaticFolderRegister(this.fileUploadsPath));
 
       this.routesManager.connect();
 

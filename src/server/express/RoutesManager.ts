@@ -15,6 +15,11 @@ import { ConfigCrudRoute } from '../../domain/config/ConfigCrudRoute';
 import { ConfigCrudService } from '../../domain/config/ConfigCrudService';
 import { ConfigEntity } from '../../domain/config/ConfigEntity';
 import { ConfigEnvRepository } from '../../domain/config/ConfigEnvRepository';
+import { FileUploadCrudController } from '../../domain/fileUpload/FileUploadCrudController';
+import { FileUploadCrudRoute } from '../../domain/fileUpload/FileUploadCrudRoute';
+import { FileUploadCrudService } from '../../domain/fileUpload/FileUploadCrudService';
+import { FileUploadEntity } from '../../domain/fileUpload/FileUploadEntity';
+import { FileUploadRepository } from '../../domain/fileUpload/FileUploadRepository';
 import { OrderMongoDbRepository } from '../../domain/order/mongodb/OrderMongoDbRepository';
 import { OrderCrudController } from '../../domain/order/OrderCrudController';
 import { OrderCrudRoute } from '../../domain/order/OrderCrudRoute';
@@ -65,6 +70,11 @@ export class RoutesManager {
   private configController: BaseCrudController<ConfigEntity>;
   private configRoute: ConfigCrudRoute;
 
+  private fileUploadRepository: Repository<FileUploadEntity>;
+  private fileUploadService: BaseCrudService<FileUploadEntity>;
+  private fileUploadController: BaseCrudController<FileUploadEntity>;
+  private fileUploadRoute: FileUploadCrudRoute;
+
   constructor(app: Application) {
     this.app = app;
 
@@ -100,6 +110,12 @@ export class RoutesManager {
     this.configController = new ConfigCrudController(this.configService);
     this.configRoute = new ConfigCrudRoute(this.configController);
     this.register(this.configRoute);
+
+    this.fileUploadRepository = new FileUploadRepository();
+    this.fileUploadService = new FileUploadCrudService(this.fileUploadRepository);
+    this.fileUploadController = new FileUploadCrudController(this.fileUploadService);
+    this.fileUploadRoute = new FileUploadCrudRoute(this.fileUploadController, this.authService);
+    this.register(this.fileUploadRoute);
   }
 
   private register(route: Route) {
