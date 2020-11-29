@@ -25,9 +25,4 @@ export class FileUploadRepository implements Repository<FileUploadEntity> {
   async deleteById(id: string): Promise<FileUploadEntity> {
     throw ServerException.NotImplementedException();
   }
-
-  // private normalize(entity: Object | null): FileUploadEntity {
-  //   const resultNotExcluded = ClassTransformer.fromPlain(FileUploadEntity, entity, false);
-  //   return ClassTransformer.fromPlain(FileUploadEntity, resultNotExcluded, true);
-  // }
 }

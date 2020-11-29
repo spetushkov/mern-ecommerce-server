@@ -1,17 +1,31 @@
 import { Expose } from 'class-transformer';
-import { IsNotEmpty, IsString } from 'class-validator';
 import { BaseDomainEntity } from '../BaseDomainEntity';
 import { FileUpload } from './FileUpload';
 
 export class FileUploadEntity extends BaseDomainEntity implements FileUpload {
   @Expose()
-  @IsString()
-  @IsNotEmpty()
-  name = '';
+  destination = '';
 
-  constructor() {
-    super();
-  }
+  @Expose()
+  encoding = '';
+
+  @Expose()
+  fieldname = '';
+
+  @Expose()
+  filename = '';
+
+  @Expose()
+  mimetype = '';
+
+  @Expose()
+  originalname = '';
+
+  @Expose()
+  path = '';
+
+  @Expose()
+  size = 0;
 
   getPrimaryKeys(): string[] {
     return [];
