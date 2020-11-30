@@ -1,8 +1,6 @@
 import { Expose } from 'class-transformer';
-import { BaseDomainEntity } from '../BaseDomainEntity';
-import { FileUpload } from './FileUpload';
 
-export class FileUploadEntity extends BaseDomainEntity implements FileUpload {
+export class FileEntity implements Partial<Express.Multer.File> {
   @Expose()
   destination = '';
 
@@ -26,8 +24,4 @@ export class FileUploadEntity extends BaseDomainEntity implements FileUpload {
 
   @Expose()
   size = 0;
-
-  getPrimaryKeys(): string[] {
-    return [];
-  }
 }

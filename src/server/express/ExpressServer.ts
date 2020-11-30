@@ -33,7 +33,7 @@ export class ExpressServer implements Server {
     this.app = express();
     this.name = 'Express server';
     this.port = Number(process.env.PORT) || 3000;
-    this.fileUploadsPath = EnvUtils.getFileUploadsPath();
+    this.fileUploadsPath = EnvUtils.getFileUploadsPath2();
 
     this.storageConnection = new MongoDbStorageConnection();
     this.storagesManager = new StoragesManager(this.storageConnection);
