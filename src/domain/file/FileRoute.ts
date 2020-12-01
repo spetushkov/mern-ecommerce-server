@@ -18,7 +18,6 @@ export class FileRoute implements Route {
 
     router.get(`${this.getBaseUrl()}`, [this.findAll]);
     router.get(`${this.getBaseUrl()}/:name`, [this.download]);
-    // router.get(`${this.getBaseUrl()}/:name/download`, [this.download]);
     router.post(`${this.getBaseUrl()}`, [this.upload]);
 
     return router;
@@ -27,14 +26,6 @@ export class FileRoute implements Route {
   private findAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await this.controller.findAll(req, res);
-    } catch (error) {
-      next(error);
-    }
-  };
-
-  private findByName = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    try {
-      await this.controller.findByName(req, res);
     } catch (error) {
       next(error);
     }

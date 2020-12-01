@@ -33,20 +33,6 @@ export class FileController {
     });
   };
 
-  findByName = async (req: Request, res: Response): Promise<void> => {
-    return new Promise((resolve, reject) => {
-      const fileName = req.params.name;
-
-      const fileInfo: FileInfo = {
-        name: fileName,
-        url: baseUrl + fileName,
-      };
-
-      const response = new BaseResult(fileInfo);
-      res.status(StatusCode.OK).json(response);
-    });
-  };
-
   download = async (req: Request, res: Response): Promise<void> => {
     return new Promise((resolve, reject) => {
       const fileName = req.params.name;
