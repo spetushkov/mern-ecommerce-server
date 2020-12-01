@@ -5,7 +5,7 @@
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
 @contentTypeFormData = multipart/form-data
-@entityId = robot.png-1606809315785.png
+@entityId = playstation.jpg
 
 ### upload
 POST {{url}}/upload?field=file&limitFileSize=4&imageFileType=true {{protocol}}

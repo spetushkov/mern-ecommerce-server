@@ -8,15 +8,6 @@ import { EnvUtils } from '../../../utils/EnvUtils';
 
 const imageFileTypeRegExp = /jpg|jpeg|png/;
 
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, EnvUtils.getFileUploadsPath2());
-  },
-  filename(req, file, cb) {
-    cb(null, `${file.originalname}-${Date.now()}${path.extname(file.originalname)}`);
-  },
-});
-
 const validateFileType = (
   file: Express.Multer.File,
   cb: multer.FileFilterCallback,
@@ -41,6 +32,15 @@ export const FileUploader = (
     ...fileSize,
   };
 
+  const storage = multer.diskStorage({
+    destination(req, file, cb) {
+      cb(null, EnvUtils.getFileUploadsPath2());
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname);
+    },
+  });
+
   const uploadFile = multer({
     storage,
     limits,
@@ -50,7 +50,7 @@ export const FileUploader = (
       }
       cb(null, true);
     },
-  });
+  }).single(field);
 
-  return util.promisify(uploadFile.single(field));
+  return util.promisify(uploadFile);
 };

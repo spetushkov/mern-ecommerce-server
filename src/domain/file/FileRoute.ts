@@ -13,7 +13,7 @@ export class FileRoute implements Route {
     return '/files';
   }
 
-  getRoute = (): Router => {
+  registerRoutes = (): Router => {
     const router = express.Router();
 
     router.post(`${this.getBaseUrl()}/upload`, [this.upload]);
@@ -23,7 +23,7 @@ export class FileRoute implements Route {
     return router;
   };
 
-  upload = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  private upload = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await this.controller.upload(req, res);
     } catch (error) {
@@ -31,7 +31,7 @@ export class FileRoute implements Route {
     }
   };
 
-  list = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  private list = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await this.controller.list(req, res);
     } catch (error) {
@@ -39,7 +39,7 @@ export class FileRoute implements Route {
     }
   };
 
-  download = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  private download = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await this.controller.download(req, res);
     } catch (error) {

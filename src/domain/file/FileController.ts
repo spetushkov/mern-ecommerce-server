@@ -5,9 +5,10 @@ import { ClassTransformer } from '../../class/ClassTransformer';
 import { FileUploader } from '../../server/express/middleware/FileUploader';
 import { EnvUtils } from '../../utils/EnvUtils';
 import { FileEntity } from './FileEntity';
+import { FileInfo } from './FileInfo';
 import { FileQueryEntity } from './FileQueryEntity';
 
-type FileInfo = { name: string; url: string };
+const baseUrl = '/files/download/';
 
 export class FileController {
   upload = async (req: Request, res: Response): Promise<void> => {
@@ -18,14 +19,17 @@ export class FileController {
       }
 
       await FileUploader(fileQueryEntity)(req, res);
-
       if (!req.file) {
         throw ServerException.create(StatusCode.BAD_REQUEST, 'Please upload a file');
       }
 
       const fileEntity = ClassTransformer.fromPlain(FileEntity, req.file);
+      const fileInfo: FileInfo = {
+        name: fileEntity.filename,
+        url: baseUrl + fileEntity.filename,
+      };
 
-      const response = new BaseResult(`/${fileEntity.path}`);
+      const response = new BaseResult(fileInfo);
       res.status(StatusCode.CREATED).json(response);
     } catch (error) {
       return Promise.reject(error);
@@ -41,7 +45,7 @@ export class FileController {
         }
 
         const filesInfo: FileInfo[] = [];
-        const baseUrl = '/files/download/';
+
         files.forEach((file) => {
           filesInfo.push({
             name: file,

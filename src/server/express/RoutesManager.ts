@@ -95,7 +95,11 @@ export class RoutesManager {
     this.productRepository = new ProductMongoDbRepository();
     this.productService = new ProductCrudService(this.productRepository);
     this.productController = new ProductCrudController(this.productService);
-    this.productRoute = new ProductCrudRoute(this.productController, this.authService);
+    this.productRoute = new ProductCrudRoute(
+      this.productController,
+      this.fileController,
+      this.authService,
+    );
     this.register(this.productRoute);
 
     this.orderRepository = new OrderMongoDbRepository();
@@ -116,9 +120,9 @@ export class RoutesManager {
   }
 
   connect(): void {
-    this.routes.forEach((route) => this.app.use(`${this.baseUrl}`, route.getRoute()));
+    this.routes.forEach((route) => this.app.use(`${this.baseUrl}`, route.registerRoutes()));
 
-    this.app.use(RootRoute.getRoute());
+    this.app.use(RootRoute.registerRoutes());
     this.app.use(UndefinedRoute);
   }
 }

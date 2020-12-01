@@ -152,6 +152,8 @@ dist
 
 *.snap
 *.png
+*.jpg
+*.jpeg
 *.http
 *.ico
 *.txt
