@@ -34,7 +34,7 @@ export const FileUploader = (
 
   const storage = multer.diskStorage({
     destination(req, file, cb) {
-      cb(null, EnvUtils.getFileUploadsPath2());
+      cb(null, EnvUtils.getFileUploadsPath());
     },
     filename: (req, file, cb) => {
       cb(null, file.originalname);

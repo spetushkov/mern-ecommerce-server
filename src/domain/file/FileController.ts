@@ -11,6 +11,55 @@ import { FileQueryEntity } from './FileQueryEntity';
 const baseUrl = '/files/download/';
 
 export class FileController {
+  findAll = async (req: Request, res: Response): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      const dirPath = EnvUtils.getFileUploadsPath();
+      fs.readdir(dirPath, (error, files) => {
+        if (error) {
+          return reject(error);
+        }
+
+        const filesInfo: FileInfo[] = [];
+        files.forEach((file) => {
+          filesInfo.push({
+            name: file,
+            url: baseUrl + file,
+          });
+        });
+
+        const response = new BaseResult(filesInfo);
+        res.status(StatusCode.OK).json(response);
+      });
+    });
+  };
+
+  findByName = async (req: Request, res: Response): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      const fileName = req.params.name;
+
+      const fileInfo: FileInfo = {
+        name: fileName,
+        url: baseUrl + fileName,
+      };
+
+      const response = new BaseResult(fileInfo);
+      res.status(StatusCode.OK).json(response);
+    });
+  };
+
+  download = async (req: Request, res: Response): Promise<void> => {
+    return new Promise((resolve, reject) => {
+      const fileName = req.params.name;
+      const dirPath = EnvUtils.getFileUploadsPath();
+
+      res.download(dirPath + fileName, fileName, (error) => {
+        if (error) {
+          reject(error);
+        }
+      });
+    });
+  };
+
   upload = async (req: Request, res: Response): Promise<void> => {
     try {
       const fileQueryEntity = ClassTransformer.fromPlain(FileQueryEntity, req.query);
@@ -34,41 +83,5 @@ export class FileController {
     } catch (error) {
       return Promise.reject(error);
     }
-  };
-
-  list = async (req: Request, res: Response): Promise<void> => {
-    return new Promise((resolve, reject) => {
-      const dirPath = EnvUtils.getFileUploadsPath2();
-      fs.readdir(dirPath, (error, files) => {
-        if (error) {
-          return reject(error);
-        }
-
-        const filesInfo: FileInfo[] = [];
-
-        files.forEach((file) => {
-          filesInfo.push({
-            name: file,
-            url: baseUrl + file,
-          });
-        });
-
-        const response = new BaseResult(filesInfo);
-        res.status(StatusCode.OK).json(response);
-      });
-    });
-  };
-
-  download = async (req: Request, res: Response): Promise<void> => {
-    return new Promise((resolve, reject) => {
-      const fileName = req.params.name;
-      const dirPath = EnvUtils.getFileUploadsPath2();
-
-      res.download(dirPath + fileName, fileName, (error) => {
-        if (error) {
-          reject(error);
-        }
-      });
-    });
   };
 }

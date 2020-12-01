@@ -7,14 +7,14 @@
 @contentTypeFormData = multipart/form-data
 @entityId = playstation.jpg
 
-### upload
-POST {{url}}/upload?field=file&limitFileSize=4&imageFileType=true {{protocol}}
+### findAll
+GET {{url}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+### findByName (download)
+GET {{url}}/{{entityId}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+### save (upload)
+POST {{url}}?field=file&limitFileSize=4&imageFileType=true {{protocol}}
 Content-Type: {{contentTypeFormData}}
-
-### list
-GET {{url}}/list {{protocol}}
-Content-Type: {{contentTypeJson}}
-
-### download
-GET {{url}}/download/{{entityId}} {{protocol}}
-Content-Type: {{contentTypeJson}}

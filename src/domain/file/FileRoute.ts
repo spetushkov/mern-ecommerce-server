@@ -16,24 +16,25 @@ export class FileRoute implements Route {
   registerRoutes = (): Router => {
     const router = express.Router();
 
-    router.post(`${this.getBaseUrl()}/upload`, [this.upload]);
-    router.get(`${this.getBaseUrl()}/list`, [this.list]);
-    router.get(`${this.getBaseUrl()}/download/:name`, [this.download]);
+    router.get(`${this.getBaseUrl()}`, [this.findAll]);
+    router.get(`${this.getBaseUrl()}/:name`, [this.download]);
+    // router.get(`${this.getBaseUrl()}/:name/download`, [this.download]);
+    router.post(`${this.getBaseUrl()}`, [this.upload]);
 
     return router;
   };
 
-  private upload = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  private findAll = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      await this.controller.upload(req, res);
+      await this.controller.findAll(req, res);
     } catch (error) {
       next(error);
     }
   };
 
-  private list = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  private findByName = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-      await this.controller.list(req, res);
+      await this.controller.findByName(req, res);
     } catch (error) {
       next(error);
     }
@@ -42,6 +43,14 @@ export class FileRoute implements Route {
   private download = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
       await this.controller.download(req, res);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  private upload = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      await this.controller.upload(req, res);
     } catch (error) {
       next(error);
     }
