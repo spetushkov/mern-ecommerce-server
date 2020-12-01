@@ -5,13 +5,19 @@ import { ClassTransformer } from '../../class/ClassTransformer';
 import { FileUploader } from '../../server/express/middleware/FileUploader';
 import { EnvUtils } from '../../utils/EnvUtils';
 import { FileEntity } from './FileEntity';
+import { FileQueryEntity } from './FileQueryEntity';
 
 type FileInfo = { name: string; url: string };
 
 export class FileController {
   upload = async (req: Request, res: Response): Promise<void> => {
     try {
-      await FileUploader(req, res);
+      const fileQueryEntity = ClassTransformer.fromPlain(FileQueryEntity, req.query);
+      if (!fileQueryEntity.field) {
+        throw ServerException.create(StatusCode.BAD_REQUEST, 'File field is not defined');
+      }
+
+      await FileUploader(fileQueryEntity)(req, res);
 
       if (!req.file) {
         throw ServerException.create(StatusCode.BAD_REQUEST, 'Please upload a file');
