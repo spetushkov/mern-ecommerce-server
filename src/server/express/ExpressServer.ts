@@ -45,7 +45,9 @@ export class ExpressServer implements Server {
       this.app.use(UrlEncoder());
       this.app.use(CookieParser());
       this.app.use(Cors());
-      this.app.use(HttpLogger());
+      if (process.env.NODE_ENV === 'development') {
+        this.app.use(HttpLogger());
+      }
       this.app.use(this.fileUploadsPath, StaticFolderRegister(this.fileUploadsPath));
 
       this.routesManager.connect();

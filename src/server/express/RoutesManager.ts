@@ -27,6 +27,11 @@ import { ProductCrudController } from '../../domain/product/ProductCrudControlle
 import { ProductCrudRoute } from '../../domain/product/ProductCrudRoute';
 import { ProductCrudService } from '../../domain/product/ProductCrudService';
 import { ProductEntity } from '../../domain/product/ProductEntity';
+import { ReviewMongoDbRepository } from '../../domain/review/mongodb/ReviewMongoDbRepository';
+import { ReviewCrudController } from '../../domain/review/ReviewCrudController';
+import { ReviewCrudRoute } from '../../domain/review/ReviewCrudRoute';
+import { ReviewCrudService } from '../../domain/review/ReviewCrudService';
+import { ReviewEntity } from '../../domain/review/ReviewEntity';
 import { UserAuthController } from '../../domain/user/auth/UserAuthController';
 import { UserAuthRoute } from '../../domain/user/auth/UserAuthRoute';
 import { UserAuthService } from '../../domain/user/auth/UserAuthService';
@@ -70,9 +75,13 @@ export class RoutesManager {
   private fileController: FileController;
   private fileRoute: FileRoute;
 
+  private reviewRepository: Repository<ReviewEntity>;
+  private reviewService: BaseCrudService<ReviewEntity>;
+  private reviewController: BaseCrudController<ReviewEntity>;
+  private reviewRoute: ReviewCrudRoute;
+
   constructor(app: Application) {
     this.app = app;
-
     this.apiVersion = process.env.API_VERSION || 'v1';
     this.baseUrl = `/${this.apiVersion}/api`;
 
@@ -113,6 +122,12 @@ export class RoutesManager {
     this.configController = new ConfigCrudController(this.configService);
     this.configRoute = new ConfigCrudRoute(this.configController);
     this.register(this.configRoute);
+
+    this.reviewRepository = new ReviewMongoDbRepository();
+    this.reviewService = new ReviewCrudService(this.reviewRepository, this.productRepository);
+    this.reviewController = new ReviewCrudController(this.reviewService);
+    this.reviewRoute = new ReviewCrudRoute(this.reviewController, this.authService);
+    this.register(this.reviewRoute);
   }
 
   private register(route: Route) {

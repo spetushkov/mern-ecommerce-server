@@ -1,41 +1,54 @@
 @protocol = HTTP/1.1
 @host = http://localhost
 @port = 8080
-@baseUrl = /v1/api/users
+@baseUrl = /v1/api/reviews
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5fa8fc458ae34c23fada2732
+@entityId = 5fc77c79b6c6d45d0c728ef1
 @authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDY5MTE4MDAsImV4cCI6MTYwNjk0MDYwMH0.X0cmOVe4nNATGhP4doT58icovACAywMc1wu-LdDIicw
 
 ### findAll
 GET {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
-Authorization: {{authHeader}}
 
 ### findById
 GET {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
-Authorization: {{authHeader}}
 
-### save
+### save review #1
 POST {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
 Authorization: {{authHeader}}
 
 {
-"name": "jdoe3",
-"email": "jdoe3@company.com",
-"password": "12345678",
-"isAdmin": false
+    "rating": 4.5,
+    "comment": "comment 1",
+    "user": "5f9a9744e07c97391c49c656",
+    "product": "5f9a9744e07c97391c49c659"
 }
 
-### updateById
-PATCH {{url}}/{{entityId}} {{protocol}}
+### save review #2
+POST {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
 Authorization: {{authHeader}}
 
 {
-"name": "jsmith"
+    "rating": 4,
+    "comment": "comment 2",
+    "user": "5f9a9744e07c97391c49c657",
+    "product": "5f9a9744e07c97391c49c659"
+}
+
+### save review #3
+POST {{url}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+{
+    "rating": 5,
+    "comment": "comment 3",
+    "user": "5f9a9744e07c97391c49c658",
+    "product": "5f9a9744e07c97391c49c659"
 }
 
 ### deleteById

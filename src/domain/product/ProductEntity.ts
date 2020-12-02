@@ -1,14 +1,7 @@
-import { Expose, Type } from 'class-transformer';
-import {
-  ArrayNotEmpty,
-  IsArray,
-  IsMongoId,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
+import { MongoDbUtils } from '@spetushkou/api-expressjs';
+import { Expose, Transform, Type } from 'class-transformer';
+import { IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
+import { ObjectId } from 'mongodb';
 import { BaseDomainEntity } from '../BaseDomainEntity';
 import { ReviewEntity } from '../review/ReviewEntity';
 import { UserEntity } from '../user/UserEntity';
@@ -61,18 +54,19 @@ export class ProductEntity extends BaseDomainEntity implements Product {
   numReviews = 0;
 
   @Expose()
-  @Type(() => UserEntity)
+  @Type(() => ObjectId)
+  @Transform(MongoDbUtils.toObjectId('user'), { toClassOnly: true })
   @IsMongoId()
   @IsNotEmpty()
   user: UserEntity | string = ''; // reference: Product MANY_TO_ONE User
 
   @Expose()
-  @Type(() => ReviewEntity)
+  @Type(() => ObjectId)
+  @Transform(MongoDbUtils.toArrayObjectId('reviews'), { toClassOnly: true })
   @IsOptional()
-  @IsArray()
-  @ArrayNotEmpty()
-  @ValidateNested()
-  reviews?: ReviewEntity[] | string[]; // reference (embedded doc): Product ONE_TO_ONE Review
+  @IsMongoId()
+  @IsNotEmpty()
+  reviews?: ReviewEntity[] | string[]; // reference: Product MANY_TO_ONE Review
 
   constructor() {
     super();

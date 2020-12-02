@@ -1,5 +1,4 @@
 import { model, Schema } from 'mongoose';
-import { ReviewSchema } from '../../review/mongodb/ReviewModel';
 
 export const ProductSchema = new Schema(
   {
@@ -13,7 +12,7 @@ export const ProductSchema = new Schema(
     rating: { type: Number, required: true, default: 0.0 },
     numReviews: { type: Number, required: true, default: 0 },
     user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    reviews: [ReviewSchema],
+    reviews: [{ type: Schema.Types.ObjectId, required: true, ref: 'Review' }],
   },
   { timestamps: true },
 );

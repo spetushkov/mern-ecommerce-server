@@ -1,3 +1,4 @@
+import { MongoDbUtils } from '@spetushkou/api-expressjs';
 import { Expose, Transform, Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
@@ -13,7 +14,6 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { ObjectId } from 'mongodb';
-import { MongoDbUtils } from '../../repository/mongodb/MongoDbUtils';
 import { BaseDomainEntity } from '../BaseDomainEntity';
 import { ProductEntity } from '../product/ProductEntity';
 import { UserEntity } from '../user/UserEntity';
