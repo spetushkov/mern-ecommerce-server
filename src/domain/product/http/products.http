@@ -24,6 +24,10 @@ OPTIONS {{url}}/{{entityId}} {{protocol}}
 GET {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
 
+### findAll with params
+GET {{url}}?keyword=phone {{protocol}}
+Content-Type: {{contentTypeJson}}
+
 ### findById
 GET {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
