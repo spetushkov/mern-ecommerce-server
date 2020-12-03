@@ -28,6 +28,14 @@ Content-Type: {{contentTypeJson}}
 GET {{url}}?keyword=phone {{protocol}}
 Content-Type: {{contentTypeJson}}
 
+### findAll with a paginator
+GET {{url}}?page=1&pageLimit=2 {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+### findAll top 3 rated
+GET {{url}}?sort=-rating&pageLimit=3 {{protocol}}
+Content-Type: {{contentTypeJson}}
+
 ### findById
 GET {{url}}/{{entityId}} {{protocol}}
 Content-Type: {{contentTypeJson}}
