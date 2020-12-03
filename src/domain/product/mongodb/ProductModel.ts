@@ -13,12 +13,13 @@ export const ProductSchema = new Schema(
     numReviews: { type: Number, required: true, default: 0 },
     user: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
     reviews: [{ type: Schema.Types.ObjectId, required: true, ref: 'Review' }],
+    _reviews: [{ type: Schema.Types.ObjectId, required: true, ref: 'Review' }],
   },
   { timestamps: true },
 );
 
 ProductSchema.statics.getExternalKeys = function () {
-  return ['user'];
+  return ['user', '_reviews'];
 };
 
 export const ProductModel = model('Product', ProductSchema);

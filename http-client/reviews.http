@@ -5,7 +5,7 @@
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
 @entityId = 5fc77c79b6c6d45d0c728ef1
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDY5MTE4MDAsImV4cCI6MTYwNjk0MDYwMH0.X0cmOVe4nNATGhP4doT58icovACAywMc1wu-LdDIicw
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDY5ODQ0NjAsImV4cCI6MTYwNzAxMzI2MH0.3XQsV7a1v_A7m9iWOFRG6Woe2SWCZGyn-d-qrF7e2wU
 
 ### findAll
 GET {{url}} {{protocol}}
@@ -48,6 +48,18 @@ Authorization: {{authHeader}}
     "rating": 5,
     "comment": "comment 3",
     "user": "5f9a9744e07c97391c49c658",
+    "product": "5f9a9744e07c97391c49c659"
+}
+
+### save review #4
+POST {{url}} {{protocol}}
+Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
+
+{
+    "rating": 4,
+    "comment": "comment 4",
+    "user": "5fa8fc458ae34c23fada2732",
     "product": "5f9a9744e07c97391c49c659"
 }
 

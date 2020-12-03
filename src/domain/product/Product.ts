@@ -13,5 +13,6 @@ export interface Product extends BaseDomain {
   rating: number;
   numReviews: number;
   user: User | string; // reference: Product MANY_TO_ONE User
-  reviews?: Review[] | string[]; // reference: Product MANY_TO_ONE Review
+  reviews?: string[]; // reference: Product MANY_TO_ONE Review
+  _reviews?: Review[] | string[];
 }

@@ -65,6 +65,7 @@ export class ReviewCrudService extends BaseDomainCrudService<ReviewEntity> {
     reviews.push(entitySaved.id);
 
     productEntityUpdated.reviews = reviews;
+    productEntityUpdated._reviews = reviews;
     productEntityUpdated.numReviews = reviews.length;
 
     const reviewEntities = await this.getReviews({

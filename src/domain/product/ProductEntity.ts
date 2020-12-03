@@ -66,7 +66,11 @@ export class ProductEntity extends BaseDomainEntity implements Product {
   @IsOptional()
   @IsMongoId()
   @IsNotEmpty()
-  reviews?: ReviewEntity[] | string[]; // reference: Product MANY_TO_ONE Review
+  reviews?: string[]; // reference: Product MANY_TO_ONE Review
+
+  @Expose()
+  @Type(() => ReviewEntity)
+  _reviews?: ReviewEntity[] | string[];
 
   constructor() {
     super();
