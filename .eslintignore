@@ -152,10 +152,12 @@ dist
 
 *.snap
 *.png
+*.jpg
+*.jpeg
 *.http
 *.ico
 *.txt
-.env*.local
+.env*.*
 .gitignore
 .prettierignore
 .eslintignore
@@ -166,4 +168,5 @@ package-lock.json
 LICENSE
 TODO
 public/
+src/assets/
 client/build/
