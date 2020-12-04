@@ -1,0 +1,5 @@
+{
+  "products": {
+    "header": "Latest Products (namespace: {{namespace}})"
+  }
+}
