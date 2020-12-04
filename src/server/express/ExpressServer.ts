@@ -52,14 +52,6 @@ export class ExpressServer implements Server {
 
       this.routesManager.connect();
 
-      // if (process.env.NODE_ENV === 'production') {
-      //   this.app.use(StaticFolderRegister('client/build/'));
-
-      //   this.app.get('*', (req: Request, res: Response) => {
-      //     res.sendFile(path.resolve(path.resolve(), 'client', 'build', 'index.html'));
-      //   });
-      // }
-
       this.onStop();
 
       this.app.use(ServerErrorHandler);
