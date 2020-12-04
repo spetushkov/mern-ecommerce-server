@@ -45,6 +45,7 @@
     "MERN, ecommerce"
   ],
   "dependencies": {
+    "@spetushkou/api-expressjs": "^1.0.0",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
     "dotenv-expand": "^5.1.0",
