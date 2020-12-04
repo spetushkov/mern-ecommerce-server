@@ -166,4 +166,4 @@ package-lock.json
 LICENSE
 TODO
 public/
-client/
+client/build/
