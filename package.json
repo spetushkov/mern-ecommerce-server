@@ -32,7 +32,7 @@
     "setup:link": "sudo npm link @spetushkou/api-expressjs",
     "start": "yarn start:dev",
     "start:dev": "cross-env NODE_ENV=development yarn start:watch",
-    "start:prod": "cross-env NODE_ENV=production node dist/index.js",
+    "start:prod": "node dist/index.js",
     "start:stage": "cross-env NODE_ENV=production ts-node .",
     "start:test": "cross-env NODE_ENV=test yarn start:watch",
     "start:watch": "nodemon --watch 'src/**/*.{js,ts}' --ignore 'src/**/*.test.{js,ts}' --ext 'js,ts' --exec 'ts-node' .",
