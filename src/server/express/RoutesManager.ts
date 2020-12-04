@@ -9,7 +9,8 @@ import {
   Route,
   UndefinedRoute,
 } from '@spetushkou/api-expressjs';
-import { Application } from 'express';
+import { Application, Request, Response } from 'express';
+import path from 'path';
 import { ConfigCrudController } from '../../domain/config/ConfigCrudController';
 import { ConfigCrudRoute } from '../../domain/config/ConfigCrudRoute';
 import { ConfigCrudService } from '../../domain/config/ConfigCrudService';
@@ -40,6 +41,7 @@ import { UserCrudController } from '../../domain/user/UserCrudController';
 import { UserCrudRoute } from '../../domain/user/UserCrudRoute';
 import { UserCrudService } from '../../domain/user/UserCrudService';
 import { UserEntity } from '../../domain/user/UserEntity';
+import { StaticFolderRegister } from './middleware/StaticFolderRegister';
 
 export class RoutesManager {
   private app: Application;
@@ -136,8 +138,21 @@ export class RoutesManager {
 
   connect(): void {
     this.routes.forEach((route) => this.app.use(`${this.baseUrl}`, route.registerRoutes()));
-
+    this.registerProductionClientRoute();
     this.app.use(RootRoute.registerRoutes());
     this.app.use(UndefinedRoute);
   }
+
+  registerProductionClientRoute = (): void => {
+    if (process.env.NODE_ENV !== 'production') {
+      return;
+    }
+
+    const clientBuildPath = process.env.CLIENT_BUILD_PATH || '/';
+    this.app.use(StaticFolderRegister(`${clientBuildPath}`));
+
+    this.app.get('*', (req: Request, res: Response) => {
+      res.sendFile(path.resolve(path.resolve(), clientBuildPath, 'index.html'));
+    });
+  };
 }

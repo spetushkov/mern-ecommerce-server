@@ -157,7 +157,7 @@ dist
 *.http
 *.ico
 *.txt
-.env*.local
+.env*.*
 .gitignore
 .prettierignore
 .eslintignore
@@ -169,3 +169,4 @@ LICENSE
 TODO
 public/
 src/assets/
+client/
