@@ -151,3 +151,4 @@ dist
 # CUSTOM
 
 .env*.local
+README.local.md
