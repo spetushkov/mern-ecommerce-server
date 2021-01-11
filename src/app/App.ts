@@ -1,14 +1,13 @@
 import { ErrorHandler, Logger, Server } from '@spetushkou/api-expressjs';
 import 'reflect-metadata';
 import { ExpressServer } from '../server/express/ExpressServer';
-import { AppContext } from './AppContext';
-
-export const CONTEXT = new AppContext();
+import { AppConfig } from './AppConfig';
 
 export class App {
   private server: Server;
 
   constructor() {
+    new AppConfig();
     this.server = new ExpressServer();
   }
 

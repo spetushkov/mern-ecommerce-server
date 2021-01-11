@@ -7,7 +7,7 @@ import {
   ServerException,
 } from '@spetushkou/api-expressjs';
 import { NextFunction, RequestHandler, Response } from 'express';
-import { UserEntity } from '../../../domain/user/UserEntity';
+import { UserEntity } from '../../../api/user/UserEntity';
 
 export const UserAuthenticator = (
   authService: AuthService<UserEntity, AuthData>,

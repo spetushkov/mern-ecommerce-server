@@ -1,8 +1,8 @@
 import { Logger } from '@spetushkou/api-expressjs';
-import { AppContext } from '../app/AppContext';
-import { OrderModel } from '../domain/order/mongodb/OrderModel';
-import { ProductModel } from '../domain/product/mongodb/ProductModel';
-import { UserModel } from '../domain/user/mongodb/UserModel';
+import { OrderModel } from '../api/order/mongodb/OrderModel';
+import { ProductModel } from '../api/product/mongodb/ProductModel';
+import { UserModel } from '../api/user/mongodb/UserModel';
+import { AppConfig } from '../app/AppConfig';
 import { MongoDbStorage } from '../repository/mongodb/MongoDbStorage';
 import { MongoDbStorageConnection } from '../repository/mongodb/MongoDbStorageConnection';
 import { products } from './json/products';
@@ -12,7 +12,7 @@ class MockData {
   private mongoDbStorage: MongoDbStorage;
 
   constructor() {
-    new AppContext();
+    new AppConfig();
 
     this.mongoDbStorage = new MongoDbStorage(new MongoDbStorageConnection());
     this.mongoDbStorage.connect();

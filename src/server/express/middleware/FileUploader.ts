@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 import util from 'util';
-import { FileQueryEntity } from '../../../domain/file/FileQueryEntity';
+import { FileQueryEntity } from '../../../api/file/FileQueryEntity';
 import { EnvUtils } from '../../../utils/EnvUtils';
 
 const imageFileTypeRegExp = /jpg|jpeg|png/;

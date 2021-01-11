@@ -1,6 +1,6 @@
 import { BaseRequest, ServerException } from '@spetushkou/api-expressjs';
 import { NextFunction, RequestHandler, Response } from 'express';
-import { AuthAccessService } from '../../../auth/AuthAccessService';
+import { UserAuthorizationService } from '../../../api/auth/UserAuthorizationService';
 
 export const UserAdminValidator = (): RequestHandler => (
   req: BaseRequest,
@@ -8,7 +8,7 @@ export const UserAdminValidator = (): RequestHandler => (
   next: NextFunction,
 ) => {
   try {
-    if (!AuthAccessService.isAdmin(req.user)) {
+    if (!UserAuthorizationService.isAdmin(req.user)) {
       throw ServerException.InvalidAccessException();
     }
 
