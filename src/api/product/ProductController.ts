@@ -4,7 +4,7 @@ import { BaseApiCrudController } from '../../controller/BaseApiCrudController';
 import { ProductEntity } from './ProductEntity';
 import { ProductQueryEntity } from './ProductQueryEntity';
 
-export class ProductCrudController extends BaseApiCrudController<ProductEntity> {
+export class ProductController extends BaseApiCrudController<ProductEntity> {
   constructor(service: CrudService<ProductEntity>) {
     super(service, ProductEntity);
   }

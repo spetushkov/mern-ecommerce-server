@@ -10,7 +10,7 @@ export class OrderMongoDbRepository extends BaseApiMongoDbRepository<OrderEntity
 
   protected async postFindById(doc: Document): Promise<Document> {
     try {
-      const keys = OrderSchema.statics.getExternalKeys();
+      const keys = OrderSchema.statics.getForeignKeys();
       for (const key of keys) {
         await doc.populate(key).execPopulate();
       }

@@ -3,7 +3,7 @@ import { BaseApiCrudService } from '../../service/BaseApiCrudService';
 import { ProductEntity } from '../product/ProductEntity';
 import { ReviewEntity } from './ReviewEntity';
 
-export class ReviewCrudService extends BaseApiCrudService<ReviewEntity> {
+export class ReviewService extends BaseApiCrudService<ReviewEntity> {
   private productRepository: Repository<ProductEntity>;
 
   constructor(repository: Repository<ReviewEntity>, productRepository: Repository<ProductEntity>) {

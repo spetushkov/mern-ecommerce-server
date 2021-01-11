@@ -5,13 +5,13 @@ import {
   BaseCrudRoute,
 } from '@spetushkou/api-expressjs';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { UserAdminValidator } from '../../server/express/middleware/UserAdminValidator';
+import { UserRoleValidator } from '../../server/express/middleware/UserAdminValidator';
 import { UserAuthenticator } from '../../server/express/middleware/UserAuthenticator';
 import { FileController } from '../file/FileController';
 import { UserEntity } from '../user/UserEntity';
 import { ProductEntity } from './ProductEntity';
 
-export class ProductCrudRoute extends BaseCrudRoute<ProductEntity> {
+export class ProductRoute extends BaseCrudRoute<ProductEntity> {
   private authService: AuthService<UserEntity, AuthData>;
   private fileController: FileController;
 
@@ -45,19 +45,19 @@ export class ProductCrudRoute extends BaseCrudRoute<ProductEntity> {
 
   protected saveHandlers = (): RequestHandler[] => [
     UserAuthenticator(this.authService),
-    UserAdminValidator(),
+    UserRoleValidator(),
     this.save,
   ];
 
   protected updateByIdHandlers = (): RequestHandler[] => [
     UserAuthenticator(this.authService),
-    UserAdminValidator(),
+    UserRoleValidator(),
     this.updateById,
   ];
 
   protected deleteByIdHandlers = (): RequestHandler[] => [
     UserAuthenticator(this.authService),
-    UserAdminValidator(),
+    UserRoleValidator(),
     this.deleteById,
   ];
 }

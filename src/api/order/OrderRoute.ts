@@ -9,7 +9,7 @@ import { UserAuthenticator } from '../../server/express/middleware/UserAuthentic
 import { UserEntity } from '../user/UserEntity';
 import { OrderEntity } from './OrderEntity';
 
-export class OrderCrudRoute extends BaseCrudRoute<OrderEntity> {
+export class OrderRoute extends BaseCrudRoute<OrderEntity> {
   private authService: AuthService<UserEntity, AuthData>;
 
   constructor(

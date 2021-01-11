@@ -14,33 +14,33 @@ import path from 'path';
 import { UserAuthController } from '../../api/auth/UserAuthController';
 import { UserAuthRoute } from '../../api/auth/UserAuthRoute';
 import { UserAuthService } from '../../api/auth/UserAuthService';
-import { ConfigCrudController } from '../../api/config/ConfigCrudController';
-import { ConfigCrudRoute } from '../../api/config/ConfigCrudRoute';
-import { ConfigCrudService } from '../../api/config/ConfigCrudService';
+import { ConfigController } from '../../api/config/ConfigController';
 import { ConfigEntity } from '../../api/config/ConfigEntity';
 import { ConfigEnvRepository } from '../../api/config/ConfigEnvRepository';
+import { ConfigRoute } from '../../api/config/ConfigRoute';
+import { ConfigService } from '../../api/config/ConfigService';
 import { FileController } from '../../api/file/FileController';
 import { FileRoute } from '../../api/file/FileRoute';
 import { OrderMongoDbRepository } from '../../api/order/mongodb/OrderMongoDbRepository';
-import { OrderCrudController } from '../../api/order/OrderCrudController';
-import { OrderCrudRoute } from '../../api/order/OrderCrudRoute';
-import { OrderCrudService } from '../../api/order/OrderCrudService';
+import { OrderController } from '../../api/order/OrderController';
 import { OrderEntity } from '../../api/order/OrderEntity';
+import { OrderRoute } from '../../api/order/OrderRoute';
+import { OrderService } from '../../api/order/OrderService';
 import { ProductMongoDbRepository } from '../../api/product/mongodb/ProductMongoDbRepository';
-import { ProductCrudController } from '../../api/product/ProductCrudController';
-import { ProductCrudRoute } from '../../api/product/ProductCrudRoute';
-import { ProductCrudService } from '../../api/product/ProductCrudService';
+import { ProductController } from '../../api/product/ProductController';
 import { ProductEntity } from '../../api/product/ProductEntity';
+import { ProductRoute } from '../../api/product/ProductRoute';
+import { ProductService } from '../../api/product/ProductService';
 import { ReviewMongoDbRepository } from '../../api/review/mongodb/ReviewMongoDbRepository';
-import { ReviewCrudController } from '../../api/review/ReviewCrudController';
-import { ReviewCrudRoute } from '../../api/review/ReviewCrudRoute';
-import { ReviewCrudService } from '../../api/review/ReviewCrudService';
+import { ReviewController } from '../../api/review/ReviewController';
 import { ReviewEntity } from '../../api/review/ReviewEntity';
+import { ReviewRoute } from '../../api/review/ReviewRoute';
+import { ReviewService } from '../../api/review/ReviewService';
 import { UserMongoDbRepository } from '../../api/user/mongodb/UserMongoDbRepository';
-import { UserCrudController } from '../../api/user/UserCrudController';
-import { UserCrudRoute } from '../../api/user/UserCrudRoute';
-import { UserCrudService } from '../../api/user/UserCrudService';
+import { UseController } from '../../api/user/UseController';
 import { UserEntity } from '../../api/user/UserEntity';
+import { UserRoute } from '../../api/user/UserRoute';
+import { UserService } from '../../api/user/UserService';
 import { StaticFolderRegister } from './middleware/StaticFolderRegister';
 
 export class RoutesManager {
@@ -53,7 +53,7 @@ export class RoutesManager {
   private userRepository: Repository<UserEntity>;
   private userService: BaseCrudService<UserEntity>;
   private userController: BaseCrudController<UserEntity>;
-  private userRoute: UserCrudRoute;
+  private userRoute: UserRoute;
 
   private authService: AuthService<UserEntity, AuthData>;
   private authController: AuthController;
@@ -62,17 +62,18 @@ export class RoutesManager {
   private productRepository: Repository<ProductEntity>;
   private productService: BaseCrudService<ProductEntity>;
   private productController: BaseCrudController<ProductEntity>;
-  private productRoute: ProductCrudRoute;
+  private productRoute: ProductRoute;
 
   private orderRepository: Repository<OrderEntity>;
   private orderService: BaseCrudService<OrderEntity>;
+
   private orderController: BaseCrudController<OrderEntity>;
-  private orderRoute: OrderCrudRoute;
+  private orderRoute: OrderRoute;
 
   private configRepository: Repository<ConfigEntity>;
   private configService: BaseCrudService<ConfigEntity>;
   private configController: BaseCrudController<ConfigEntity>;
-  private configRoute: ConfigCrudRoute;
+  private configRoute: ConfigRoute;
 
   private fileController: FileController;
   private fileRoute: FileRoute;
@@ -80,7 +81,7 @@ export class RoutesManager {
   private reviewRepository: Repository<ReviewEntity>;
   private reviewService: BaseCrudService<ReviewEntity>;
   private reviewController: BaseCrudController<ReviewEntity>;
-  private reviewRoute: ReviewCrudRoute;
+  private reviewRoute: ReviewRoute;
 
   constructor(app: Application) {
     this.app = app;
@@ -98,15 +99,15 @@ export class RoutesManager {
     this.authRoute = new UserAuthRoute(this.authController);
     this.register(this.authRoute);
 
-    this.userService = new UserCrudService(this.userRepository);
-    this.userController = new UserCrudController(this.userService);
-    this.userRoute = new UserCrudRoute(this.userController, this.authService);
+    this.userService = new UserService(this.userRepository);
+    this.userController = new UseController(this.userService);
+    this.userRoute = new UserRoute(this.userController, this.authService);
     this.register(this.userRoute);
 
     this.productRepository = new ProductMongoDbRepository();
-    this.productService = new ProductCrudService(this.productRepository);
-    this.productController = new ProductCrudController(this.productService);
-    this.productRoute = new ProductCrudRoute(
+    this.productService = new ProductService(this.productRepository);
+    this.productController = new ProductController(this.productService);
+    this.productRoute = new ProductRoute(
       this.productController,
       this.fileController,
       this.authService,
@@ -114,21 +115,21 @@ export class RoutesManager {
     this.register(this.productRoute);
 
     this.orderRepository = new OrderMongoDbRepository();
-    this.orderService = new OrderCrudService(this.orderRepository);
-    this.orderController = new OrderCrudController(this.orderService);
-    this.orderRoute = new OrderCrudRoute(this.orderController, this.authService);
+    this.orderService = new OrderService(this.orderRepository);
+    this.orderController = new OrderController(this.orderService);
+    this.orderRoute = new OrderRoute(this.orderController, this.authService);
     this.register(this.orderRoute);
 
     this.configRepository = new ConfigEnvRepository();
-    this.configService = new ConfigCrudService(this.configRepository);
-    this.configController = new ConfigCrudController(this.configService);
-    this.configRoute = new ConfigCrudRoute(this.configController);
+    this.configService = new ConfigService(this.configRepository);
+    this.configController = new ConfigController(this.configService);
+    this.configRoute = new ConfigRoute(this.configController);
     this.register(this.configRoute);
 
     this.reviewRepository = new ReviewMongoDbRepository();
-    this.reviewService = new ReviewCrudService(this.reviewRepository, this.productRepository);
-    this.reviewController = new ReviewCrudController(this.reviewService);
-    this.reviewRoute = new ReviewCrudRoute(this.reviewController, this.authService);
+    this.reviewService = new ReviewService(this.reviewRepository, this.productRepository);
+    this.reviewController = new ReviewController(this.reviewService);
+    this.reviewRoute = new ReviewRoute(this.reviewController, this.authService);
     this.register(this.reviewRoute);
   }
 

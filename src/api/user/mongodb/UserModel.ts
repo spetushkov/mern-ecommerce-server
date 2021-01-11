@@ -10,7 +10,7 @@ export const UserSchema = new Schema(
   { timestamps: true },
 );
 
-UserSchema.statics.getExternalKeys = function () {
+UserSchema.statics.getForeignKeys = function () {
   return [];
 };
 

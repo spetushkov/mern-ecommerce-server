@@ -2,7 +2,7 @@ import { BaseRequest, ServerException } from '@spetushkou/api-expressjs';
 import { NextFunction, RequestHandler, Response } from 'express';
 import { UserAuthorizationService } from '../../../api/auth/UserAuthorizationService';
 
-export const UserAdminValidator = (): RequestHandler => (
+export const UserRoleValidator = (): RequestHandler => (
   req: BaseRequest,
   res: Response,
   next: NextFunction,

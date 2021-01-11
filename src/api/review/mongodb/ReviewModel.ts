@@ -11,7 +11,7 @@ export const ReviewSchema = new Schema(
   { timestamps: true },
 );
 
-ReviewSchema.statics.getExternalKeys = function () {
+ReviewSchema.statics.getForeignKeys = function () {
   return [];
 };
 

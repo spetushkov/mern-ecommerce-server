@@ -18,7 +18,7 @@ export const ProductSchema = new Schema(
   { timestamps: true },
 );
 
-ProductSchema.statics.getExternalKeys = function () {
+ProductSchema.statics.getForeignKeys = function () {
   return ['user', '_reviews'];
 };
 

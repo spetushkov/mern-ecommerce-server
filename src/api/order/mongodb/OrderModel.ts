@@ -49,7 +49,7 @@ export const OrderSchema = new Schema(
   { timestamps: true },
 );
 
-OrderSchema.statics.getExternalKeys = function () {
+OrderSchema.statics.getForeignKeys = function () {
   return ['user'];
 };
 

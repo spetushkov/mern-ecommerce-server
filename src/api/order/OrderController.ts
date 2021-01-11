@@ -7,7 +7,7 @@ import { UserAuthorizationService } from '../auth/UserAuthorizationService';
 import { OrderEntity } from './OrderEntity';
 import { OrderQueryEntity } from './OrderQueryEntity';
 
-export class OrderCrudController extends BaseApiCrudController<OrderEntity> {
+export class OrderController extends BaseApiCrudController<OrderEntity> {
   constructor(service: CrudService<OrderEntity>) {
     super(service, OrderEntity);
   }
