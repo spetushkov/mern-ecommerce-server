@@ -28,6 +28,9 @@ export class UserEntity extends BaseApiEntity implements User {
   @IsNotEmpty()
   isAdmin? = false;
 
+  @Expose()
+  roles = [];
+
   getPrimaryKeys(): string[] {
     return ['email'];
   }

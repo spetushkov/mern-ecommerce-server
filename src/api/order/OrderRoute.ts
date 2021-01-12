@@ -5,7 +5,7 @@ import {
   BaseCrudRoute,
 } from '@spetushkou/api-expressjs';
 import { RequestHandler } from 'express';
-import { UserAuthenticator } from '../../server/express/middleware/UserAuthenticator';
+import { Authenticate } from '../../server/express/middleware/Authenticate';
 import { UserEntity } from '../user/UserEntity';
 import { OrderEntity } from './OrderEntity';
 
@@ -25,19 +25,19 @@ export class OrderRoute extends BaseCrudRoute<OrderEntity> {
   }
 
   protected findAllHandlers = (): RequestHandler[] => [
-    UserAuthenticator(this.authService),
+    Authenticate(this.authService),
     this.findAll,
   ];
 
   protected findByIdHandlers = (): RequestHandler[] => [
-    UserAuthenticator(this.authService),
+    Authenticate(this.authService),
     this.findById,
   ];
 
-  protected saveHandlers = (): RequestHandler[] => [UserAuthenticator(this.authService), this.save];
+  protected saveHandlers = (): RequestHandler[] => [Authenticate(this.authService), this.save];
 
   protected updateByIdHandlers = (): RequestHandler[] => [
-    UserAuthenticator(this.authService),
+    Authenticate(this.authService),
     this.updateById,
   ];
 }

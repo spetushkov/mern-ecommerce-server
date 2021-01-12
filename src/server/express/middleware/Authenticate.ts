@@ -9,7 +9,7 @@ import {
 import { NextFunction, RequestHandler, Response } from 'express';
 import { UserEntity } from '../../../api/user/UserEntity';
 
-export const UserAuthenticator = (
+export const Authenticate = (
   authService: AuthService<UserEntity, AuthData>,
 ): RequestHandler => async (req: BaseRequest, res: Response, next: NextFunction) => {
   try {

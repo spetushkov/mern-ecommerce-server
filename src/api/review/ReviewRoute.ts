@@ -5,7 +5,7 @@ import {
   BaseCrudRoute,
 } from '@spetushkou/api-expressjs';
 import { RequestHandler } from 'express';
-import { UserAuthenticator } from '../../server/express/middleware/UserAuthenticator';
+import { Authenticate } from '../../server/express/middleware/Authenticate';
 import { UserEntity } from '../user/UserEntity';
 import { ReviewEntity } from './ReviewEntity';
 
@@ -24,15 +24,15 @@ export class ReviewRoute extends BaseCrudRoute<ReviewEntity> {
     return '/reviews';
   }
 
-  protected saveHandlers = (): RequestHandler[] => [UserAuthenticator(this.authService), this.save];
+  protected saveHandlers = (): RequestHandler[] => [Authenticate(this.authService), this.save];
 
   protected updateByIdHandlers = (): RequestHandler[] => [
-    UserAuthenticator(this.authService),
+    Authenticate(this.authService),
     this.updateById,
   ];
 
   protected deleteByIdHandlers = (): RequestHandler[] => [
-    UserAuthenticator(this.authService),
+    Authenticate(this.authService),
     this.deleteById,
   ];
 }

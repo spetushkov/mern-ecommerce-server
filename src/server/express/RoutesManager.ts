@@ -7,6 +7,7 @@ import {
   Repository,
   RootRoute,
   Route,
+  StaticFolderRegister,
   UndefinedRoute,
 } from '@spetushkou/api-expressjs';
 import { Application, Request, Response } from 'express';
@@ -41,7 +42,6 @@ import { UseController } from '../../api/user/UseController';
 import { UserEntity } from '../../api/user/UserEntity';
 import { UserRoute } from '../../api/user/UserRoute';
 import { UserService } from '../../api/user/UserService';
-import { StaticFolderRegister } from './middleware/StaticFolderRegister';
 
 export class RoutesManager {
   private app: Application;
