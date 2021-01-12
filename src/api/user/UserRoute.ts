@@ -6,7 +6,6 @@ import {
 } from '@spetushkou/api-expressjs';
 import { RequestHandler } from 'express';
 import { Authenticate } from '../../server/express/middleware/Authenticate';
-import { UserRoleValidator } from '../../server/express/middleware/UserAdminValidator';
 import { UserEntity } from './UserEntity';
 
 export class UserRoute extends BaseCrudRoute<UserEntity> {
@@ -26,31 +25,23 @@ export class UserRoute extends BaseCrudRoute<UserEntity> {
 
   protected findAllHandlers = (): RequestHandler[] => [
     Authenticate(this.authService),
-    UserRoleValidator(),
     this.findAll,
   ];
 
   protected findByIdHandlers = (): RequestHandler[] => [
     Authenticate(this.authService),
-    UserRoleValidator(),
     this.findById,
   ];
 
-  protected saveHandlers = (): RequestHandler[] => [
-    Authenticate(this.authService),
-    UserRoleValidator(),
-    this.save,
-  ];
+  protected saveHandlers = (): RequestHandler[] => [Authenticate(this.authService), this.save];
 
   protected updateByIdHandlers = (): RequestHandler[] => [
     Authenticate(this.authService),
-    UserRoleValidator(),
     this.updateById,
   ];
 
   protected deleteByIdHandlers = (): RequestHandler[] => [
     Authenticate(this.authService),
-    UserRoleValidator(),
     this.deleteById,
   ];
 }

@@ -5,7 +5,7 @@ import { ApiRole } from '../../../role/ApiRole';
 export const AuthorizeDefault = (
   role: ApiRole,
   scope: string,
-  permission: string,
+  permission?: string,
 ): RequestHandler => (req: BaseRequest, res: Response, next: NextFunction) => {
   try {
     if (!PermissionManager.hasPermission(role, scope, permission)) {

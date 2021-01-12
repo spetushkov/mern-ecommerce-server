@@ -10,7 +10,6 @@ import { PublicRole } from '../../role/system/PublicRole';
 import { Authenticate } from '../../server/express/middleware/Authenticate';
 import { Authorize } from '../../server/express/middleware/Authorize';
 import { AuthorizeDefault } from '../../server/express/middleware/AuthorizeDefault';
-import { UserRoleValidator } from '../../server/express/middleware/UserAdminValidator';
 import { FileController } from '../file/FileController';
 import { UserEntity } from '../user/UserEntity';
 import { ProductEntity } from './ProductEntity';
@@ -18,6 +17,7 @@ import { ProductEntity } from './ProductEntity';
 export class ProductRoute extends BaseCrudRoute<ProductEntity> {
   private authService: AuthService<UserEntity, AuthData>;
   private fileController: FileController;
+  private modelId: string;
 
   constructor(
     constroller: BaseCrudController<ProductEntity>,
@@ -27,6 +27,7 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
     super(constroller);
     this.fileController = fileController;
     this.authService = authService;
+    this.modelId = 'product';
 
     this.registerAdditionalRoutes();
   }
@@ -47,29 +48,23 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
     return '/products';
   }
 
-  protected findAllHandlers = (): RequestHandler[] => [
-    AuthorizeDefault(PublicRole, 'product', 'findAll'),
+  protected findAllHandlers = (handlerId?: string): RequestHandler[] => [
+    AuthorizeDefault(PublicRole, this.modelId, handlerId),
     Authenticate(this.authService),
-    AuthorizeDefault(AuthenticatedRole, 'product', 'findAll'),
-    Authorize('product', 'findAll'),
+    AuthorizeDefault(AuthenticatedRole, this.modelId, handlerId),
+    Authorize(this.modelId, handlerId),
     this.findAll,
   ];
 
-  protected saveHandlers = (): RequestHandler[] => [
-    Authenticate(this.authService),
-    UserRoleValidator(),
-    this.save,
-  ];
+  protected saveHandlers = (): RequestHandler[] => [Authenticate(this.authService), this.save];
 
   protected updateByIdHandlers = (): RequestHandler[] => [
     Authenticate(this.authService),
-    UserRoleValidator(),
     this.updateById,
   ];
 
   protected deleteByIdHandlers = (): RequestHandler[] => [
     Authenticate(this.authService),
-    UserRoleValidator(),
     this.deleteById,
   ];
 }

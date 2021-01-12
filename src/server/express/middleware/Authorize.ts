@@ -3,14 +3,14 @@ import { NextFunction, RequestHandler, Response } from 'express';
 import { UserEntity } from '../../../api/user/UserEntity';
 import { RolesManager } from '../../../role/RolesManager';
 
-export const Authorize = (scope: string, permission: string): RequestHandler => (
+export const Authorize = (scope: string, permission?: string): RequestHandler => (
   req: BaseRequest,
   res: Response,
   next: NextFunction,
 ) => {
   try {
     const user = req.user as UserEntity;
-    if (!user || !user.roles) {
+    if (!user || !user.roles || !permission) {
       throw ServerException.InvalidAccessException();
     }
 
