@@ -1,15 +1,19 @@
+import { AdminRole } from './AdminRole';
+import { ApiRole } from './ApiRole';
 import { ApplicationRole } from './ApplicationRole';
-import { AuthenticatedRole } from './AuthenticatedRole';
-import { PublicRole } from './PublicRole';
-import { Role } from './Role';
+import { AuthenticatedRole } from './system/AuthenticatedRole';
+import { PublicRole } from './system/PublicRole';
+import { SystemRole } from './system/SystemRole';
 
 export class RolesManager {
-  static create(role: Role): ApplicationRole | null {
+  static create(role: keyof typeof SystemRole | keyof typeof ApplicationRole): ApiRole | null {
     switch (role) {
-      case Role.PUBLIC:
-        return new PublicRole();
-      case Role.AUTHENTICATED:
-        return new AuthenticatedRole();
+      case 'PUBLIC':
+        return PublicRole;
+      case 'AUTHENTICATED':
+        return AuthenticatedRole;
+      case 'ADMIN':
+        return AdminRole;
       default:
         return null;
     }

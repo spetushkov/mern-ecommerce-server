@@ -1,6 +1,16 @@
 import { Exclude, Expose } from 'class-transformer';
-import { IsBoolean, IsEmail, IsNotEmpty, IsOptional, IsString, MinLength } from 'class-validator';
+import {
+  ArrayNotEmpty,
+  IsBoolean,
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 import { BaseApiEntity } from '../../entity/BaseApiEntity';
+import { ApplicationRole } from '../../role/ApplicationRole';
 import { User } from './User';
 
 export class UserEntity extends BaseApiEntity implements User {
@@ -29,7 +39,10 @@ export class UserEntity extends BaseApiEntity implements User {
   isAdmin? = false;
 
   @Expose()
-  roles = [];
+  @IsOptional()
+  @ArrayNotEmpty()
+  @IsEnum(ApplicationRole, { each: true })
+  roles?: ApplicationRole[];
 
   getPrimaryKeys(): string[] {
     return ['email'];

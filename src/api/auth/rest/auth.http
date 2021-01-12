@@ -10,10 +10,11 @@ POST {{url}}/signUp {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
-"name": "name1",
-"email": "name1@company.com",
+"name": "name10",
+"email": "name11@company.com",
 "password": "123456",
-"isAdmin": false
+"isAdmin": true,
+"roles": ["ADMIN"]
 }
 
 ### signIn as a regular user
@@ -21,7 +22,7 @@ POST {{url}}/signIn {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
-"email": "name1@company.com",
+"email": "name9@company.com",
 "password": "123456"
 }
 

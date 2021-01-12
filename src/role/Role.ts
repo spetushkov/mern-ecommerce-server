@@ -1,4 +1,1 @@
-export enum Role {
-  PUBLIC = 'public',
-  AUTHENTICATED = 'authenticated',
-}
+export interface Role {}

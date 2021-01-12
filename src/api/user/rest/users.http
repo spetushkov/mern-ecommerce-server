@@ -4,8 +4,8 @@
 @baseUrl = /v1/api/users
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
-@entityId = 5fa8fc458ae34c23fada2732
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDY5ODQ0NjAsImV4cCI6MTYwNzAxMzI2MH0.3XQsV7a1v_A7m9iWOFRG6Woe2SWCZGyn-d-qrF7e2wU
+@entityId = 5ffd7325a01a777e959248a1
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmZkNzMyNWEwMWE3NzdlOTU5MjQ4YTEiLCJpYXQiOjE2MTA0NDU2MDUsImV4cCI6MTYxMDQ3NDQwNX0.I3UQ2cG6ydy6ACmAFlgWG7KMLQQHqoUQCXLjKa5w3C8
 
 ### findAll
 GET {{url}} {{protocol}}
