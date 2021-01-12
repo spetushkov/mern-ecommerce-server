@@ -11,7 +11,7 @@ Content-Type: {{contentTypeJson}}
 
 {
 "name": "name10",
-"email": "name11@company.com",
+"email": "name12@company.com",
 "password": "123456",
 "isAdmin": true,
 "roles": ["ADMIN"]

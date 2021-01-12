@@ -8,13 +8,15 @@ export const AuthenticatedRole: ApiRole = {
     updateById: false,
     replaceById: false,
     deleteById: false,
+    orderSend: false,
   },
   product: {
-    findAll: false,
+    findAll: true,
     findById: false,
     save: false,
     updateById: false,
     replaceById: false,
     deleteById: false,
+    productPublish: false,
   },
 };

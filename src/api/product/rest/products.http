@@ -7,7 +7,7 @@
 @contentTypeFormData = multipart/form-data
 @entityId = 5f9a9744e07c97391c49c659
 @authCookie = Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1Zjk1YzE2OGM1ZDRjMDkyYjNhZmVlZTYiLCJpYXQiOjE2MDM2NDk4OTgsImV4cCI6MTYwMzY3ODY5OH0.bHREuS-H71gXUkFSwXei-VXGgMdWg4S7LXjYSl0Ruqc; HttpOnly; Max-Age=28800
-@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZjlhOTc0NGUwN2M5NzM5MWM0OWM2NTYiLCJpYXQiOjE2MDY5ODQ0NjAsImV4cCI6MTYwNzAxMzI2MH0.3XQsV7a1v_A7m9iWOFRG6Woe2SWCZGyn-d-qrF7e2wU
+@authHeader = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZmZkODFkODU2ZGM3Njg3MTllNmVjM2EiLCJpYXQiOjE2MTA0NDkzNjgsImV4cCI6MTYxMDQ3ODE2OH0.jk96gPq_XsnVjKhzyBOwZGc72KHae-nd_HJ8k7hsdNc
 ### head
 HEAD {{url}} {{protocol}}
 
@@ -23,6 +23,7 @@ OPTIONS {{url}}/{{entityId}} {{protocol}}
 ### findAll
 GET {{url}} {{protocol}}
 Content-Type: {{contentTypeJson}}
+Authorization: {{authHeader}}
 
 ### findAll with params
 GET {{url}}?keyword=phone {{protocol}}

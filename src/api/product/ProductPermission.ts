@@ -1,3 +1,5 @@
-import { CrudPermission } from '../../permisssion/CrudPermission';
+import { CrudPermission } from '@spetushkou/api-expressjs';
 
-export interface ProductPermission extends CrudPermission {}
+export interface ProductPermission extends CrudPermission {
+  productPublish: boolean;
+}

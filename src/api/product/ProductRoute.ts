@@ -5,7 +5,11 @@ import {
   BaseCrudRoute,
 } from '@spetushkou/api-expressjs';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
+import { AuthenticatedRole } from '../../role/system/AuthenticatedRole';
+import { PublicRole } from '../../role/system/PublicRole';
 import { Authenticate } from '../../server/express/middleware/Authenticate';
+import { Authorize } from '../../server/express/middleware/Authorize';
+import { AuthorizeDefault } from '../../server/express/middleware/AuthorizeDefault';
 import { UserRoleValidator } from '../../server/express/middleware/UserAdminValidator';
 import { FileController } from '../file/FileController';
 import { UserEntity } from '../user/UserEntity';
@@ -42,6 +46,14 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
   getBaseUrl(): string {
     return '/products';
   }
+
+  protected findAllHandlers = (): RequestHandler[] => [
+    AuthorizeDefault(PublicRole, 'product', 'findAll'),
+    Authenticate(this.authService),
+    AuthorizeDefault(AuthenticatedRole, 'product', 'findAll'),
+    Authorize('product', 'findAll'),
+    this.findAll,
+  ];
 
   protected saveHandlers = (): RequestHandler[] => [
     Authenticate(this.authService),
