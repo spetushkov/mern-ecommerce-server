@@ -48,23 +48,27 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
     return '/products';
   }
 
-  protected findAllHandlers = (handlerId?: string): RequestHandler[] => [
+  protected saveHandlers = (handlerId?: string): RequestHandler[] => [
     Authorize(PublicRole, this.permissionSchemaId, handlerId),
     Authenticate(this.authService),
     Authorize(AuthenticatedRole, this.permissionSchemaId, handlerId),
     AuthorizeUser(this.permissionSchemaId, handlerId),
-    this.findAll,
+    this.save,
   ];
 
-  protected saveHandlers = (): RequestHandler[] => [Authenticate(this.authService), this.save];
-
-  protected updateByIdHandlers = (): RequestHandler[] => [
+  protected updateByIdHandlers = (handlerId?: string): RequestHandler[] => [
+    Authorize(PublicRole, this.permissionSchemaId, handlerId),
     Authenticate(this.authService),
+    Authorize(AuthenticatedRole, this.permissionSchemaId, handlerId),
+    AuthorizeUser(this.permissionSchemaId, handlerId),
     this.updateById,
   ];
 
-  protected deleteByIdHandlers = (): RequestHandler[] => [
+  protected deleteByIdHandlers = (handlerId?: string): RequestHandler[] => [
+    Authorize(PublicRole, this.permissionSchemaId, handlerId),
     Authenticate(this.authService),
+    Authorize(AuthenticatedRole, this.permissionSchemaId, handlerId),
+    AuthorizeUser(this.permissionSchemaId, handlerId),
     this.deleteById,
   ];
 }
