@@ -3,12 +3,12 @@ import {
   CookieParser,
   Cors,
   DbStorageConnection,
-  ErrorHandler,
+  ExceptionHandler,
   HttpLogger,
   JsonParser,
   Logger,
   Server,
-  ServerErrorHandler,
+  ServerExceptionHandler,
   StaticFolderRegister,
   StatusCode,
   UrlEncoder,
@@ -54,10 +54,10 @@ export class ExpressServer implements Server {
 
       this.onStop();
 
-      this.app.use(ServerErrorHandler);
+      this.app.use(ServerExceptionHandler);
     } catch (error) {
       const appError = new AppException(StatusCode.INTERNAL_SERVER_ERROR, error.message);
-      ErrorHandler.handle(appError);
+      ExceptionHandler.handle(appError);
     }
   }
 

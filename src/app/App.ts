@@ -1,4 +1,4 @@
-import { ErrorHandler, Logger, Server } from '@spetushkou/api-expressjs';
+import { ExceptionHandler, Logger, Server } from '@spetushkou/api-expressjs';
 import 'reflect-metadata';
 import { ExpressServer } from '../server/express/ExpressServer';
 import { AppEnvConfig } from './AppEnvConfig';
@@ -17,7 +17,7 @@ export class App {
 
       Logger.log('App: started');
     } catch (error) {
-      ErrorHandler.handle(error);
+      ExceptionHandler.handle(error);
     }
   }
 }
