@@ -9,7 +9,7 @@ import { AuthenticatedRole } from '../../role/system/AuthenticatedRole';
 import { PublicRole } from '../../role/system/PublicRole';
 import { Authenticate } from '../../server/express/middleware/Authenticate';
 import { Authorize } from '../../server/express/middleware/Authorize';
-import { AuthorizeDefault } from '../../server/express/middleware/AuthorizeDefault';
+import { AuthorizeUser } from '../../server/express/middleware/AuthorizeUser';
 import { FileController } from '../file/FileController';
 import { UserEntity } from '../user/UserEntity';
 import { ProductEntity } from './ProductEntity';
@@ -17,7 +17,7 @@ import { ProductEntity } from './ProductEntity';
 export class ProductRoute extends BaseCrudRoute<ProductEntity> {
   private authService: AuthService<UserEntity, AuthData>;
   private fileController: FileController;
-  private modelId: string;
+  private permissionSchemaId: string;
 
   constructor(
     constroller: BaseCrudController<ProductEntity>,
@@ -27,7 +27,7 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
     super(constroller);
     this.fileController = fileController;
     this.authService = authService;
-    this.modelId = 'product';
+    this.permissionSchemaId = 'product';
 
     this.registerAdditionalRoutes();
   }
@@ -49,10 +49,10 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
   }
 
   protected findAllHandlers = (handlerId?: string): RequestHandler[] => [
-    AuthorizeDefault(PublicRole, this.modelId, handlerId),
+    Authorize(PublicRole, this.permissionSchemaId, handlerId),
     Authenticate(this.authService),
-    AuthorizeDefault(AuthenticatedRole, this.modelId, handlerId),
-    Authorize(this.modelId, handlerId),
+    Authorize(AuthenticatedRole, this.permissionSchemaId, handlerId),
+    AuthorizeUser(this.permissionSchemaId, handlerId),
     this.findAll,
   ];
 
