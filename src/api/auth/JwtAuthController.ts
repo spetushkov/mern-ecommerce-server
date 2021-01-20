@@ -13,7 +13,7 @@ import { Request, Response } from 'express';
 import { ClassTransformer } from '../../class/ClassTransformer';
 import { UserEntity } from '../user/UserEntity';
 
-export class UserAuthController extends BaseController<UserEntity> implements AuthController {
+export class JwtAuthController extends BaseController<UserEntity> implements AuthController {
   private service: AuthService<UserEntity, AuthData>;
 
   constructor(service: AuthService<UserEntity, AuthData>) {

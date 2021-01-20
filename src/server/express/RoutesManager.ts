@@ -12,9 +12,9 @@ import {
 } from '@spetushkou/api-expressjs';
 import { Application, Request, Response } from 'express';
 import path from 'path';
-import { UserAuthController } from '../../api/auth/UserAuthController';
-import { UserAuthRoute } from '../../api/auth/UserAuthRoute';
-import { UserAuthService } from '../../api/auth/UserAuthService';
+import { JwtAuthController } from '../../api/auth/JwtAuthController';
+import { JwtAuthRoute } from '../../api/auth/JwtAuthRoute';
+import { JwtAuthService } from '../../api/auth/JwtAuthService';
 import { ConfigController } from '../../api/config/ConfigController';
 import { ConfigEntity } from '../../api/config/ConfigEntity';
 import { ConfigEnvRepository } from '../../api/config/ConfigEnvRepository';
@@ -38,7 +38,7 @@ import { ReviewEntity } from '../../api/review/ReviewEntity';
 import { ReviewRoute } from '../../api/review/ReviewRoute';
 import { ReviewService } from '../../api/review/ReviewService';
 import { UserMongoDbRepository } from '../../api/user/mongodb/UserMongoDbRepository';
-import { UseController } from '../../api/user/UseController';
+import { UserController } from '../../api/user/UserController';
 import { UserEntity } from '../../api/user/UserEntity';
 import { UserRoute } from '../../api/user/UserRoute';
 import { UserService } from '../../api/user/UserService';
@@ -57,7 +57,7 @@ export class RoutesManager {
 
   private authService: AuthService<UserEntity, AuthData>;
   private authController: AuthController;
-  private authRoute: UserAuthRoute;
+  private authRoute: JwtAuthRoute;
 
   private productRepository: Repository<ProductEntity>;
   private productService: BaseCrudService<ProductEntity>;
@@ -94,13 +94,13 @@ export class RoutesManager {
     this.fileRoute = new FileRoute(this.fileController);
     this.register(this.fileRoute);
 
-    this.authService = new UserAuthService(this.userRepository);
-    this.authController = new UserAuthController(this.authService);
-    this.authRoute = new UserAuthRoute(this.authController);
+    this.authService = new JwtAuthService(this.userRepository);
+    this.authController = new JwtAuthController(this.authService);
+    this.authRoute = new JwtAuthRoute(this.authController);
     this.register(this.authRoute);
 
     this.userService = new UserService(this.userRepository);
-    this.userController = new UseController(this.userService);
+    this.userController = new UserController(this.userService);
     this.userRoute = new UserRoute(this.userController, this.authService);
     this.register(this.userRoute);
 

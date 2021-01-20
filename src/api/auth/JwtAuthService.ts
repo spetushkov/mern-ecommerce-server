@@ -11,7 +11,7 @@ import { ClassTransformer } from '../../class/ClassTransformer';
 import { BaseApiCrudService } from '../../service/BaseApiCrudService';
 import { UserEntity } from '../user/UserEntity';
 
-export class UserAuthService
+export class JwtAuthService
   extends BaseApiCrudService<UserEntity>
   implements AuthService<UserEntity, AuthData> {
   constructor(repository: Repository<UserEntity>) {

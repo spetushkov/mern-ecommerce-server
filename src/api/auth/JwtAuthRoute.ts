@@ -1,7 +1,7 @@
 import { AuthController, AuthRoute, Route } from '@spetushkou/api-expressjs';
 import express, { NextFunction, Request, Response, Router } from 'express';
 
-export class UserAuthRoute implements AuthRoute, Route {
+export class JwtAuthRoute implements AuthRoute, Route {
   private controller: AuthController;
   private router: Router;
 

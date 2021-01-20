@@ -3,7 +3,6 @@ import { Response } from 'express';
 import { ClassTransformer } from '../../class/ClassTransformer';
 import { BaseApiCrudController } from '../../controller/BaseApiCrudController';
 import { BaseQueryEntity } from '../../entity/BaseQueryEntity';
-import { UserAuthorizationService } from '../auth/UserAuthorizationService';
 import { OrderEntity } from './OrderEntity';
 import { OrderQueryEntity } from './OrderQueryEntity';
 
@@ -18,10 +17,11 @@ export class OrderController extends BaseApiCrudController<OrderEntity> {
       // filter by user id
       this.insertUserIdToRequestQuery(req);
     } else {
+      // TODO
       // do not filter by user id, return all entries (admin only)
-      if (!UserAuthorizationService.isAdmin(req.user)) {
-        throw ServerException.InvalidAccessException();
-      }
+      // if (!UserAuthorizationService.isAdmin(req.user)) {
+      //   throw ServerException.InvalidAccessException();
+      // }
     }
   }
 
@@ -31,10 +31,11 @@ export class OrderController extends BaseApiCrudController<OrderEntity> {
       // filter by user id
       this.insertUserIdToRequestQuery(req);
     } else {
+      // TODO
       // do not filter by user id, return all entries (admin only)
-      if (!UserAuthorizationService.isAdmin(req.user)) {
-        throw ServerException.InvalidAccessException();
-      }
+      // if (!UserAuthorizationService.isAdmin(req.user)) {
+      //   throw ServerException.InvalidAccessException();
+      // }
     }
   }
 
