@@ -5,33 +5,43 @@
 @url = {{host}}:{{port}}{{baseUrl}}
 @contentTypeJson = application/json
 
-### signUp
+### signUp as admin
 POST {{url}}/signUp {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
-"name": "name10",
-"email": "name12@company.com",
+"name": "admin",
+"email": "admin@company.com",
 "password": "123456",
-"isAdmin": true,
-"roles": ["ADMIN"]
+"roles": ["ADMIN", "AUTHOR", "EDITOR"]
 }
 
-### signIn as a regular user
-POST {{url}}/signIn {{protocol}}
-Content-Type: {{contentTypeJson}}
-
-{
-"email": "name9@company.com",
-"password": "123456"
-}
-
-### signIn as admin user
+### signIn as admin
 POST {{url}}/signIn {{protocol}}
 Content-Type: {{contentTypeJson}}
 
 {
 "email": "admin@company.com",
+"password": "123456"
+}
+
+### signUp as user
+POST {{url}}/signUp {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+{
+"name": "user1",
+"email": "user1@company.com",
+"password": "123456",
+"roles": ["AUTHOR", "EDITOR"]
+}
+
+### signIn as user
+POST {{url}}/signIn {{protocol}}
+Content-Type: {{contentTypeJson}}
+
+{
+"email": "user1@company.com",
 "password": "123456"
 }
 

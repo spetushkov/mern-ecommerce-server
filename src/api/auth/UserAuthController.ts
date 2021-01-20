@@ -5,7 +5,6 @@ import {
   AuthToken,
   BaseController,
   Cookie,
-  Header,
   ServerException,
   StatusCode,
   StatusCodeReason,
@@ -34,7 +33,7 @@ export class UserAuthController extends BaseController<UserEntity> implements Au
       }
 
       if (data) {
-        res.setHeader(Header.SET_COOKIE, [this.createAuthCookie(data.authToken)]);
+        this.createAuthCookie(res, data.authToken);
       }
       res.status(StatusCode.OK).json(response);
     } catch (error) {
@@ -54,7 +53,7 @@ export class UserAuthController extends BaseController<UserEntity> implements Au
       }
 
       if (data) {
-        res.setHeader(Header.SET_COOKIE, [this.createAuthCookie(data.authToken)]);
+        this.createAuthCookie(res, data.authToken);
       }
       res.status(StatusCode.OK).json(response);
     } catch (error) {
@@ -75,7 +74,7 @@ export class UserAuthController extends BaseController<UserEntity> implements Au
       }
 
       if (response) {
-        res.setHeader(Header.SET_COOKIE, [this.removeAuthCookie()]);
+        this.removeAuthCookie(res);
       }
       res.status(StatusCode.OK).json(response);
     } catch (error) {
@@ -83,12 +82,22 @@ export class UserAuthController extends BaseController<UserEntity> implements Au
     }
   }
 
-  private createAuthCookie(token: AuthToken): string {
-    return `${Cookie.AUTHORIZATION}=${token.token}; HttpOnly; Max-Age=${token.expiresIn}`;
+  private createAuthCookie(res: Response, authToken: AuthToken): void {
+    res.cookie(Cookie.AUTHORIZATION, authToken.token, this.getAuthCookieConfig(authToken));
   }
 
-  private removeAuthCookie(): string {
-    return `${Cookie.AUTHORIZATION}=; Max-Age=0`;
+  private removeAuthCookie(res: Response): void {
+    res.clearCookie(Cookie.AUTHORIZATION, this.getAuthCookieConfig());
+  }
+
+  private getAuthCookieConfig(authToken?: AuthToken) {
+    return {
+      path: '/',
+      maxAge: authToken ? authToken.expiresIn * 1000 : 0, // seconds to milliseconds
+      httpOnly: process.env.NODE_ENV !== 'development',
+      secure: process.env.NODE_ENV !== 'development',
+      sameSite: true,
+    };
   }
 
   protected normalize(entity: Object | null): UserEntity {

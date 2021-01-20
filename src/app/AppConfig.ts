@@ -3,7 +3,7 @@ import dotenvExpand from 'dotenv-expand';
 import dotenvFlow from 'dotenv-flow';
 import { cleanEnv, port, str } from 'envalid';
 
-export class AppEnvConfig {
+export class AppConfig {
   constructor() {
     const env = dotenvFlow.config({
       path: './config/',

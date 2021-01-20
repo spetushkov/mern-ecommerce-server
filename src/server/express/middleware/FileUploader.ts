@@ -4,7 +4,7 @@ import multer from 'multer';
 import path from 'path';
 import util from 'util';
 import { FileQueryEntity } from '../../../api/file/FileQueryEntity';
-import { EnvUtils } from '../../../utils/EnvUtils';
+import { ConfigUtils } from '../../../utils/ConfigUtils';
 
 const imageFileTypeRegExp = /jpg|jpeg|png/;
 
@@ -34,7 +34,7 @@ export const FileUploader = (
 
   const storage = multer.diskStorage({
     destination(req, file, cb) {
-      cb(null, EnvUtils.getFileUploadsPath());
+      cb(null, ConfigUtils.getFileUploadsPath());
     },
     filename: (req, file, cb) => {
       cb(null, file.originalname);

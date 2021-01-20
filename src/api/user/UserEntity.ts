@@ -1,7 +1,6 @@
 import { Exclude, Expose } from 'class-transformer';
 import {
   ArrayNotEmpty,
-  IsBoolean,
   IsEmail,
   IsEnum,
   IsNotEmpty,
@@ -31,12 +30,6 @@ export class UserEntity extends BaseApiEntity implements User {
   @IsNotEmpty()
   @MinLength(6)
   password = '';
-
-  @Expose()
-  @IsOptional()
-  @IsBoolean()
-  @IsNotEmpty()
-  isAdmin? = false;
 
   @Expose()
   @IsOptional()

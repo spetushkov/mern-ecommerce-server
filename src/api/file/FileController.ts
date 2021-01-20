@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import fs from 'fs';
 import { ClassTransformer } from '../../class/ClassTransformer';
 import { FileUploader } from '../../server/express/middleware/FileUploader';
-import { EnvUtils } from '../../utils/EnvUtils';
+import { ConfigUtils } from '../../utils/ConfigUtils';
 import { FileEntity } from './FileEntity';
 import { FileInfo } from './FileInfo';
 import { FileQueryEntity } from './FileQueryEntity';
@@ -13,7 +13,7 @@ const baseUrl = '/files/download/';
 export class FileController {
   findAll = async (req: Request, res: Response): Promise<void> => {
     return new Promise((resolve, reject) => {
-      const dirPath = EnvUtils.getFileUploadsPath();
+      const dirPath = ConfigUtils.getFileUploadsPath();
       fs.readdir(dirPath, (error, files) => {
         if (error) {
           return reject(error);
@@ -36,7 +36,7 @@ export class FileController {
   download = async (req: Request, res: Response): Promise<void> => {
     return new Promise((resolve, reject) => {
       const fileName = req.params.name;
-      const dirPath = EnvUtils.getFileUploadsPath();
+      const dirPath = ConfigUtils.getFileUploadsPath();
 
       res.download(dirPath + fileName, fileName, (error) => {
         if (error) {

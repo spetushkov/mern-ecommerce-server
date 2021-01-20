@@ -1,13 +1,13 @@
 import { ExceptionHandler, Logger, Server } from '@spetushkou/api-expressjs';
 import 'reflect-metadata';
 import { ExpressServer } from '../server/express/ExpressServer';
-import { AppEnvConfig } from './AppEnvConfig';
+import { AppConfig } from './AppConfig';
 
 export class App {
   private server: Server;
 
   constructor() {
-    new AppEnvConfig();
+    new AppConfig();
     this.server = new ExpressServer();
   }
 

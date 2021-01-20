@@ -15,7 +15,7 @@ import {
 } from '@spetushkou/api-expressjs';
 import express, { Application } from 'express';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
-import { EnvUtils } from '../../utils/EnvUtils';
+import { ConfigUtils } from '../../utils/ConfigUtils';
 import { ResponseHeaders } from './middleware/ResponseHeaders';
 import { RoutesManager } from './RoutesManager';
 import { StoragesManager } from './StoragesManager';
@@ -33,7 +33,7 @@ export class ExpressServer implements Server {
     this.app = express();
     this.name = 'Express server';
     this.port = Number(process.env.PORT) || 3000;
-    this.fileUploadsPath = EnvUtils.getFileUploadsPath();
+    this.fileUploadsPath = ConfigUtils.getFileUploadsPath();
 
     this.storageConnection = new MongoDbStorageConnection();
     this.storagesManager = new StoragesManager(this.storageConnection);
