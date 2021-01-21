@@ -4,7 +4,7 @@ import multer from 'multer';
 import path from 'path';
 import util from 'util';
 import { FileQueryEntity } from '../../../api/file/FileQueryEntity';
-import { ConfigUtils } from '../../../utils/ConfigUtils';
+import { ConfigUtils } from '../../../config/ConfigUtils';
 
 const imageFileTypeRegExp = /jpg|jpeg|png/;
 

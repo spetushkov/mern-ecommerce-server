@@ -2,8 +2,8 @@ import { BaseResult, ServerException, StatusCode } from '@spetushkou/api-express
 import { Request, Response } from 'express';
 import fs from 'fs';
 import { ClassTransformer } from '../../class/ClassTransformer';
+import { ConfigUtils } from '../../config/ConfigUtils';
 import { FileUploader } from '../../server/express/middleware/FileUploader';
-import { ConfigUtils } from '../../utils/ConfigUtils';
 import { FileEntity } from './FileEntity';
 import { FileInfo } from './FileInfo';
 import { FileQueryEntity } from './FileQueryEntity';

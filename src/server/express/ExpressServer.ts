@@ -14,8 +14,8 @@ import {
   UrlEncoder,
 } from '@spetushkou/api-expressjs';
 import express, { Application } from 'express';
+import { ConfigUtils } from '../../config/ConfigUtils';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
-import { ConfigUtils } from '../../utils/ConfigUtils';
 import { ResponseHeaders } from './middleware/ResponseHeaders';
 import { RoutesManager } from './RoutesManager';
 import { StoragesManager } from './StoragesManager';

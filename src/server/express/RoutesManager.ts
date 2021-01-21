@@ -12,9 +12,9 @@ import {
 } from '@spetushkou/api-expressjs';
 import { Application, Request, Response } from 'express';
 import path from 'path';
-import { BaseAuthController } from '../../api/auth/BaseAuthController';
-import { BaseAuthRoute } from '../../api/auth/BaseAuthRoute';
-import { BaseAuthService } from '../../api/auth/BaseAuthService';
+import { JwtAuthController } from '../../api/auth/JwtAuthController';
+import { JwtAuthRoute } from '../../api/auth/JwtAuthRoute';
+import { JwtAuthService } from '../../api/auth/JwtAuthService';
 import { ConfigController } from '../../api/config/ConfigController';
 import { ConfigEntity } from '../../api/config/ConfigEntity';
 import { ConfigEnvRepository } from '../../api/config/ConfigEnvRepository';
@@ -57,7 +57,7 @@ export class RoutesManager {
 
   private authService: AuthService<UserEntity, AuthData>;
   private authController: AuthController;
-  private authRoute: BaseAuthRoute;
+  private authRoute: JwtAuthRoute;
 
   private productRepository: Repository<ProductEntity>;
   private productService: BaseCrudService<ProductEntity>;
@@ -94,9 +94,9 @@ export class RoutesManager {
     this.fileRoute = new FileRoute(this.fileController);
     this.register(this.fileRoute);
 
-    this.authService = new BaseAuthService(this.userRepository);
-    this.authController = new BaseAuthController(this.authService);
-    this.authRoute = new BaseAuthRoute(this.authController);
+    this.authService = new JwtAuthService(this.userRepository);
+    this.authController = new JwtAuthController(this.authService);
+    this.authRoute = new JwtAuthRoute(this.authController);
     this.register(this.authRoute);
 
     this.userService = new UserService(this.userRepository);

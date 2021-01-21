@@ -26,7 +26,6 @@ Authorization: {{authHeader}}
 "name": "jdoe3",
 "email": "jdoe3@company.com",
 "password": "12345678",
-"isAdmin": false
 }
 
 ### updateById

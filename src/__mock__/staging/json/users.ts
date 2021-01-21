@@ -2,21 +2,21 @@ import { PasswordService } from '@spetushkou/api-expressjs';
 
 export const users = [
   {
-    name: 'Admin User',
+    name: 'admin',
     email: 'admin@company.com',
     password: PasswordService.hashSync('123456'),
-    isAdmin: true,
+    roles: ['ADMIN', 'EDITOR', 'AUTHOR'],
   },
   {
-    name: 'John Doe',
-    email: 'jdoe@company.com',
+    name: 'user1',
+    email: 'user1@company.com',
     password: PasswordService.hashSync('123456'),
-    isAdmin: false,
+    roles: ['EDITOR', 'AUTHOR'],
   },
   {
-    name: 'Adam Smith',
-    email: 'asmith@company.com',
+    name: 'user2',
+    email: 'user2@company.com',
     password: PasswordService.hashSync('123456'),
-    isAdmin: false,
+    roles: ['AUTHOR'],
   },
 ];

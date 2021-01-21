@@ -1,18 +1,19 @@
 import { Logger } from '@spetushkou/api-expressjs';
-import { OrderModel } from '../api/order/mongodb/OrderModel';
-import { ProductModel } from '../api/product/mongodb/ProductModel';
-import { UserModel } from '../api/user/mongodb/UserModel';
-import { AppConfig } from '../app/AppConfig';
-import { MongoDbStorage } from '../repository/mongodb/MongoDbStorage';
-import { MongoDbStorageConnection } from '../repository/mongodb/MongoDbStorageConnection';
+import { OrderModel } from '../../api/order/mongodb/OrderModel';
+import { ProductModel } from '../../api/product/mongodb/ProductModel';
+import { ReviewModel } from '../../api/review/mongodb/ReviewModel';
+import { UserModel } from '../../api/user/mongodb/UserModel';
+import { Env } from '../../config/Env';
+import { MongoDbStorage } from '../../repository/mongodb/MongoDbStorage';
+import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { products } from './json/products';
 import { users } from './json/users';
 
-class MockData {
+class StagingData {
   private mongoDbStorage: MongoDbStorage;
 
   constructor() {
-    new AppConfig();
+    new Env();
 
     this.mongoDbStorage = new MongoDbStorage(new MongoDbStorageConnection());
     this.mongoDbStorage.connect();
@@ -25,9 +26,7 @@ class MockData {
 
   async create(): Promise<void> {
     try {
-      await OrderModel.deleteMany({});
-      await ProductModel.deleteMany({});
-      await UserModel.deleteMany({});
+      await this.deleteCollections();
 
       const usersCreated = await UserModel.insertMany(users);
       const productsUpdated = products.map((product) => {
@@ -35,7 +34,7 @@ class MockData {
       });
       await ProductModel.insertMany(productsUpdated);
 
-      Logger.log('Mock data created');
+      Logger.log('Staging data created');
     } catch (error) {
       Logger.error(error);
       this.exit(1);
@@ -44,11 +43,21 @@ class MockData {
 
   async delete(): Promise<void> {
     try {
+      await this.deleteCollections();
+
+      Logger.log('Staging data deleted');
+    } catch (error) {
+      Logger.error(error);
+      this.exit(1);
+    }
+  }
+
+  private async deleteCollections() {
+    try {
       await OrderModel.deleteMany({});
       await ProductModel.deleteMany({});
+      await ReviewModel.deleteMany({});
       await UserModel.deleteMany({});
-
-      Logger.log('Mock data deleted');
     } catch (error) {
       Logger.error(error);
       this.exit(1);
@@ -57,7 +66,7 @@ class MockData {
 }
 
 const run = async () => {
-  const mockData = new MockData();
+  const mockData = new StagingData();
   switch (process.argv[2]) {
     case '--create':
       await mockData.create();
@@ -66,7 +75,7 @@ const run = async () => {
       await mockData.delete();
       break;
     default:
-      Logger.log('No mock data updated');
+      Logger.log('No staging data updated');
       break;
   }
   mockData.exit();

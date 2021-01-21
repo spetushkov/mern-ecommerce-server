@@ -1,11 +1,11 @@
 import {
   AuthData,
+  Authenticate,
   AuthService,
   BaseCrudController,
   BaseCrudRoute,
 } from '@spetushkou/api-expressjs';
 import { RequestHandler } from 'express';
-import { Authenticate } from '../../server/express/middleware/Authenticate';
 import { UserEntity } from '../user/UserEntity';
 import { OrderEntity } from './OrderEntity';
 

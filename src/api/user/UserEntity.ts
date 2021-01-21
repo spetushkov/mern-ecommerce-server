@@ -9,7 +9,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { BaseApiEntity } from '../../entity/BaseApiEntity';
-import { ApplicationRole } from '../../role/ApplicationRole';
+import { ApplicationRole } from '../../role/application/ApplicationRole';
 import { User } from './User';
 
 export class UserEntity extends BaseApiEntity implements User {

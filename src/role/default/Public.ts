@@ -1,6 +1,6 @@
 import { ApiRole } from '../ApiRole';
 
-export const AuthenticatedRole: ApiRole = {
+export const Public: ApiRole = {
   order: {
     findAll: false,
     findById: false,
@@ -14,7 +14,7 @@ export const AuthenticatedRole: ApiRole = {
     findAll: true,
     findById: false,
     save: false,
-    updateById: false,
+    updateById: true,
     replaceById: false,
     deleteById: false,
     productPublish: false,
