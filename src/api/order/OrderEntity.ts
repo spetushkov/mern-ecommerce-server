@@ -15,11 +15,11 @@ import {
 } from 'class-validator';
 import { ObjectId } from 'mongodb';
 import { BaseApiEntity } from '../../entity/BaseApiEntity';
+import { PayPalPaymentResult } from '../payPal/PayPalPaymentResult';
 import { ProductEntity } from '../product/ProductEntity';
 import { UserEntity } from '../user/UserEntity';
 import { Order } from './Order';
-import { PaymentMethod } from './PaymentMethod';
-import { PayPalPaymentResult } from './payPal/PayPalPaymentResult';
+import { OrderPaymentMethod } from './OrderPaymentMethod';
 
 class OrderItem {
   @Expose()
@@ -98,7 +98,7 @@ export class OrderEntity extends BaseApiEntity implements Order {
   shippingAddress = null;
 
   @Expose()
-  @IsEnum(PaymentMethod)
+  @IsEnum(OrderPaymentMethod)
   @IsNotEmpty()
   paymentMethod = null;
 

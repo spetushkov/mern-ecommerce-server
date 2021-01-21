@@ -8,7 +8,6 @@ export const Authenticated: ApiRole = {
     updateById: false,
     replaceById: false,
     deleteById: false,
-    orderSend: false,
   },
   product: {
     findAll: true,
@@ -17,6 +16,5 @@ export const Authenticated: ApiRole = {
     updateById: true,
     replaceById: false,
     deleteById: false,
-    productPublish: false,
   },
 };
