@@ -1,11 +1,11 @@
-import { BaseApiEntity } from '../../entity/BaseApiEntity';
+import { ApiEntity } from '@spetushkou/expressjs';
 import { PayPalPaymentResultEntity } from '../payPal/PayPalPaymentResultEntity';
 import { User } from '../user/User';
 import { OrderItem } from './orderItem/OrderItem';
 import { OrderPaymentMethod } from './orderPaymentMethod/OrderPaymentMethod';
 import { OrderShippingAddress } from './orderShippingAddress/OrderShippingAddress';
 
-export interface Order extends BaseApiEntity {
+export interface Order extends ApiEntity {
   user?: User | string; // reference: Order MANY_TO_ONE User
   orderItems: OrderItem[]; // reference (embedded doc): Order ONE_TO_ONE OrderItem
   shippingAddress: OrderShippingAddress | null;

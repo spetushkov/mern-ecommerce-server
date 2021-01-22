@@ -1,5 +1,5 @@
-import { BaseApiEntity } from '../../entity/BaseApiEntity';
+import { ApiEntity } from '@spetushkou/expressjs';
 
-export interface Config extends BaseApiEntity {
+export interface Config extends ApiEntity {
   payPalClientId?: string;
 }

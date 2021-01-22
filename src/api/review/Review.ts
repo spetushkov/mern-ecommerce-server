@@ -1,8 +1,8 @@
-import { BaseApiEntity } from '../../entity/BaseApiEntity';
+import { ApiEntity } from '@spetushkou/expressjs';
 import { Product } from '../product/Product';
 import { User } from '../user/User';
 
-export interface Review extends BaseApiEntity {
+export interface Review extends ApiEntity {
   name?: string;
   rating: number;
   comment: string;
