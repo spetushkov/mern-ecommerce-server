@@ -2,7 +2,7 @@ import { BaseResult, ServerException, StatusCode } from '@spetushkou/expressjs';
 import { Request, Response } from 'express';
 import fs from 'fs';
 import { ClassTransformer } from '../../class/ClassTransformer';
-import { ConfigUtils } from '../../env/EnvUtils';
+import { EnvUtils } from '../../env/EnvUtils';
 import { FileUploader } from '../../server/express/middleware/FileUploader';
 import { File } from './File';
 import { FileEntity } from './FileEntity';
@@ -13,7 +13,7 @@ const baseUrl = '/files/download/';
 export class FileController {
   findAll = async (req: Request, res: Response): Promise<void> => {
     return new Promise((resolve, reject) => {
-      const dirPath = ConfigUtils.getFileUploadsPath();
+      const dirPath = EnvUtils.getFileUploadsPath();
       fs.readdir(dirPath, (error, files) => {
         if (error) {
           return reject(error);
@@ -36,7 +36,7 @@ export class FileController {
   download = async (req: Request, res: Response): Promise<void> => {
     return new Promise((resolve, reject) => {
       const fileName = req.params.name;
-      const dirPath = ConfigUtils.getFileUploadsPath();
+      const dirPath = EnvUtils.getFileUploadsPath();
 
       res.download(dirPath + fileName, fileName, (error) => {
         if (error) {
@@ -59,12 +59,12 @@ export class FileController {
       }
 
       const fileEntity = ClassTransformer.fromPlain(FileEntity, req.file);
-      const fileInfo: File = {
+      const file: File = {
         name: fileEntity.filename,
         url: baseUrl + fileEntity.filename,
       };
 
-      const response = new BaseResult(fileInfo);
+      const response = new BaseResult(file);
       res.status(StatusCode.CREATED).json(response);
     } catch (error) {
       return Promise.reject(error);

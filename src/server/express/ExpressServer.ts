@@ -14,7 +14,7 @@ import {
   UrlEncoder,
 } from '@spetushkou/expressjs';
 import express, { Application } from 'express';
-import { ConfigUtils } from '../../env/EnvUtils';
+import { EnvUtils } from '../../env/EnvUtils';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { ResponseHeaders } from './middleware/ResponseHeaders';
 import { RoutesManager } from './RoutesManager';
@@ -33,7 +33,7 @@ export class ExpressServer implements Server {
     this.app = express();
     this.name = 'Express server';
     this.port = Number(process.env.PORT) || 3000;
-    this.fileUploadsPath = ConfigUtils.getFileUploadsPath();
+    this.fileUploadsPath = EnvUtils.getFileUploadsPath();
 
     this.storageConnection = new MongoDbStorageConnection();
     this.storagesManager = new StoragesManager(this.storageConnection);

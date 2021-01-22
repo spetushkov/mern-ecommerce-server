@@ -4,9 +4,9 @@ import multer from 'multer';
 import path from 'path';
 import util from 'util';
 import { FileQueryEntity } from '../../../api/file/FileQueryEntity';
-import { ConfigUtils } from '../../../env/EnvUtils';
+import { EnvUtils } from '../../../env/EnvUtils';
 
-const imageFileTypeRegExp = /jpg|jpeg|png/;
+const fileTypeFilter = /jpg|jpeg|png/;
 
 const validateFileType = (
   file: Express.Multer.File,
@@ -26,7 +26,7 @@ const validateFileType = (
 export const FileUploader = (
   payload: FileQueryEntity,
 ): ((req: Request, res: Response) => Promise<void>) => {
-  const { field = 'file', limitFileSize = 2, imageFileType = false } = payload;
+  const { field = 'file', limitFileSize = 1, imageFileType = false } = payload;
   const fileSize = limitFileSize ? { fileSize: SizeUtils.toMb(limitFileSize) } : {};
   const limits = {
     ...fileSize,
@@ -34,7 +34,7 @@ export const FileUploader = (
 
   const storage = multer.diskStorage({
     destination(req, file, cb) {
-      cb(null, ConfigUtils.getFileUploadsPath());
+      cb(null, EnvUtils.getFileUploadsPath());
     },
     filename: (req, file, cb) => {
       cb(null, file.originalname);
@@ -46,7 +46,7 @@ export const FileUploader = (
     limits,
     fileFilter: function (req, file, cb) {
       if (imageFileType) {
-        validateFileType(file, cb, imageFileTypeRegExp);
+        validateFileType(file, cb, fileTypeFilter);
       }
       cb(null, true);
     },

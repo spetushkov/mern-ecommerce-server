@@ -64,9 +64,7 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
   ];
 
   protected deleteByIdHandlers = (handlerId?: string): RequestHandler[] => [
-    Authorize(Public, this.permissionSchemaId, handlerId),
     Authenticate(this.authService),
-    Authorize(Authenticated, this.permissionSchemaId, handlerId),
     AuthorizeUser(appContext.applicationRolesManager, this.permissionSchemaId, handlerId),
     this.deleteById,
   ];

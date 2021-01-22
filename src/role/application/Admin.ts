@@ -6,5 +6,6 @@ export const Admin = {
     ...Authenticated.product,
     save: true,
     updateById: true,
+    deleteById: true,
   },
 };
