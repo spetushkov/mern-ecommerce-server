@@ -43,7 +43,7 @@ import { UserEntity } from '../../api/user/UserEntity';
 import { UserRoute } from '../../api/user/UserRoute';
 import { UserService } from '../../api/user/UserService';
 
-export class RoutesManager {
+export class Routes {
   private app: Application;
 
   private apiVersion: string;

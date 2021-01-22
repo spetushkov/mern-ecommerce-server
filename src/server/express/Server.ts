@@ -7,7 +7,7 @@ import {
   HttpLogger,
   JsonParser,
   Logger,
-  Server,
+  ResponseHeaders,
   ServerExceptionHandler,
   StaticFolderRegister,
   StatusCode,
@@ -16,17 +16,16 @@ import {
 import express, { Application } from 'express';
 import { EnvUtils } from '../../env/EnvUtils';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
-import { ResponseHeaders } from './middleware/ResponseHeaders';
-import { RoutesManager } from './RoutesManager';
-import { StoragesManager } from './StoragesManager';
+import { Routes } from './Routes';
+import { Storages } from './Storages';
 
-export class ExpressServer implements Server {
+export class Server {
   private name: string;
   private port: number;
   private app: Application;
   private storageConnection: DbStorageConnection;
-  private storagesManager: StoragesManager;
-  private routesManager: RoutesManager;
+  private storages: Storages;
+  private routes: Routes;
   private fileUploadsPath: string;
 
   constructor() {
@@ -36,11 +35,17 @@ export class ExpressServer implements Server {
     this.fileUploadsPath = EnvUtils.getFileUploadsPath();
 
     this.storageConnection = new MongoDbStorageConnection();
-    this.storagesManager = new StoragesManager(this.storageConnection);
-    this.routesManager = new RoutesManager(this.app);
+    this.storages = new Storages(this.storageConnection);
+    this.routes = new Routes(this.app);
 
     try {
-      this.app.use(ResponseHeaders);
+      this.app.use(
+        ResponseHeaders(
+          process.env.ACCESS_CONTROL_ALLOW_ORIGIN || '*',
+          process.env.ACCESS_CONTROL_ALLOW_HEADERS || '',
+          process.env.ACCESS_CONTROL_ALLOW_METHODS || '',
+        ),
+      );
       this.app.use(JsonParser());
       this.app.use(UrlEncoder());
       this.app.use(CookieParser());
@@ -50,7 +55,7 @@ export class ExpressServer implements Server {
       }
       this.app.use(this.fileUploadsPath, StaticFolderRegister(this.fileUploadsPath));
 
-      this.routesManager.connect();
+      this.routes.connect();
 
       this.onStop();
 
@@ -68,7 +73,7 @@ export class ExpressServer implements Server {
         Logger.log(`${this.name}: started on port ${this.port} in mode ${ENV_NAME}`);
       });
 
-      await this.storagesManager.connect();
+      await this.storages.connect();
     } catch (error) {
       return Promise.reject(error);
     }
@@ -77,7 +82,7 @@ export class ExpressServer implements Server {
   private onStop() {
     process.on('SIGINT', async () => {
       try {
-        await this.storagesManager.disconnect();
+        await this.storages.disconnect();
 
         Logger.log(`${this.name}: stopped`);
         process.exit(0);

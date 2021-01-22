@@ -1,7 +1,7 @@
 import { DbStorageConnection, Storage } from '@spetushkou/expressjs';
 import { MongoDbStorage } from '../../repository/mongodb/MongoDbStorage';
 
-export class StoragesManager {
+export class Storages {
   private storages: Storage[] = [];
   private mongoDbStorage: Storage;
 

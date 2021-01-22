@@ -1,8 +1,8 @@
-import { ExceptionHandler, Logger, Server } from '@spetushkou/expressjs';
+import { ExceptionHandler, Logger } from '@spetushkou/expressjs';
 import 'reflect-metadata';
 import { Env } from '../env/Env';
 import { ApplicationRolesManager } from '../role/application/ApplicationRolesManager';
-import { ExpressServer } from '../server/express/ExpressServer';
+import { Server } from '../server/express/Server';
 
 interface AppContext {
   readonly applicationRolesManager: ApplicationRolesManager;
@@ -17,7 +17,7 @@ export class App {
 
   constructor() {
     new Env();
-    this.server = new ExpressServer();
+    this.server = new Server();
   }
 
   async start(): Promise<void> {

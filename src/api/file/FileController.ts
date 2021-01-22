@@ -1,9 +1,8 @@
-import { BaseResult, ServerException, StatusCode } from '@spetushkou/expressjs';
+import { BaseResult, FileUploader, ServerException, StatusCode } from '@spetushkou/expressjs';
 import { Request, Response } from 'express';
 import fs from 'fs';
 import { ClassTransformer } from '../../class/ClassTransformer';
 import { EnvUtils } from '../../env/EnvUtils';
-import { FileUploader } from '../../server/express/middleware/FileUploader';
 import { File } from './File';
 import { FileEntity } from './FileEntity';
 import { FileQueryEntity } from './FileQueryEntity';
@@ -40,20 +39,22 @@ export class FileController {
 
       res.download(dirPath + fileName, fileName, (error) => {
         if (error) {
-          reject(error);
+          return reject(error);
         }
       });
     });
   };
 
-  upload = async (req: Request, res: Response): Promise<void> => {
+  async upload(req: Request, res: Response): Promise<void> {
     try {
       const fileQueryEntity = ClassTransformer.fromPlain(FileQueryEntity, req.query);
       if (!fileQueryEntity.field) {
         throw ServerException.create(StatusCode.BAD_REQUEST, 'File field is not defined');
       }
 
-      await FileUploader(fileQueryEntity)(req, res);
+      const dirPath = EnvUtils.getFileUploadsPath();
+      const fileTypeFilter = /jpg|jpeg|png/;
+      await FileUploader(fileQueryEntity, dirPath, fileTypeFilter)(req, res);
       if (!req.file) {
         throw ServerException.create(StatusCode.BAD_REQUEST, 'Please upload a file');
       }
@@ -69,5 +70,5 @@ export class FileController {
     } catch (error) {
       return Promise.reject(error);
     }
-  };
+  }
 }

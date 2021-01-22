@@ -1,17 +1,11 @@
-import { BooleanUtils } from '@spetushkou/expressjs';
-import { Expose, Transform, Type } from 'class-transformer';
+import { FileQuery } from '@spetushkou/expressjs';
+import { Expose, Type } from 'class-transformer';
 
-export class FileQueryEntity {
+export class FileQueryEntity implements FileQuery {
   @Expose()
   field = '';
 
   @Expose()
   @Type(() => Number)
   limitFileSize?: number;
-
-  @Expose()
-  @Transform((value: string) => {
-    return BooleanUtils.fromString(value);
-  })
-  imageFileType?: boolean;
 }
