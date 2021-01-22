@@ -1,11 +1,11 @@
-import { ApiEntity } from '../../entity/ApiEntity';
-import { PayPalPaymentResult } from '../payPal/PayPalPaymentResult';
+import { BaseApiEntity } from '../../entity/BaseApiEntity';
+import { PayPalPaymentResultEntity } from '../payPal/PayPalPaymentResultEntity';
 import { User } from '../user/User';
-import { OrderItem } from './OrderItem';
-import { OrderPaymentMethod } from './OrderPaymentMethod';
-import { OrderShippingAddress } from './OrderShippingAddress';
+import { OrderItem } from './orderItem/OrderItem';
+import { OrderPaymentMethod } from './orderPaymentMethod/OrderPaymentMethod';
+import { OrderShippingAddress } from './orderShippingAddress/OrderShippingAddress';
 
-export interface Order extends ApiEntity {
+export interface Order extends BaseApiEntity {
   user?: User | string; // reference: Order MANY_TO_ONE User
   orderItems: OrderItem[]; // reference (embedded doc): Order ONE_TO_ONE OrderItem
   shippingAddress: OrderShippingAddress | null;
@@ -14,7 +14,7 @@ export interface Order extends ApiEntity {
   shippingPrice: number;
   taxPrice: number;
   totalPrice: number;
-  paymentResult?: PayPalPaymentResult;
+  paymentResult?: PayPalPaymentResultEntity;
   isPaid?: boolean;
   paidAt?: Date;
   isDelivered?: boolean;

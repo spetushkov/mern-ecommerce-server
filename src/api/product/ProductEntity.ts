@@ -1,4 +1,4 @@
-import { MongoDbUtils } from '@spetushkou/api-expressjs';
+import { MongoDbUtils } from '@spetushkou/expressjs';
 import { Expose, Transform, Type } from 'class-transformer';
 import { IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 import { ObjectId } from 'mongodb';

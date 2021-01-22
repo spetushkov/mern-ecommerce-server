@@ -12,9 +12,9 @@ import {
   StaticFolderRegister,
   StatusCode,
   UrlEncoder,
-} from '@spetushkou/api-expressjs';
+} from '@spetushkou/expressjs';
 import express, { Application } from 'express';
-import { ConfigUtils } from '../../config/ConfigUtils';
+import { ConfigUtils } from '../../env/EnvUtils';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { ResponseHeaders } from './middleware/ResponseHeaders';
 import { RoutesManager } from './RoutesManager';

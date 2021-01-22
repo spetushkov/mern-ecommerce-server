@@ -1,4 +1,4 @@
-import { BaseRequest, CrudService, ServerException } from '@spetushkou/api-expressjs';
+import { BaseRequest, CrudService, ServerException } from '@spetushkou/expressjs';
 import { Response } from 'express';
 import { appContext } from '../../app/App';
 import { ClassTransformer } from '../../class/ClassTransformer';

@@ -1,4 +1,4 @@
-import { CrudService } from '@spetushkou/api-expressjs';
+import { CrudService } from '@spetushkou/expressjs';
 import { BaseApiCrudController } from '../../controller/BaseApiCrudController';
 import { ReviewEntity } from './ReviewEntity';
 

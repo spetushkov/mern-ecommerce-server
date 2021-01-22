@@ -1,4 +1,4 @@
-import { AuthUser, RolesManager } from '@spetushkou/api-expressjs';
+import { AuthUser, RolesManager } from '@spetushkou/expressjs';
 import { ApiRole } from '../ApiRole';
 import { Admin } from './Admin';
 import { ApplicationRole } from './ApplicationRole';

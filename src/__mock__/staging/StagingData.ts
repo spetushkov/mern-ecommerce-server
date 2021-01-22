@@ -1,9 +1,9 @@
-import { Logger } from '@spetushkou/api-expressjs';
+import { Logger } from '@spetushkou/expressjs';
 import { OrderModel } from '../../api/order/mongodb/OrderModel';
 import { ProductModel } from '../../api/product/mongodb/ProductModel';
 import { ReviewModel } from '../../api/review/mongodb/ReviewModel';
 import { UserModel } from '../../api/user/mongodb/UserModel';
-import { Env } from '../../config/Env';
+import { Env } from '../../env/Env';
 import { MongoDbStorage } from '../../repository/mongodb/MongoDbStorage';
 import { MongoDbStorageConnection } from '../../repository/mongodb/MongoDbStorageConnection';
 import { products } from './json/products';

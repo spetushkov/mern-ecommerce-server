@@ -1,4 +1,4 @@
-import { PageRequest, Repository, ServerException, StatusCode } from '@spetushkou/api-expressjs';
+import { PageRequest, Repository, ServerException, StatusCode } from '@spetushkou/expressjs';
 import { BaseApiCrudService } from '../../service/BaseApiCrudService';
 import { ProductEntity } from '../product/ProductEntity';
 import { ReviewEntity } from './ReviewEntity';

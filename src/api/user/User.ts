@@ -1,7 +1,7 @@
-import { ApiEntity } from '../../entity/ApiEntity';
+import { BaseApiEntity } from '../../entity/BaseApiEntity';
 import { ApplicationRole } from '../../role/application/ApplicationRole';
 
-export interface User extends ApiEntity {
+export interface User extends BaseApiEntity {
   name: string;
   email: string;
   password: string;

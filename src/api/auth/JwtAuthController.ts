@@ -1,4 +1,4 @@
-import { AuthData, AuthService, BaseAuthController } from '@spetushkou/api-expressjs';
+import { AuthData, AuthService, BaseAuthController } from '@spetushkou/expressjs';
 import { ClassTransformer } from '../../class/ClassTransformer';
 import { UserEntity } from '../user/UserEntity';
 

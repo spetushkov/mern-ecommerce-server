@@ -1,4 +1,4 @@
-import { ServerException, StatusCode } from '@spetushkou/api-expressjs';
+import { ServerException, StatusCode } from '@spetushkou/expressjs';
 import dotenvExpand from 'dotenv-expand';
 import dotenvFlow from 'dotenv-flow';
 import { cleanEnv, port, str } from 'envalid';

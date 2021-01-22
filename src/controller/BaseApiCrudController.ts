@@ -1,7 +1,8 @@
-import { BaseCrudController, CrudService, Entity } from '@spetushkou/api-expressjs';
+import { BaseCrudController, CrudService } from '@spetushkou/expressjs';
 import { ClassTransformer, Clazz } from '../class/ClassTransformer';
+import { BaseApiEntity } from '../entity/BaseApiEntity';
 
-export class BaseApiCrudController<T extends Entity> extends BaseCrudController<T> {
+export class BaseApiCrudController<T extends BaseApiEntity> extends BaseCrudController<T> {
   private entityClass: Clazz<T>;
 
   constructor(service: CrudService<T>, entityClass: Clazz<T>) {

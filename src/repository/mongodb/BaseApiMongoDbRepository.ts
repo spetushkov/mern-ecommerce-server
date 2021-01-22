@@ -1,4 +1,4 @@
-import { BaseMongoDbRepository, MongoDbResult } from '@spetushkou/api-expressjs';
+import { BaseMongoDbRepository, MongoDbResult } from '@spetushkou/expressjs';
 import { Document, Model } from 'mongoose';
 import { ClassTransformer, Clazz } from '../../class/ClassTransformer';
 

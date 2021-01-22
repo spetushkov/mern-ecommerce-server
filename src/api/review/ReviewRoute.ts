@@ -4,7 +4,7 @@ import {
   AuthService,
   BaseCrudController,
   BaseCrudRoute,
-} from '@spetushkou/api-expressjs';
+} from '@spetushkou/expressjs';
 import { RequestHandler } from 'express';
 import { UserEntity } from '../user/UserEntity';
 import { ReviewEntity } from './ReviewEntity';

@@ -1,4 +1,4 @@
-import { Route } from '@spetushkou/api-expressjs';
+import { Route } from '@spetushkou/expressjs';
 import express, { NextFunction, Request, Response, Router } from 'express';
 import { FileController } from './FileController';
 

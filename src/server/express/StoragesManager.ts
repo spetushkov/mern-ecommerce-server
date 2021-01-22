@@ -1,4 +1,4 @@
-import { DbStorageConnection, Storage } from '@spetushkou/api-expressjs';
+import { DbStorageConnection, Storage } from '@spetushkou/expressjs';
 import { MongoDbStorage } from '../../repository/mongodb/MongoDbStorage';
 
 export class StoragesManager {

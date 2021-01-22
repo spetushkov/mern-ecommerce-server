@@ -4,7 +4,7 @@ import {
   Logger,
   StatusCode,
   Storage,
-} from '@spetushkou/api-expressjs';
+} from '@spetushkou/expressjs';
 import mongoose from 'mongoose';
 
 export class MongoDbStorage implements Storage {

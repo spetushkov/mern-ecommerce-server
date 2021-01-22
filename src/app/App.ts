@@ -1,6 +1,6 @@
-import { ExceptionHandler, Logger, Server } from '@spetushkou/api-expressjs';
+import { ExceptionHandler, Logger, Server } from '@spetushkou/expressjs';
 import 'reflect-metadata';
-import { Env } from '../config/Env';
+import { Env } from '../env/Env';
 import { ApplicationRolesManager } from '../role/application/ApplicationRolesManager';
 import { ExpressServer } from '../server/express/ExpressServer';
 

@@ -1,10 +1,10 @@
-import { SizeUtils } from '@spetushkou/api-expressjs';
+import { SizeUtils } from '@spetushkou/expressjs';
 import { Request, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 import util from 'util';
 import { FileQueryEntity } from '../../../api/file/FileQueryEntity';
-import { ConfigUtils } from '../../../config/ConfigUtils';
+import { ConfigUtils } from '../../../env/EnvUtils';
 
 const imageFileTypeRegExp = /jpg|jpeg|png/;
 

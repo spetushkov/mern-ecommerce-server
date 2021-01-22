@@ -1,11 +1,11 @@
-import { BaseResult, ServerException, StatusCode } from '@spetushkou/api-expressjs';
+import { BaseResult, ServerException, StatusCode } from '@spetushkou/expressjs';
 import { Request, Response } from 'express';
 import fs from 'fs';
 import { ClassTransformer } from '../../class/ClassTransformer';
-import { ConfigUtils } from '../../config/ConfigUtils';
+import { ConfigUtils } from '../../env/EnvUtils';
 import { FileUploader } from '../../server/express/middleware/FileUploader';
+import { File } from './File';
 import { FileEntity } from './FileEntity';
-import { FileInfo } from './FileInfo';
 import { FileQueryEntity } from './FileQueryEntity';
 
 const baseUrl = '/files/download/';
@@ -19,7 +19,7 @@ export class FileController {
           return reject(error);
         }
 
-        const filesInfo: FileInfo[] = [];
+        const filesInfo: File[] = [];
         files.forEach((file) => {
           filesInfo.push({
             name: file,
@@ -59,7 +59,7 @@ export class FileController {
       }
 
       const fileEntity = ClassTransformer.fromPlain(FileEntity, req.file);
-      const fileInfo: FileInfo = {
+      const fileInfo: File = {
         name: fileEntity.filename,
         url: baseUrl + fileEntity.filename,
       };

@@ -6,7 +6,7 @@ import {
   AuthService,
   BaseCrudController,
   BaseCrudRoute,
-} from '@spetushkou/api-expressjs';
+} from '@spetushkou/expressjs';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { appContext } from '../../app/App';
 import { Authenticated } from '../../role/default/Authenticated';

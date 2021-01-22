@@ -1,4 +1,4 @@
-import { DbStorageConnection } from '@spetushkou/api-expressjs';
+import { DbStorageConnection } from '@spetushkou/expressjs';
 
 export class MongoDbStorageConnection implements DbStorageConnection {
   host: string;

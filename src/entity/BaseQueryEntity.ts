@@ -1,4 +1,4 @@
-import { BooleanUtils } from '@spetushkou/api-expressjs';
+import { BooleanUtils } from '@spetushkou/expressjs';
 import { Expose, Transform } from 'class-transformer';
 import { IsBoolean, IsNotEmpty, IsOptional } from 'class-validator';
 

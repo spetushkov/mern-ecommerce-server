@@ -1,4 +1,4 @@
-import { MongoDbUtils } from '@spetushkou/api-expressjs';
+import { MongoDbUtils } from '@spetushkou/expressjs';
 import { Document } from 'mongoose';
 import { BaseApiMongoDbRepository } from '../../../repository/mongodb/BaseApiMongoDbRepository';
 import { ProductEntity } from '../ProductEntity';

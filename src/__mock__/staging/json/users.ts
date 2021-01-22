@@ -1,4 +1,4 @@
-import { PasswordService } from '@spetushkou/api-expressjs';
+import { PasswordService } from '@spetushkou/expressjs';
 
 export const users = [
   {

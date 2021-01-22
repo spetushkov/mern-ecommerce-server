@@ -1,4 +1,4 @@
-import { AuthController, BaseAuthRoute } from '@spetushkou/api-expressjs';
+import { AuthController, BaseAuthRoute } from '@spetushkou/expressjs';
 
 export class JwtAuthRoute extends BaseAuthRoute {
   constructor(controller: AuthController) {

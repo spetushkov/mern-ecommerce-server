@@ -1,4 +1,4 @@
-import { BooleanUtils } from '@spetushkou/api-expressjs';
+import { BooleanUtils } from '@spetushkou/expressjs';
 import { Expose, Transform, Type } from 'class-transformer';
 
 export class FileQueryEntity {

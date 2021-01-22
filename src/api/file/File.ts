@@ -1,4 +1,4 @@
-export interface FileInfo {
+export interface File {
   name: string;
   url: string;
 }

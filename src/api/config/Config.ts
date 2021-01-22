@@ -1,5 +1,5 @@
-import { ApiEntity } from '../../entity/ApiEntity';
+import { BaseApiEntity } from '../../entity/BaseApiEntity';
 
-export interface Config extends ApiEntity {
+export interface Config extends BaseApiEntity {
   payPalClientId?: string;
 }

@@ -1,9 +1,8 @@
-import { BaseEntity } from '@spetushkou/api-expressjs';
+import { ApiEntity } from '@spetushkou/expressjs';
 import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { ObjectId } from 'mongodb';
-import { ApiEntity } from './ApiEntity';
 
-export abstract class BaseApiEntity extends BaseEntity implements ApiEntity {
+export abstract class BaseApiEntity implements ApiEntity {
   @Expose({ name: '_id' })
   @Exclude()
   @Type(() => ObjectId)

@@ -1,4 +1,4 @@
-import { BaseCrudController, BaseCrudRoute } from '@spetushkou/api-expressjs';
+import { BaseCrudController, BaseCrudRoute } from '@spetushkou/expressjs';
 import { ConfigEntity } from './ConfigEntity';
 
 export class ConfigRoute extends BaseCrudRoute<ConfigEntity> {

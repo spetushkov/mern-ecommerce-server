@@ -9,7 +9,7 @@ import {
   Route,
   StaticFolderRegister,
   UndefinedRoute,
-} from '@spetushkou/api-expressjs';
+} from '@spetushkou/expressjs';
 import { Application, Request, Response } from 'express';
 import path from 'path';
 import { JwtAuthController } from '../../api/auth/JwtAuthController';
@@ -17,9 +17,9 @@ import { JwtAuthRoute } from '../../api/auth/JwtAuthRoute';
 import { JwtAuthService } from '../../api/auth/JwtAuthService';
 import { ConfigController } from '../../api/config/ConfigController';
 import { ConfigEntity } from '../../api/config/ConfigEntity';
-import { ConfigEnvRepository } from '../../api/config/ConfigEnvRepository';
 import { ConfigRoute } from '../../api/config/ConfigRoute';
 import { ConfigService } from '../../api/config/ConfigService';
+import { ConfigEnvRepository } from '../../api/config/env/ConfigEnvRepository';
 import { FileController } from '../../api/file/FileController';
 import { FileRoute } from '../../api/file/FileRoute';
 import { OrderMongoDbRepository } from '../../api/order/mongodb/OrderMongoDbRepository';

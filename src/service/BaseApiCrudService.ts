@@ -1,7 +1,8 @@
-import { BaseCrudService, BaseEntity, Repository } from '@spetushkou/api-expressjs';
+import { BaseCrudService, Repository } from '@spetushkou/expressjs';
 import { ClassTransformer } from '../class/ClassTransformer';
+import { BaseApiEntity } from '../entity/BaseApiEntity';
 
-export class BaseApiCrudService<T extends BaseEntity> extends BaseCrudService<T> {
+export class BaseApiCrudService<T extends BaseApiEntity> extends BaseCrudService<T> {
   constructor(repository: Repository<T>) {
     super(repository);
   }

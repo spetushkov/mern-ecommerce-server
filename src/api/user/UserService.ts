@@ -1,4 +1,4 @@
-import { Repository } from '@spetushkou/api-expressjs';
+import { Repository } from '@spetushkou/expressjs';
 import { BaseApiCrudService } from '../../service/BaseApiCrudService';
 import { UserEntity } from './UserEntity';
 

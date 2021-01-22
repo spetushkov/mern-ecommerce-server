@@ -1,6 +1,6 @@
-import { PageRequest, PageResult, Repository, ServerException } from '@spetushkou/api-expressjs';
-import { ClassTransformer } from '../../class/ClassTransformer';
-import { ConfigEntity } from './ConfigEntity';
+import { PageRequest, PageResult, Repository, ServerException } from '@spetushkou/expressjs';
+import { ClassTransformer } from '../../../class/ClassTransformer';
+import { ConfigEntity } from '../ConfigEntity';
 
 export class ConfigEnvRepository implements Repository<ConfigEntity> {
   async findAll(pageRequest: PageRequest): Promise<PageResult<ConfigEntity>> {

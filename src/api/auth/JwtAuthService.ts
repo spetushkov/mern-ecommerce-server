@@ -1,4 +1,4 @@
-import { BaseAuthService, Repository } from '@spetushkou/api-expressjs';
+import { BaseAuthService, Repository } from '@spetushkou/expressjs';
 import { ClassTransformer } from '../../class/ClassTransformer';
 import { UserEntity } from '../user/UserEntity';
 

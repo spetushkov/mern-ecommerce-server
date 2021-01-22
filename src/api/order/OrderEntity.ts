@@ -1,4 +1,4 @@
-import { MongoDbUtils } from '@spetushkou/api-expressjs';
+import { MongoDbUtils } from '@spetushkou/expressjs';
 import { Expose, Transform, Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
@@ -15,11 +15,11 @@ import {
 } from 'class-validator';
 import { ObjectId } from 'mongodb';
 import { BaseApiEntity } from '../../entity/BaseApiEntity';
-import { PayPalPaymentResult } from '../payPal/PayPalPaymentResult';
+import { PayPalPaymentResultEntity } from '../payPal/PayPalPaymentResultEntity';
 import { ProductEntity } from '../product/ProductEntity';
 import { UserEntity } from '../user/UserEntity';
 import { Order } from './Order';
-import { OrderPaymentMethod } from './OrderPaymentMethod';
+import { OrderPaymentMethod } from './orderPaymentMethod/OrderPaymentMethod';
 
 class OrderItem {
   @Expose()
@@ -123,10 +123,10 @@ export class OrderEntity extends BaseApiEntity implements Order {
   totalPrice = 0.0;
 
   @Expose()
-  @Type(() => PayPalPaymentResult)
+  @Type(() => PayPalPaymentResultEntity)
   @IsOptional()
   @ValidateNested()
-  paymentResult?: PayPalPaymentResult;
+  paymentResult?: PayPalPaymentResultEntity;
 
   @Expose()
   @IsOptional()

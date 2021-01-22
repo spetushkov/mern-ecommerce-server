@@ -1,4 +1,4 @@
-import { Role } from '@spetushkou/api-expressjs';
+import { Role } from '@spetushkou/expressjs';
 import { OrderPermission } from '../api/order/OrderPermission';
 import { ProductPermission } from '../api/product/ProductPermission';
 
