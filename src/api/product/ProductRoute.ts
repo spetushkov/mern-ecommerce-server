@@ -8,7 +8,7 @@ import {
   BaseCrudRoute,
 } from '@spetushkou/expressjs';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { appContext } from '../../app/App';
+import { APP_CONTEXT } from '../../app/App';
 import { Authenticated } from '../../role/default/Authenticated';
 import { Public } from '../../role/default/Public';
 import { FileController } from '../file/FileController';
@@ -51,7 +51,7 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
 
   protected saveHandlers = (handlerId?: string): RequestHandler[] => [
     Authenticate(this.authService),
-    AuthorizeUser(appContext.applicationRolesManager, this.permissionSchemaId, handlerId),
+    AuthorizeUser(APP_CONTEXT.applicationRoles, this.permissionSchemaId, handlerId),
     this.save,
   ];
 
@@ -59,13 +59,13 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
     Authorize(Public, this.permissionSchemaId, handlerId),
     Authenticate(this.authService),
     Authorize(Authenticated, this.permissionSchemaId, handlerId),
-    AuthorizeUser(appContext.applicationRolesManager, this.permissionSchemaId, handlerId),
+    AuthorizeUser(APP_CONTEXT.applicationRoles, this.permissionSchemaId, handlerId),
     this.updateById,
   ];
 
   protected deleteByIdHandlers = (handlerId?: string): RequestHandler[] => [
     Authenticate(this.authService),
-    AuthorizeUser(appContext.applicationRolesManager, this.permissionSchemaId, handlerId),
+    AuthorizeUser(APP_CONTEXT.applicationRoles, this.permissionSchemaId, handlerId),
     this.deleteById,
   ];
 }

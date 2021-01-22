@@ -1,6 +1,6 @@
 import { BaseRequest, CrudService, ServerException } from '@spetushkou/expressjs';
 import { Response } from 'express';
-import { appContext } from '../../app/App';
+import { APP_CONTEXT } from '../../app/App';
 import { ClassTransformer } from '../../class/ClassTransformer';
 import { BaseApiCrudController } from '../../controller/BaseApiCrudController';
 import { BaseQueryEntity } from '../../entity/BaseQueryEntity';
@@ -19,7 +19,7 @@ export class OrderController extends BaseApiCrudController<OrderEntity> {
       this.insertUserIdToRequestQuery(req);
     } else {
       // do not filter by user id, return all entries (admin only)
-      if (!appContext.applicationRolesManager.includes('ADMIN', req.user)) {
+      if (!APP_CONTEXT.applicationRoles.includes('ADMIN', req.user)) {
         throw ServerException.InvalidAccessException();
       }
     }
@@ -32,7 +32,7 @@ export class OrderController extends BaseApiCrudController<OrderEntity> {
       this.insertUserIdToRequestQuery(req);
     } else {
       // do not filter by user id, return all entries (admin only)
-      if (!appContext.applicationRolesManager.includes('ADMIN', req.user)) {
+      if (!APP_CONTEXT.applicationRoles.includes('ADMIN', req.user)) {
         throw ServerException.InvalidAccessException();
       }
     }

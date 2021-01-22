@@ -1,15 +1,15 @@
 import { ExceptionHandler, Logger } from '@spetushkou/expressjs';
 import 'reflect-metadata';
 import { Env } from '../env/Env';
-import { ApplicationRolesManager } from '../role/application/ApplicationRolesManager';
+import { ApplicationRoles } from '../role/application/ApplicationRoles';
 import { Server } from '../server/express/Server';
 
 interface AppContext {
-  readonly applicationRolesManager: ApplicationRolesManager;
+  readonly applicationRoles: ApplicationRoles;
 }
 
-export const appContext: AppContext = {
-  applicationRolesManager: new ApplicationRolesManager(),
+export const APP_CONTEXT: AppContext = {
+  applicationRoles: new ApplicationRoles(),
 };
 
 export class App {
