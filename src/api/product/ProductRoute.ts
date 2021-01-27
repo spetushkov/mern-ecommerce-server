@@ -21,11 +21,11 @@ export class ProductRoute extends BaseCrudRoute<ProductEntity> {
   private permissionSchemaId: string;
 
   constructor(
-    constroller: BaseCrudController<ProductEntity>,
+    controller: BaseCrudController<ProductEntity>,
     fileController: FileController,
     authService: AuthService<UserEntity, AuthData>,
   ) {
-    super(constroller);
+    super(controller);
     this.fileController = fileController;
     this.authService = authService;
     this.permissionSchemaId = 'product';

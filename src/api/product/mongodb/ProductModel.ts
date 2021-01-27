@@ -1,4 +1,5 @@
-import { model, Schema } from 'mongoose';
+import { MongoDbUtils } from '@spetushkou/expressjs';
+import { Document, model, Schema } from 'mongoose';
 
 export const ProductSchema = new Schema(
   {
@@ -21,5 +22,15 @@ export const ProductSchema = new Schema(
 ProductSchema.statics.getForeignKeys = function () {
   return ['user', '_reviews'];
 };
+
+ProductSchema.post('find', async function (docs: Document[]) {
+  for (const doc of docs) {
+    await MongoDbUtils.expose(doc);
+  }
+});
+
+ProductSchema.post('findOne', async function (doc: Document) {
+  await MongoDbUtils.expose(doc);
+});
 
 export const ProductModel = model('Product', ProductSchema);

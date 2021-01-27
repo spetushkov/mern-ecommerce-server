@@ -13,10 +13,10 @@ export class ReviewRoute extends BaseCrudRoute<ReviewEntity> {
   private authService: AuthService<UserEntity, AuthData>;
 
   constructor(
-    constroller: BaseCrudController<ReviewEntity>,
+    controller: BaseCrudController<ReviewEntity>,
     authService: AuthService<UserEntity, AuthData>,
   ) {
-    super(constroller);
+    super(controller);
     this.authService = authService;
   }
 

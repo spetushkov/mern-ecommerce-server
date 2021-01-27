@@ -13,10 +13,10 @@ export class OrderRoute extends BaseCrudRoute<OrderEntity> {
   private authService: AuthService<UserEntity, AuthData>;
 
   constructor(
-    constroller: BaseCrudController<OrderEntity>,
+    controller: BaseCrudController<OrderEntity>,
     authService: AuthService<UserEntity, AuthData>,
   ) {
-    super(constroller);
+    super(controller);
     this.authService = authService;
   }
 

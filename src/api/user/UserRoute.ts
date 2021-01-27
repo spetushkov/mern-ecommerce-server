@@ -12,10 +12,10 @@ export class UserRoute extends BaseCrudRoute<UserEntity> {
   private authService: AuthService<UserEntity, AuthData>;
 
   constructor(
-    constroller: BaseCrudController<UserEntity>,
+    controller: BaseCrudController<UserEntity>,
     authService: AuthService<UserEntity, AuthData>,
   ) {
-    super(constroller);
+    super(controller);
     this.authService = authService;
   }
 
