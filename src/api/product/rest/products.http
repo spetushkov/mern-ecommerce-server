@@ -67,7 +67,7 @@ Content-Type: {{contentTypeJson}}
 # Authorization: {{authHeader}}
 
 {
-  "description": "updated"
+  "description": ""
 }
 
 ### deleteById
